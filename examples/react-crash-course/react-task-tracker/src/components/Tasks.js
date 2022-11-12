@@ -1,29 +1,30 @@
-// This is temporary. Usually we want the tasks to be part of our state
-const tasks = [
-    {
-        id: 1,
-        text: 'Doctors Appointment',
-        day: 'Feb 5th at 2:30pm',
-        reminder: true,
-    },
-    {
-        id: 2,
-        text: 'Meeting at School',
-        day: 'Feb 6th at 1:30pm',
-        reminder: true,
-    },
-    {
-        id: 3,
-        text: 'Food Shopping',
-        day: 'Feb 5th at 2:30pm',
-        reminder: false,
-    }
-]
+import { render } from '@testing-library/react'
+import Task from './Task'
 
-const Tasks = () => {
+const TaskList = (props) => {
+  if (props.tasks.length > 0) {
+    return props.tasks.map((task) => (
+      <Task 
+        key={task.id} 
+        task={task}
+        onDelete={props.onDelete}
+      />
+    ))
+  }
+  else {
+    return 'You have no tasks to show!'
+  }
+}
+
+
+const Tasks = (props) => {
+  
   return (
     <div>
-
+      <TaskList 
+        tasks={props.tasks}
+        onDelete={props.onDelete}
+      />
     </div>
   )
 }

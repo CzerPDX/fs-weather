@@ -8,9 +8,9 @@ const Header = (props) => {
     <header className='header'>
         {/* <h1 style={cssInJsExample}>{props.title}</h1> */}
         <h1>{props.title}</h1>
-        <Button className='btn1' text={props.btnText_1} />
-        <Button className='btn2' text={props.btnText_2} />
-        <Button className='btn3' text={props.btnText_3} />
+        <Button extraClasses='btn1' text={props.btnText_1} />
+        <Button extraClasses='btn2' text={props.btnText_2} />
+        <Button extraClasses='btn3' text={props.btnText_3} />
         {/* <h2>{props.h2Title}</h2> */}
         
     </header>

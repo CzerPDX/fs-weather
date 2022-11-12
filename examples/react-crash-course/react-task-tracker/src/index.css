@@ -76,6 +76,22 @@ body {
 }
 
 
+.redCircle {
+  background-color: red;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 0.7em;
+}
+
+
+
+.redCircle svg {
+  color: white;
+  margin: auto;
+  padding: 0.1em;
+  display: block;
+}
 
 .task {
   background: #f4f4f4;

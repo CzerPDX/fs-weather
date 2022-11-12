@@ -5,7 +5,7 @@ import Button from './Button'
 
 // Allow people to give props to the components so they can be customized 
 // const Header = ({ title }) => {      // This will also work, but I think it's harder to read
-const Header = (props) => {
+const Header = ({ headerTitle, headerBtnText } ) => {
   // This is just here temporarily. We will move this later.
   const onClickFunction = () => {
     console.log('Click')
@@ -13,9 +13,9 @@ const Header = (props) => {
 
   return (
     <header className='header'>
-      <h1>{props.headerTitle}</h1>
+      <h1>{headerTitle}</h1>
       <Button 
-        text={props.headerBtnText}
+        text={headerBtnText}
         onClick={onClickFunction}
       />
     </header>

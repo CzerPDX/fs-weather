@@ -2,13 +2,19 @@ import PropTypes from 'prop-types'
 
 import React from 'react'
 
-const Button = (props) => {
+const Button = ({ extraClasses, onClick, text }) => {
+  let btnClasses = 'btn'
+  // If additional classes are provided, add them here. They will still have the default 'btn' class
+  if (extraClasses) {
+    btnClasses += ` ${extraClasses}`
+  }
+
   return (
     <button 
-      className='btn' 
-      onClick={props.onClick}
+      className={btnClasses}
+      onClick={onClick}
     >
-    {props.text}
+    {text}
     </button>
   )
 }
@@ -16,6 +22,7 @@ const Button = (props) => {
 // We can set default props below the component
 Button.defaultProps = {
   text: 'Default Btn Text',
+  className: 'btn'
 }
 
 Button.propTypes = {
