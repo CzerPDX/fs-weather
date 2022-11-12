@@ -1,27 +1,35 @@
 import PropTypes from 'prop-types'
+import Button from './Button'
+
+
 
 // Allow people to give props to the components so they can be customized 
 // const Header = ({ title }) => {      // This will also work, but I think it's harder to read
 const Header = (props) => {
+  // This is just here temporarily. We will move this later.
+  const onClickFunction = () => {
+    console.log('Click')
+  }
+
   return (
-    <header>
-        <h1>{props.title}</h1>
-        <h2>{props.h2Title}</h2>
+    <header className='header'>
+      <h1>{props.headerTitle}</h1>
+      <Button 
+        text={props.headerBtnText}
+        onClick={onClickFunction}
+      />
     </header>
   )
 }
 
 // We can set default props below the component
 Header.defaultProps = {
-    title: 'Task Tracker Default Prop Title',
-    h2Title: 'default h2 title info'
+  headerTitle: 'defaultProp Title',
+  headerBtnText: 'defaultProp Btn Text',
 }
 
-// We can use PropTypes to set datatypes for our props
-// If someone tries to pass in the wrong kind of property it will error, though it does still render
 Header.propTypes = {
-    title: PropTypes.string.isRequired,
-    h2Title: PropTypes.string,
+  headerTitle: PropTypes.string.isRequired,
 }
 
 export default Header
