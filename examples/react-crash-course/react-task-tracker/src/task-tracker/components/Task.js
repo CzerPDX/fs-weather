@@ -1,5 +1,6 @@
-import Xbtn from './Xbtn'
-// State gets passed down. Events get passed up.
+// Task.js is for Managing the display of an individual task
+
+import Xbtn from '../../components/Xbtn'
 
 
 const Task = ({ task, onDelete, onToggle }) => {
@@ -12,7 +13,10 @@ const Task = ({ task, onDelete, onToggle }) => {
   }
 
   return (
-    <div className={`task ${addReminder}`} onDoubleClick={() => onToggle(task.id)}>
+    <div 
+      className={`task ${addReminder}`} 
+      onDoubleClick={() => onToggle(task.id)}
+    >
       <h3>
         {task.text} 
         <Xbtn 

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "text": "Something ",
+    "day": "Feb 50th at 22:30pm",
+    "reminder": false
+  },
+  {
+    "id": 2,
+    "text": "Meeting in Heck",
+    "day": "Feb 666th at 6:66pm",
+    "reminder": true
+  },
+  {
+    "id": 3,
+    "text": "Always pet cat",
+    "day": "All the time",
+    "reminder": true
+  }
+]
