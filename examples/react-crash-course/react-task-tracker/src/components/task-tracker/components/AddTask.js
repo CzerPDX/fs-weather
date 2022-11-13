@@ -9,8 +9,6 @@ const AddTask = ({ onAdd }) => {
   const [day, setDay] = useState('')
   const [reminder, setReminder] = useState(false)
 
-  
-
   // We do not want to call onAdd directly so we do the following
   const onSubmit = (error) => {
     error.preventDefault()      // Do not automatically go to a new page once submission happens.
