@@ -1,13 +1,14 @@
-import { render } from '@testing-library/react'
 import Task from './Task'
 
-const TaskList = (props) => {
-  if (props.tasks.length > 0) {
-    return props.tasks.map((task) => (
+// Used by Tasks
+const TaskList = ({ tasks, onDelete, onToggle }) => {
+  if (tasks.length > 0) {
+    return tasks.map((task) => (
       <Task 
         key={task.id} 
         task={task}
-        onDelete={props.onDelete}
+        onDelete={onDelete}
+        onToggle={onToggle}
       />
     ))
   }
@@ -17,13 +18,14 @@ const TaskList = (props) => {
 }
 
 
-const Tasks = (props) => {
+const Tasks = ({ tasks, onDelete, onToggle }) => {
   
   return (
     <div>
       <TaskList 
-        tasks={props.tasks}
-        onDelete={props.onDelete}
+        tasks={tasks}
+        onDelete={onDelete}
+        onToggle={onToggle}
       />
     </div>
   )
