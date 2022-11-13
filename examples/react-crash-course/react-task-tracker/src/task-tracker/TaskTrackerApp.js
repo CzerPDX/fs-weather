@@ -6,10 +6,14 @@ import TaskTracker from './components/TaskTracker'
 import taskData from './task-data/taskData.json';  
 import taskData2 from './task-data/taskData2.json';  
 
+// Get general components
+import Header from '../components/Header'
+
 // Create a TaskTracker component for each task tracker in the app
 const TaskTrackerApp = () => {
   return (
-    <div className="body">
+    <div className="body container">
+      <Header headerTitle='A bunch of task trackers' />
       <TaskTracker 
         taskData={taskData} 
         headerTitle='Task Tracker #1'
