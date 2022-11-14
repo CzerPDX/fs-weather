@@ -4,23 +4,24 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
-const SearchAutoComplete = () => {
-  const [address, setAddress] = useState("");
-  let lat;
-  let lng;
+const SearchAutoComplete = ({ setCoordinates }) => {
+  const [city, setCity] = useState("");
 
+  // Called once a user selects from the list of suggested cities. Populates
+  // useState variable coordinates with the selected cities lat and lng
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const { lat, lng } = await getLatLng(results[0]);
-    console.log(lat, lng);
-    setAddress(value);
+    setCoordinates({ lat, lng });
+    console.log("from child", lat, lng);
+    setCity(value);
   };
 
   return (
     <div>
       <PlacesAutocomplete
-        value={address}
-        onChange={setAddress}
+        value={city}
+        onChange={setCity}
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
