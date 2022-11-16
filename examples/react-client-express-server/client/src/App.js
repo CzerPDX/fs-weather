@@ -10,9 +10,7 @@ function App() {
     // We don't have to write out "localhost:5001/api" because we defined it as "proxy" in client/package.json
     fetch('/api')
     
-    // Get the response in JSON format.
-    // We don't use curly braces here because curly braces denote that we should treat it as JS instead of React (i think)
-    // and we want it to be read as react
+    // Get the response and then translate it to JSON format
     .then((response) => 
       response.json()
     )
