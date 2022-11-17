@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../Btn";
 import SearchAutoComplete from "./SearchAutoComplete";
 
-const LargeSearchBar = ({ onSearch }) => {
+const MainSearch = ({ onSearch }) => {
   // AddTask component-level state
   //const [searchTerm, setSearchTerm] = useState("");
 
@@ -45,4 +45,4 @@ const LargeSearchBar = ({ onSearch }) => {
   );
 };
 
-export default LargeSearchBar;
+export default MainSearch;
