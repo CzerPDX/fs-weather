@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+fs-weather-app/client/node_modules
+fs-weather-app/server/node_modules
