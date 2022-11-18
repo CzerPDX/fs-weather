@@ -28,9 +28,10 @@ const currentWeather_handler = async (latitude, longitude) => {
   })
   .then((jsonData) => {
     try {
+      // console.log(`Data from server: ${JSON.stringify(jsonData)}`);
       const responseObject = {
         locationName: jsonData.name,
-        temp: Math.round(jsonData.main.temp),
+        temperature: `${Math.round(jsonData.main.temp)}${'\u00b0'}F`,
         shortDescription: jsonData.weather['0'].main,
         longDescription: jsonData.weather['0'].description,
         icon: `http://openweathermap.org/img/wn/${jsonData.weather['0'].icon}@2x.png`,

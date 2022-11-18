@@ -5,8 +5,8 @@ import CurrentWeather from '../components/forecasts/CurrentWeather'
 import MainSearch from '../components/general/search-bars/MainSearch'
 
 const SearchBarAndResults = () => {
-  let latitude = 45.5152
-  let longitude = -122.6784
+  let latitude = '45.5152'
+  let longitude = '-122.6784'
 
   // const latitudeAndLongitude = (latFromSearch, lonFromSearch) => {
   //   latitude = latFromSearch
@@ -14,7 +14,7 @@ const SearchBarAndResults = () => {
   // }
 
   return (
-    <div className='main-search container'>
+    <div className='main-page container'>
       <MainSearch />
 
       <CurrentWeather 

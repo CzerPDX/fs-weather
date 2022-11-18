@@ -1,7 +1,48 @@
-.large-search-bar {
-  margin-top: 1em;
+.forecast-container {
+  display: flex;
 }
 
-.large-search-bar .btn {
-  margin-top: 0.5em;
+.forecast-card-container{
+  padding-right:1em;
+  
+}
+
+.forecast-card {
+  margin-top: 1em;
+  display: flex;
+}
+
+.forecast-card {
+  border-style: solid;
+  border-radius: 0.65em;
+  border-width: thin;
+  padding: 0.65em;
+  border-color: #c5c5c5;
+  box-shadow: 0 0 0.5em rgba(0,0,0,0.07);
+}
+
+
+.temperature-and-graphic-card {
+  background-color: rgb(27, 151, 252);
+  display: flex;
+  min-height: 8em;
+  border-radius: 0.65em;
+}
+
+.temperature-and-graphic-card .temperature {
+
+  margin: auto;
+  position: absolute;
+}
+
+.temperature h1 {
+  font-size: xx-large;
+  font-weight: 700;
+  color: white;
+  margin: auto;
+}
+
+
+.detailed-weather-info {
+  padding: 0.5em;
 }

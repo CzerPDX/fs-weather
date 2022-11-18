@@ -1,26 +1,29 @@
-// Forecast Card Simple
+// Current Weather
 /*
   This component's main two jobs are to:
     - Pull data from the API
     - Call top-level forecast components and send them data as needed
 
-    The ParseWeather component will handle updating data
+    The ForecastCard will be responsible for formatting the data based on cardType
 
     References:
     https://bobbyhadz.com/blog/react-hook-useeffect-has-missing-dependency
 */
 
+import PropTypes from 'prop-types'
 import React, { useEffect, useState, useCallback } from 'react'
+import ForecastCard from './ForecastCard';
 // import React, { useState } from 'react'
 
 
-const CurrentWeather = ({ latitude, longitude, }) => {
+const CurrentWeather = ({ latitude, longitude , cardType }) => {
+
 
   // Have to set the data up with defaults in the same structure they will be in
   // when returned or the software will freak out
   const initialWeatherState = {
     'locationName': 'Loading...',
-    'temp': 'Loading...',
+    'temperature': 'Loading...',
     'shortDescription': 'Loading...',
     'longDescription': 'Loading...',
     'icon': 'Loading...'
@@ -51,24 +54,39 @@ const CurrentWeather = ({ latitude, longitude, }) => {
 
 
   return (
-    <div className='forecast-card'>
+    <div className='current-weather-detailed'>
+      {/* Forecast Title will stay on this component*/}
       <div className='title-block'>
-        Showing the weather from {weatherData.locationName}:
+        <h5>Showing the weather from {weatherData.locationName}:</h5>
       </div>
-      <div className='short-description'>
-        Description: {weatherData.shortDescription}
+
+      <div className='forecast-container'>
+        <ForecastCard
+          cardType={cardType}
+          icon={weatherData.icon} 
+          shortDescription={weatherData.shortDescription} 
+          longDescription={weatherData.longDescription} 
+          temperature={weatherData.temperature}
+        />
+        <ForecastCard
+          cardType={cardType}
+          icon={weatherData.icon} 
+          shortDescription={weatherData.shortDescription} 
+          longDescription={weatherData.longDescription} 
+          temperature={weatherData.temperature}
+        />
       </div>
-      <div className='long-description'>
-        Long description: {weatherData.longDescription}
-      </div>
-      <div className='weather-icon'>
-        Icon: {weatherData.icon}
-      </div>
-      <div className='temperature'>
-        Temp: {weatherData.temp}
-      </div>
+      
+      
     </div>
   )
+}
+
+
+CurrentWeather.propTypes = {
+  latitude: PropTypes.string.isRequired,
+  longitude: PropTypes.string.isRequired,
+  cardType: PropTypes.string.isRequired,
 }
 
 export default CurrentWeather 
