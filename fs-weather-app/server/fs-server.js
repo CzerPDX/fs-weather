@@ -24,6 +24,7 @@ const convertTime = (time, timezone) => {
   return { hour: hours, ampm: ampm };
 };
 
+//parses and returns day of the week from the date (dt) value in the openWeather api response
 const getDayOfWeek = (time, timezone) => {
   const dayName = [
     { name: "Sunday", abbrv: "Sun" },
@@ -38,12 +39,14 @@ const getDayOfWeek = (time, timezone) => {
   console.log(date.getDay());
   return dayName[date.getDay()];
 };
+
 app.get("/api*", (req, res) => {
+  let responseObject = null;
   let lat = req.query.lat;
-  let lng = req.query.lng;
+  let lon = req.query.lon;
 
   // parameter check. lat and lng paramaters are required
-  if (req.query.lat === undefined || req.query.lng === undefined) {
+  if (req.query.lat === undefined || req.query.lon === undefined) {
     res
       .status(400)
       .send({ message: "Error! Paramaters lat and lng are required " });
@@ -53,7 +56,7 @@ app.get("/api*", (req, res) => {
   // Handle requests for /api-current-weather
   else if (req.url.split("?")[0] === "/api-current-weather") {
     axios
-      .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lng}&appid=${KEY}`)
+      .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         responseObject = {
           locationName: response.data.name,
@@ -65,6 +68,7 @@ app.get("/api*", (req, res) => {
           // minTemp: Math.round(response.data.main.temp_min),
           // feelsLike: response.data.main.feels_like,
         };
+        console.log(responseObject);
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -73,7 +77,7 @@ app.get("/api*", (req, res) => {
       });
   } else if (req.url.split("?")[0] === "/api-hourly-weather") {
     axios
-      .get(`${HOURLY_FORECAST}&lat=${lat}&lon=${lng}&appid=${KEY}`)
+      .get(`${HOURLY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
@@ -83,54 +87,63 @@ app.get("/api*", (req, res) => {
 
           // {description : item.weather[0].main, descriptionLng : item.weather[0].description}
           // Can be added if we want those values for hourly forcast
-          return {
+          let obj = {
             time: time,
             temp: Math.round(item.main.temp),
             icon: item.weather[0].icon,
           };
+          return obj;
         });
 
+        console.log(responseObject);
         res.status(200).send(responseObject);
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
         console.log(error);
       });
-  } else if (req.url.split("?")[0] === "/api-forecast-weather") {
-    console.log("***forecast");
+  } else if (req.url.split("?")[0] === "/api-daily-weather") {
     axios
-      .get(`${DAILY_FORECAST}&lat=${lat}&lon=${lng}&appid=${KEY}`)
+      .get(`${DAILY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
 
         responseObject = list.map((item) => {
           const dayOfWeek = getDayOfWeek(item.dt, timeZone);
-          return {
+          let obj = {
             day: dayOfWeek,
             temp: Math.round(item.temp.day),
             tempMax: Math.round(item.temp.max),
             tempMin: Math.round(item.temp.min),
             icon: item.weather[0].icon,
+            shortDescription: item.weather[0].main,
+            longDescription: item.weather[0].description,
           };
+          return obj;
         });
 
         console.log(responseObject);
         res.status(200).send(responseObject);
-        //res.status(200).send(response.data);
-        res.end;
       })
       .catch((error) => {
+        res.status(502).send({ message: error.message });
         console.log(error);
       });
   } else if (req.url.split("?")[0] === "/api-air-quality") {
     console.log("***air quality");
     axios
-      .get(`${AIR_QUALITY}&lat=${lat}&lon=${lng}&appid=${KEY}`)
+      .get(`${AIR_QUALITY}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
-        console.log(response.data);
-        //res.status(200).send(response.data);
-        res.end;
+        const list = response.data.list;
+        let aqiValues = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
+
+        responseObject = {
+          aqiIndex: list[0].main.aqi,
+          aqiDescription: aqiValues[list[0].main.aqi - 1],
+        };
+        console.log(responseObject);
+        res.status(200).send(response.data);
       })
       .catch((error) => {
         res.status(502).send({ message: "Failed request to openweather API" });
