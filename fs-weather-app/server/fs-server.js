@@ -36,7 +36,6 @@ const getDayOfWeek = (time, timezone) => {
     { name: "Saturday", abbrv: "Sat" },
   ];
   let date = new Date((time + timezone) * 1000);
-  console.log(date.getDay());
   return dayName[date.getDay()];
 };
 
@@ -75,6 +74,7 @@ app.get("/api*", (req, res) => {
         res.status(502).send({ message: error.message });
         console.log({ message: error.message });
       });
+    // Handle requests for /api-hourly-weather
   } else if (req.url.split("?")[0] === "/api-hourly-weather") {
     axios
       .get(`${HOURLY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
@@ -102,6 +102,7 @@ app.get("/api*", (req, res) => {
         res.status(502).send({ message: error.message });
         console.log(error);
       });
+    // Handle requests for /api-daily-weather
   } else if (req.url.split("?")[0] === "/api-daily-weather") {
     axios
       .get(`${DAILY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
@@ -130,6 +131,7 @@ app.get("/api*", (req, res) => {
         res.status(502).send({ message: error.message });
         console.log(error);
       });
+    // Handle requests for /api-air-quality
   } else if (req.url.split("?")[0] === "/api-air-quality") {
     console.log("***air quality");
     axios
@@ -149,7 +151,6 @@ app.get("/api*", (req, res) => {
         res.status(502).send({ message: "Failed request to openweather API" });
         console.log(error);
       });
-    // We will let the front-end parse the json data since it seems like that's how the openweather api is
   }
 
   // Handle invalid requests
