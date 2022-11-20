@@ -2,11 +2,33 @@
 
   References:
   https://bobbyhadz.com/blog/javascript-typeerror-response-json-is-not-a-function
+  https://maximorlov.com/send-a-file-with-axios-in-nodejs/
+  https://maximorlov.com/send-a-file-with-axios-in-nodejs/
 */
 
 const express = require('express')
 const app = express()
 const port = 5001
+
+
+
+
+const axios = require('axios');
+const FormData = require('form-data');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Creates a json object with response data for the weather
@@ -78,6 +100,22 @@ app.get("/api*", async (req, res) => {
     res.status(400).send('Error! Invalid request!');
   }
 })
+
+// Get media requests for mp4 weather videos
+app.get("/media", async (req, res) => {
+  console.log(`/api received a request on path ${req.path}`)
+  
+  var formData = new FormData();
+  var imagefile = document.querySelector('#file');
+  formData.append("/animations/Night_Thunderstorm.mp4", imagefile.files[0]);
+  axios.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+  })
+})
+
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`)

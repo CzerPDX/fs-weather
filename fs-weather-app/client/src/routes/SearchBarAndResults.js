@@ -20,6 +20,7 @@ const SearchBarAndResults = () => {
       <CurrentWeather 
         latitude={latitude}
         longitude={longitude}
+        cardType='main-large'
       />
 
     </div>
