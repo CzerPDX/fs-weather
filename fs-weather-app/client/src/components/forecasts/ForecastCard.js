@@ -21,7 +21,7 @@ const WeatherImage = ({ icon, shortDescription }) => {
 // Different cardTypes of ForecastCards can have different layouts
 // Add new layouts as new components below like MainLarge is
 
-const MainLarge = ({ temperature, icon, shortDescription, longDescription }) => {
+const MainLarge = ({ temperature, iconCode, shortDescription, longDescription }) => {
   return (
     <div>
       <div className='temperature-and-graphic-card'>
@@ -35,7 +35,7 @@ const MainLarge = ({ temperature, icon, shortDescription, longDescription }) => 
         <div className='weather-icon row'>
           <div className='col'>
             <WeatherImage
-              icon={icon}
+              iconCode={iconCode}
               shortDescription={shortDescription}
             />
           </div>
@@ -70,7 +70,7 @@ const ForecastCard = (props) => {
     if (props.cardType === 'main-large') {
       return <MainLarge 
         temperature={props.temperature}
-        icon={props.icon}
+        iconCode={props.iconCode}
         shortDescription={props.shortDescription}
         longDescription={props.longDescription}
       />
