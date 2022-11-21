@@ -26,7 +26,7 @@ const CurrentWeather = ( props ) => {
     'temperature': 'Loading...',
     'shortDescription': 'Loading...',
     'longDescription': 'Loading...',
-    'icon': 'Loading...'
+    'iconCode': 'Loading...'
   }
 
 

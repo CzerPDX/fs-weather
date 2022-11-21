@@ -1,9 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-<<<<<<< HEAD
-=======
 const FormData = require('form-data');
->>>>>>> 1540b6d1820d6d44e9b22b4975b9ecc7d71c5708
 const app = express();
 const port = 5001;
 const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
@@ -14,11 +11,6 @@ const HOURLY_FORECAST =
 const DAILY_FORECAST =
   "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 1540b6d1820d6d44e9b22b4975b9ecc7d71c5708
 
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
@@ -63,16 +55,17 @@ app.get("/api*", (req, res) => {
   }
 
   // Handle requests for /api-current-weather
-  else if (req.url.split("?")[0] === "/api-current-weather/") {
+  else if (req.url.split("?")[0] === "/api-current-weather") {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         responseObject = {
           locationName: response.data.name,
-          temp: Math.round(response.data.main.temp),
+          temperature: `${Math.round(response.data.main.temp)}`,
           shortDescription: response.data.weather[0].main,
           longDescription: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          iconCode: response.data.weather[0].icon,
           // maxTemp: Math.round(response.data.main.temp_max),
           // minTemp: Math.round(response.data.main.temp_min),
           // feelsLike: response.data.main.feels_like,
