@@ -1,15 +1,10 @@
 import './index.css';
-import SearchBarAndResults from './routes/SearchBarAndResults'
-import Header from './components/general/Header';
+import MainPage from './routes/MainPage';
 
 const App = () => {
   return (
     <div>
-      <Header 
-        headerTitle='FS Weather'
-        headerClasses='p-3 bg-dark text-white'
-      />
-      <SearchBarAndResults />
+      <MainPage />
     </div>
   );
 }

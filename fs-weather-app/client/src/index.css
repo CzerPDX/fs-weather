@@ -1,3 +1,5 @@
+
+/* Main page search */
 .main-search {
   margin-bottom: 1.5em;
 }
@@ -5,7 +7,7 @@
   margin-top: 0.5em;
 }
 
-
+/* Forecast Card */
 .forecast-container {
   display: flex;
 }
