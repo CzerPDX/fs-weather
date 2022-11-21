@@ -1,10 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 5001
-
-const axios = require('axios');
-const FormData = require('form-data');
-
+const express = require("express");
+const axios = require("axios");
+const app = express();
+const port = 5001;
+const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
+const CURRENT_WEATHER =
+  "https://api.openweathermap.org/data/2.5/weather?units=imperial";
+const HOURLY_FORECAST =
+  "https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=12";
+const DAILY_FORECAST =
+  "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
+const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
@@ -54,11 +59,10 @@ app.get("/api*", (req, res) => {
       .then((response) => {
         responseObject = {
           locationName: response.data.name,
-          temperature: Math.round(response.data.main.temp),
+          temp: Math.round(response.data.main.temp),
           shortDescription: response.data.weather[0].main,
           longDescription: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-          iconCode: response.data.weather[0].icon,
           // maxTemp: Math.round(response.data.main.temp_max),
           // minTemp: Math.round(response.data.main.temp_min),
           // feelsLike: response.data.main.feels_like,
@@ -151,26 +155,10 @@ app.get("/api*", (req, res) => {
 
   // Handle invalid requests
   else {
-    console.error('Error! Response was empty')
-    res.send('[]')
+    console.error("Error! Response was empty");
+    res.send("[]");
   }
-})
-
-// Get media requests for mp4 weather videos
-app.get("/media", async (req, res) => {
-  console.log(`/api received a request on path ${req.path}`)
-  
-  var formData = new FormData();
-  var imagefile = document.querySelector('#file');
-  formData.append("/animations/Night_Thunderstorm.mp4", imagefile.files[0]);
-  axios.post('', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-  })
-})
-
-
+});
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
