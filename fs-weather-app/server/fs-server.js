@@ -1,5 +1,9 @@
 const express = require("express");
 const axios = require("axios");
+<<<<<<< HEAD
+=======
+const FormData = require('form-data');
+>>>>>>> 1540b6d1820d6d44e9b22b4975b9ecc7d71c5708
 const app = express();
 const port = 5001;
 const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
@@ -10,6 +14,11 @@ const HOURLY_FORECAST =
 const DAILY_FORECAST =
   "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1540b6d1820d6d44e9b22b4975b9ecc7d71c5708
 
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
@@ -40,6 +49,7 @@ const getDayOfWeek = (time, timezone) => {
 };
 
 app.get("/api*", (req, res) => {
+  console.log(`req.url.split("?")[0] = ${req.url.split("?")[0]}`);
   let responseObject = null;
   let lat = req.query.lat;
   let lon = req.query.lon;
@@ -53,7 +63,7 @@ app.get("/api*", (req, res) => {
   }
 
   // Handle requests for /api-current-weather
-  else if (req.url.split("?")[0] === "/api-current-weather") {
+  else if (req.url.split("?")[0] === "/api-current-weather/") {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
