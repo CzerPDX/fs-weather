@@ -10,26 +10,8 @@ const express = require('express')
 const app = express()
 const port = 5001
 
-
-
-
 const axios = require('axios');
 const FormData = require('form-data');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Creates a json object with response data for the weather
 const currentWeather_handler = async (latitude, longitude) => {
@@ -89,14 +71,10 @@ app.get("/api*", async (req, res) => {
       catch (error) {
         res.status(404).send(error);
       }
-    }
-    else {
+    } else {
       res.status(400).send(`Bad request!. Current weather request must include latitude and longitude as queries`);
     }
-  }
-
-  // Handle invalid requests
-  else {
+  } else { // Handle invalid requests
     res.status(400).send('Error! Invalid request!');
   }
 })
