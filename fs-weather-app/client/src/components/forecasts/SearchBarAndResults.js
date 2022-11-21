@@ -1,8 +1,8 @@
 // MainSearch manages the search function on the main page
 
 import React from 'react'
-import CurrentWeather from '../components/forecasts/CurrentWeather'
-import MainSearch from '../components/general/search-bars/MainSearch'
+import CurrentWeather from './CurrentWeather'
+import MainSearch from '../general/search-bars/MainSearch'
 
 const SearchBarAndResults = () => {
   let latitude = '45.5152'

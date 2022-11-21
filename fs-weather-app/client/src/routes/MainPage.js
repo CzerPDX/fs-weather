@@ -1,5 +1,5 @@
 import React from 'react'
-import LargeSearchBar from '../components/general/search-bars/LargeSearchBar'
+import SearchBarAndResults from '../components/forecasts/SearchBarAndResults'
 import Header from '../components/general/Header'
 
 const MainPage = () => {
