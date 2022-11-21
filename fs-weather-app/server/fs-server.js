@@ -13,47 +13,6 @@ const DAILY_FORECAST =
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 
 
-// Creates a json object with response data for the weather
-const currentWeather_handler = async (latitude, longitude) => {
-  // Later we can call this for a file for security!
-  const apiKey = 'a71b03145dabd9b781e709b6786f5ccd'
-
-  // API call to openweather to get current weather results
-  const url = `https://pro.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
-  // console.log(`API REQUEST URL: ${url}`);
-  const weatherData = await fetch(url)
-  .then((response) => {
-    try {
-      return (response.json());
-    }
-    catch {
-      throw (`Error! Response from API: ${response.status}`);
-    }
-  })
-  .then((jsonData) => {
-    try {
-      // console.log(`Data from server: ${JSON.stringify(jsonData)}`);
-      const responseObject = {
-        locationName: jsonData.name,
-        temperature: `${Math.round(jsonData.main.temp)}${'\u00b0'}F`,
-        shortDescription: jsonData.weather['0'].main,
-        longDescription: jsonData.weather['0'].description,
-        icon: `http://openweathermap.org/img/wn/${jsonData.weather['0'].icon}@2x.png`,
-      }
-      return(responseObject)
-    }
-    catch (error) {
-      return(error)
-    }
-  })
-  .catch ((error) => {
-    return (error);
-  })
-
-  return (weatherData);
-}
-
-
 
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
