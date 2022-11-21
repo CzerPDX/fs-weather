@@ -13,22 +13,6 @@ const DAILY_FORECAST =
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Creates a json object with response data for the weather
 const currentWeather_handler = async (latitude, longitude) => {
   // Later we can call this for a file for security!
@@ -119,10 +103,11 @@ app.get("/api*", (req, res) => {
       .then((response) => {
         responseObject = {
           locationName: response.data.name,
-          temp: Math.round(response.data.main.temp),
+          temperature: Math.round(response.data.main.temp),
           shortDescription: response.data.weather[0].main,
           longDescription: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          iconCode: response.data.weather[0].icon,
           // maxTemp: Math.round(response.data.main.temp_max),
           // minTemp: Math.round(response.data.main.temp_min),
           // feelsLike: response.data.main.feels_like,
@@ -218,7 +203,7 @@ app.get("/api*", (req, res) => {
     console.error("Error! Response was empty");
     res.send("[]");
   }
-});
+})
 
 // Get media requests for mp4 weather videos
 app.get("/media", async (req, res) => {
