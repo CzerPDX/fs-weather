@@ -56,16 +56,32 @@ const MainLarge = ({ temperature, icon, shortDescription, longDescription }) => 
 }
 
 
+
+const HourlyForecastCard = ({ temperature, icon, shortDescription, longDescription }) => {
+
+}
+
+
 const ForecastCard = (props) => {
 
   // Pick layout of forecast card based on the card type
-  const renderByType = ({ cardType, icon, shortDescription, longDescription, temperature }) => {
-    if (cardType === 'main-large') {
+  const renderByType = ( props ) => {
+
+    if (props.cardType === 'main-large') {
       return <MainLarge 
-        temperature={temperature}
-        icon={icon}
-        shortDescription={shortDescription}
-        longDescription={longDescription}
+        temperature={props.temperature}
+        icon={props.icon}
+        shortDescription={props.shortDescription}
+        longDescription={props.longDescription}
+      />
+    }
+
+    else if (props.cardType === 'hourly-forecast') {
+      return <HourlyForecastCard
+        time={props.time}
+        icon={props.icon}
+        temperature={props.temperature}
+        description={props.description}
       />
     }
   }

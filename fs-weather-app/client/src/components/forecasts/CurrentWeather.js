@@ -16,7 +16,7 @@ import ForecastCard from './ForecastCard';
 // import React, { useState } from 'react'
 
 
-const CurrentWeather = ({ latitude, longitude , cardType }) => {
+const CurrentWeather = ({ lat, lon , cardType }) => {
 
 
   // Have to set the data up with defaults in the same structure they will be in
@@ -30,7 +30,7 @@ const CurrentWeather = ({ latitude, longitude , cardType }) => {
   }
 
 
-  const url = `/api-current-weather/?latitude=${latitude}&longitude=${longitude}`;
+  const url = `/api-current-weather/?lat=${lat}&lon=${lon}`;
   // Get data from backend API
   const [weatherData, setWeatherData] = useState(initialWeatherState)
 
@@ -84,8 +84,8 @@ const CurrentWeather = ({ latitude, longitude , cardType }) => {
 
 
 CurrentWeather.propTypes = {
-  latitude: PropTypes.string.isRequired,
-  longitude: PropTypes.string.isRequired,
+  lat: PropTypes.string.isRequired,
+  lon: PropTypes.string.isRequired,
   cardType: PropTypes.string.isRequired,
 }
 
