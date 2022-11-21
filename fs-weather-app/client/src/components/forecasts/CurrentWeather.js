@@ -77,7 +77,6 @@ const CurrentWeather = ({ lat, lon , cardType }) => {
         />
       </div>
       
-      
     </div>
   )
 }

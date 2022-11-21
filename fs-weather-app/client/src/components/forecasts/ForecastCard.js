@@ -74,9 +74,7 @@ const ForecastCard = (props) => {
         shortDescription={props.shortDescription}
         longDescription={props.longDescription}
       />
-    }
-
-    else if (props.cardType === 'hourly-forecast') {
+    } else if (props.cardType === 'hourly-forecast') {
       return <HourlyForecastCard
         time={props.time}
         icon={props.icon}
