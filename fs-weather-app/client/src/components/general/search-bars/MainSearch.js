@@ -29,7 +29,7 @@ const MainSearch = ({ onSearch }) => {
   // const searchIcon = 'hello'
 
   return (
-    <div className="main-search">
+    <div className="large-search-bar container">
       <form className="form-control" onSubmit={onSubmit}>
         <label>Search City and State to view Weather</label>
         {/** SearchAutoComplete acts as input */}

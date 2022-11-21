@@ -11,10 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "videos": [
-    {
-      "src": "src/animations/"
-    }
-  ]
+  "background_color": "#ffffff"
 }

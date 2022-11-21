@@ -9,7 +9,9 @@ const MainPage = () => {
         headerTitle='FS Weather'
         headerClasses='p-3 bg-dark text-white'
       />
-      <SearchBarAndResults />   
+      <LargeSearchBar 
+        defaultText='Search by city and state...'
+      />
     </div>
   )
 }
