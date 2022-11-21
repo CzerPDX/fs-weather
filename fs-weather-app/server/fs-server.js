@@ -43,6 +43,7 @@ const getDayOfWeek = (time, timezone) => {
 };
 
 app.get("/api*", (req, res) => {
+  console.log(`req.url.split("?")[0] = ${req.url.split("?")[0]}`);
   let responseObject = null;
   let lat = req.query.lat;
   let lon = req.query.lon;
@@ -56,7 +57,7 @@ app.get("/api*", (req, res) => {
   }
 
   // Handle requests for /api-current-weather
-  else if (req.url.split("?")[0] === "/api-current-weather") {
+  else if (req.url.split("?")[0] === "/api-current-weather/") {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
