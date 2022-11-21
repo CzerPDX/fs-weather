@@ -5,12 +5,12 @@ import CurrentWeather from './CurrentWeather'
 import MainSearch from '../general/search-bars/MainSearch'
 
 const SearchBarAndResults = () => {
-  let latitude = '45.5152'
-  let longitude = '-122.6784'
+  let lat = '45.5152'
+  let lon = '-122.6784'
 
-  // const latitudeAndLongitude = (latFromSearch, lonFromSearch) => {
-  //   latitude = latFromSearch
-  //   longitude = lonFromSearch
+  // const latAndlon = (latFromSearch, lonFromSearch) => {
+  //   lat = latFromSearch
+  //   lon = lonFromSearch
   // }
 
   return (
@@ -18,8 +18,8 @@ const SearchBarAndResults = () => {
       <MainSearch />
 
       <CurrentWeather 
-        latitude={latitude}
-        longitude={longitude}
+        lat={lat}
+        lon={lon}
         cardType='main-large'
       />
 

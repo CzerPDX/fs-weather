@@ -63,7 +63,7 @@ app.get("/api*", (req, res) => {
           // minTemp: Math.round(response.data.main.temp_min),
           // feelsLike: response.data.main.feels_like,
         };
-        console.log(`Response Object: ${responseObject}`);
+        console.log(responseObject);
         res.status(200).send(responseObject);
       })
       .catch((error) => {

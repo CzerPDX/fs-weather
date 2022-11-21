@@ -103,7 +103,7 @@ ForecastCard.propTypes = {
 }
 
 MainLarge.propTypes = {
-  icon: PropTypes.string.isRequired,
+  iconCode: PropTypes.string.isRequired,
   shortDescription: PropTypes.string.isRequired,
   longDescription: PropTypes.string.isRequired,
   temperature: PropTypes.string.isRequired,
