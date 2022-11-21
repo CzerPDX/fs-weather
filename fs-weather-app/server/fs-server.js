@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const FormData = require('form-data');
 const app = express();
 const port = 5001;
 const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
@@ -12,10 +13,6 @@ const DAILY_FORECAST =
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 
 
-
-
-const axios = require('axios');
-const FormData = require('form-data');
 
 
 
