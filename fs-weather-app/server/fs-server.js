@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const axios = require("axios");
 const app = express();
@@ -11,19 +10,6 @@ const HOURLY_FORECAST =
 const DAILY_FORECAST =
   "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
-=======
-/*
-
-  References:
-  https://bobbyhadz.com/blog/javascript-typeerror-response-json-is-not-a-function
-  https://maximorlov.com/send-a-file-with-axios-in-nodejs/
-  https://maximorlov.com/send-a-file-with-axios-in-nodejs/
-*/
-
-const express = require('express')
-const app = express()
-const port = 5001
->>>>>>> 1a9e0912110a349487f6a3c670b78a387a6454b7
 
 
 
