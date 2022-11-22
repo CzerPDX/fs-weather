@@ -7,8 +7,8 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
   // AddTask component-level state
   //const [searchTerm, setSearchTerm] = useState("");
 
-  let tempLat = null;
-  let tempLon = null;
+  let tempLat = coordinates.lat;
+  let tempLon = coordinates.lon;
 
   const setTempCoords = (lat, lon) => {
     tempLat = lat;
@@ -24,7 +24,7 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
 
     // Validate that coordinate state was updated from child-SearchAutoComplete
     console.log('from parent', coordinates);
-    if (tempLat !== coordinates.Lat && tempLon !== coordinates.lon) {
+    if (tempLat !== coordinates.lat && tempLon !== coordinates.lon) {
       setCoordinates({ lat: tempLat, lon: tempLon });
     }
 
