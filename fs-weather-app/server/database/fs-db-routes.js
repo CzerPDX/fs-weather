@@ -8,12 +8,11 @@ module.exports = router;
 const UserSchema = require('./table-schema/user-table-schema')
 
 /*
-  User database endpoints:
 
-  1. POST data to the databse
-  2. GET data based on ID
-  3. UPDATE data based on ID
-  4. DELETE data based on ID
+  - POST data to the databse
+  - GET data based on ID
+  - UPDATE data based on ID
+  - DELETE data based on ID
 
   Each of the functions below:
     - First parameter: The route it covers
@@ -90,5 +89,5 @@ router.delete('/delete', async (req, res) => {
 })
 
 router.all('*', (req, res) => {
-  res.status(400).send(`invalid request path /db${req.path}`)
+  res.status(400).send(`Error! Invalid databse request at /db${req.path}`)
 })

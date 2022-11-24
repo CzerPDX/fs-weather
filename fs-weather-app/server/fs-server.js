@@ -172,17 +172,9 @@ app.get("/api*", (req, res) => {
 });
 
 
-// Database Info
-const dbRoutes = require('./fs-db-routes');
+// Database routes
+const dbRoutes = require('./database/fs-db-routes');
 app.use('/db', dbRoutes);
-
-// // Database
-// app.all("/db*", (req, res) => {
-
-
-// })
-
-
 
 
 
