@@ -1,9 +1,11 @@
 const express = require("express");
 const axios = require("axios");
-const FormData = require('form-data');
 const app = express();
 const port = 5001;
-const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
+
+require('dotenv').config()
+const KEY = process.env.OPEN_WEATHER_API_KEY;
+
 const CURRENT_WEATHER =
   "https://api.openweathermap.org/data/2.5/weather?units=imperial";
 const HOURLY_FORECAST =
@@ -163,6 +165,13 @@ app.get("/api*", (req, res) => {
   }
 });
 
+
+
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
+
+
+
+// app.get("/api*", (req, res) => {
+// }
