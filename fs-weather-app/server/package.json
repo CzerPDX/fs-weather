@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node fs-server",
-    "dev": "nodemon fs-server"
+    "dev": "nodemon fs-server",
+    "user-db": "json-server-auth -p 8001 user-db.json"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,8 @@
     "mongoose": "^6.7.3"
   },
   "devDependencies": {
+    "json-server": "^0.17.1",
+    "json-server-auth": "^2.1.0",
     "nodemon": "^2.0.20"
   }
 }

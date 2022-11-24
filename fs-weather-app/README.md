@@ -1,18 +1,47 @@
-### Install
+# How to use
+## **Installation**
 
-cd into `fs-weather-app` and use:
+### Backend
+- #### **Install server node modules**
+  cd into `fs-weather-app/server` and use:
 
-```shell
-npm install
-```
+  ```shell
+  npm install
+  ```
+- #### **Set up environment variable file**
+  Copy the provided `.env` file that contains the API key into `fs-weather-app/server`
 
-### Run
+- #### **Install client node modules**
+  cd into `fs-weather-app/client` and use:
 
-cd into `fs-weather-app` and use:
+  ```shell
+  npm install
+  ```
 
-```shell
-npm start
-```
+
+## Running the software
+- ### **Start the Database & Server**
+  cd into `fs-weather-app/server` and use:
+
+  ```shell
+  npm run user-db
+  ```
+
+  then run 
+
+  ```shell
+  npm run dev
+  ```
+
+- ### **Start the client**
+  cd into `fs-weather-app/client` and use:
+
+  ```shell
+  npm start
+  ```
+
+
+# Development information
 
 ### react-icons is installed
 
@@ -23,3 +52,8 @@ npm start
 ### Styling with CSS vs directly editing the style of an object with React
 
 I've been styling using index.css rather than react as it's usually a lot easier to make changes. So if you need to edit the style of something that isn't bootstrap-specific, my edits will all be class and selector-based and stored in `index.css` - Brooke
+
+
+## OPEN WEATHER API KEY
+There will be a `.env` file for each person with a database login string and it will contain the api key. 
+Place it in the `fs-weather-app/server` directory and it should work!

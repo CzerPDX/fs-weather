@@ -1,11 +1,20 @@
 const express = require("express");
 const axios = require("axios");
+const mongoose = require('mongoose');
 const app = express();
+app.use(express.json());
+require('dotenv').config()
 const port = 5001;
 
-require('dotenv').config()
-const KEY = process.env.OPEN_WEATHER_API_KEY;
 
+
+
+
+
+// Open Weather API information
+// Set up a route for the API. The frontend will make calls to this route
+// In the frontend we will fetch this user array and display all the users.
+const KEY = process.env.OPEN_WEATHER_API_KEY;
 const CURRENT_WEATHER =
   "https://api.openweathermap.org/data/2.5/weather?units=imperial";
 const HOURLY_FORECAST =
@@ -14,8 +23,6 @@ const DAILY_FORECAST =
   "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
 const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 
-// Set up a route for the API. The frontend will make calls to this route
-// In the frontend we will fetch this user array and display all the users.
 
 // convert, parse and format time from the date (dt) value in the openWeather api response
 const convertTime = (time, timezone) => {
@@ -167,11 +174,19 @@ app.get("/api*", (req, res) => {
 
 
 
+
+// Database
+app.all("/db*", (req, res) => {
+})
+
+
+
+
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
 
 
 
-// app.get("/api*", (req, res) => {
-// }
