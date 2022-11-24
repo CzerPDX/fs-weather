@@ -1,6 +1,5 @@
 const express = require("express");
 const axios = require("axios");
-const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 require('dotenv').config()
@@ -173,11 +172,15 @@ app.get("/api*", (req, res) => {
 });
 
 
+// Database Info
+const dbRoutes = require('./fs-db-routes');
+app.use('/db', dbRoutes);
+
+// // Database
+// app.all("/db*", (req, res) => {
 
 
-// Database
-app.all("/db*", (req, res) => {
-})
+// })
 
 
 
