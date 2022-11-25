@@ -20,14 +20,16 @@
 
 
 ## Running the software
-- ### **Start the Database & Server**
+- ### **Start the Database**
   cd into `fs-weather-app/server` and use:
 
   ```shell
   npm run fs-database
   ```
 
-  then run 
+- ### **Start the Server**
+  stay in `fs-weather-app/server` and use:
+
 
   ```shell
   npm run dev
@@ -57,3 +59,9 @@ I've been styling using index.css rather than react as it's usually a lot easier
 ## OPEN WEATHER API KEY
 There will be a `.env` file for each person with a database login string and it will contain the api key. 
 Place it in the `fs-weather-app/server` directory and it should work!
+
+
+## Database
+We are using `json-server` and `json-server-auth` to securely store the email and password information of our users. 
+https://www.npmjs.com/package/json-server-auth
+It uses a `JWT` style of authentication

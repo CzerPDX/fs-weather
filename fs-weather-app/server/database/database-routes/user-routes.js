@@ -16,62 +16,82 @@ const axios = require('axios');
 const router = express.Router();
 module.exports = router;
 
-// Import our database schema into the routes.js file
-const UserSchema = require('../table-schema/user-table-schema')
+const DB_URL = 'http://localhost:8001';
+
 
 // REGISTER using json-server-auth
 router.post('/register', async (req, res) => {
-  // console.log(`BODY: ${JSON.stringify(req.body)}`);
-  if (
-    (req?.body?.id === undefined) 
-    || (req?.body?.email === undefined)
-    || (req?.body?.password === undefined)
-    || (req?.body?.displayName === undefined)) {
-    res.status(400).send(`Error! Requests for user registration must include in the body: id, email, password, and displayName`);
-    } 
+
+  // Verify the proper information was passed in
+  if ((req?.body?.email === undefined) || (req?.body?.password === undefined) || (req?.body?.displayName === undefined)) {
+    res.status(400).send(`Error! Requests for user registration must include in the body: email, password, and displayName`);
+  } 
     
-    else {
-      const newUser = {
-        "id": req.body.id,
-        "email": req.body.email,
-        "password": req.body.password,
-        "displayName": req.body.displayName,
-      }
-
-      try {
-        const databaseResponse = await axios.post(`http://localhost:8001/register`, newUser)
-        console.log(`${databaseResponse}`)
-        res.send(databaseResponse);
-      }
-      catch (error) {
-        res.send(error?.response?.data)
-      }
+  else {
+    const newUser = {
+      "email": req.body.email,
+      "password": req.body.password,
+      "displayName": req.body.displayName,
     }
+
+    try {
+      const databaseResponse = await axios.post(`${DB_URL}/register`, newUser)
+      console.log(`${databaseResponse}`)
+      res.send(databaseResponse.dat);
+    }
+    catch (error) {
+      res.send(error?.response?.data)
+    }
+  }
+})
+
+// LOGIN using json-server-auth
+router.post('/login', async (req, res) => {
+
+  // Verify the proper information was passed in
+  if ((req?.body?.email === undefined) || (req?.body?.password === undefined)) {
+    res.status(400).send(`Error! Requests for user login must include in the body: email and password`);
+  } 
+  else {
+    const loginInfo = {
+      "email": req.body.email,
+      "password": req.body.password
+    }
+    try {
+      const databaseResponse = await axios.post(`${DB_URL}/login`, loginInfo)
+      console.log(databaseResponse.data)
+      res.send(databaseResponse.data);
+    }
+    catch (error) {
+      res.send(error?.response?.data)
+    }
+  }
 })
 
 
-// POST to databse
-// Example POST endpoint: localhost:5001/data/user/post
-router.post('/post', async (req, res) => {
+
+// // POST to databse
+// // Example POST endpoint: localhost:5001/data/user/post
+// router.post('/post', async (req, res) => {
   
-  msg = `POST: id=${req.body.id}, email=${req.body.email}, displayName=${req.body.displayName}`
+//   msg = `POST: email=${req.body.email}, displayName=${req.body.displayName}`
 
-  try {
-    console.log(msg)
-    res.status(200).send(msg)
-  }
-  catch (error) {
-    const errMsg = `ERROR! ${error}`;
-    console.error(errMsg)
-    res.status(400).send(errMsg)
-  }
+//   try {
+//     console.log(msg)
+//     res.status(200).send(msg)
+//   }
+//   catch (error) {
+//     const errMsg = `ERROR! ${error}`;
+//     console.error(errMsg)
+//     res.status(400).send(errMsg)
+//   }
 
-})
+// })
 
 // GET by ID
 // Example GET endpoint: localhost:5001/data/user/get
 router.get('/get', async (req, res) => {
-  msg = `GET: id=${req.body.id}`
+  msg = `GET: email=${req.body.email}`
   try {
     console.log(msg)
     res.status(200).send(msg)
@@ -87,7 +107,7 @@ router.get('/get', async (req, res) => {
 // UPDATE by ID using the patch method
 // Example PATCH endpoint: localhost:5001/data/user/update
 router.patch('/update', async (req, res) => {
-  msg = `UPDATE: id=${req.body.id}, email=${req.body.email}, displayName=${req.body.displayName}`
+  msg = `UPDATE: email=${req.body.email}, displayName=${req.body.displayName}`
   try {
     console.log(msg)
     res.status(200).send(msg)
@@ -102,7 +122,7 @@ router.patch('/update', async (req, res) => {
 // DELETE by ID
 // Example DELETE endpoint: localhost:5001/data/user/delete
 router.delete('/delete', async (req, res) => {
-  msg = `DELETE: id=${req.body.id}`
+  msg = `DELETE: email=${req.body.email}`
   try {
     console.log(msg)
     res.status(200).send(msg)
