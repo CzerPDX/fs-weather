@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import React from 'react';
 import CurrentWeather from './CurrentWeather';
+import TestCurrentWeather from './TestCurrentWeather';
 import MainSearch from '../general/search-bars/MainSearch';
 
 const SearchBarAndResults = () => {
@@ -15,10 +16,10 @@ const SearchBarAndResults = () => {
     show = '';
   } else {
     show = (
-      <CurrentWeather
+      <TestCurrentWeather
         lat={coordinates.lat}
         lon={coordinates.lon}
-        cardType="main-large"
+        cardType="hourly-forecast"
       />
     );
   }
