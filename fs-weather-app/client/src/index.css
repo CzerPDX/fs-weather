@@ -1,3 +1,15 @@
+/* Header */
+.login-logout-btn {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+
+/* Main Page General */
+.main-page {
+  padding-top: 1em;
+}
+
 
 /* Main page search */
 .main-search {

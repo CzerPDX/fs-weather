@@ -63,5 +63,5 @@ Place it in the `fs-weather-app/server` directory and it should work!
 
 ## Database
 We are using `json-server` and `json-server-auth` to securely store the email and password information of our users. 
-https://www.npmjs.com/package/json-server-auth
+[https://www.npmjs.com/package/json-server-auth](https://www.npmjs.com/package/json-server-auth)
 It uses a `JWT` style of authentication
