@@ -56,3 +56,11 @@
   max-width: 20em;
   border-radius: 1em;
 }
+.hr-icon {
+  width: 4rem;
+  height: auto;
+}
+.hr-icon-name {
+  font-size: 0.8em;
+  font-weight: bold;
+}
