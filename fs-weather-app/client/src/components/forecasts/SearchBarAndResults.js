@@ -16,11 +16,18 @@ const SearchBarAndResults = () => {
     show = '';
   } else {
     show = (
-      <TestCurrentWeather
-        lat={coordinates.lat}
-        lon={coordinates.lon}
-        cardType="hourly-forecast"
-      />
+      <div>
+        <TestCurrentWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="main-large"
+        />
+        <TestCurrentWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="hourly-forecast"
+        />
+      </div>
     );
   }
   // const latAndlon = (latFromSearch, lonFromSearch) => {
