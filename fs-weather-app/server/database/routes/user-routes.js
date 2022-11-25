@@ -8,6 +8,7 @@
   - DELETE data based on ID
 
   References:
+  https://www.npmjs.com/package/json-server-auth
   https://www.freecodecamp.org/news/build-a-restful-api-using-node-express-and-mongodb/
 */
 
@@ -53,6 +54,7 @@ router.post('/login', async (req, res) => {
     res.status(400).send(`Error! Requests for user login must include in the body: email and password`);
   } 
   else {
+    // Build an object with the email and password for the login attempt
     const loginInfo = {
       "email": req.body.email,
       "password": req.body.password

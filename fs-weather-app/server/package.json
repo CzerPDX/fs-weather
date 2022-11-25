@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node fs-server",
     "dev": "nodemon fs-server",
-    "fs-database": "json-server-auth -p 8001 database/fs-database.json"
+    "fs-database": "json-server-auth -p 8001 database/fs-database.json database/routes/custom-user-routes.json"
   },
   "keywords": [],
   "author": "",
