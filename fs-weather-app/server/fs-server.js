@@ -174,7 +174,7 @@ app.get("/api*", (req, res) => {
 
 // Database routes
 const dbRoutes = require('./database/fs-db-routes');
-app.use('/db', dbRoutes);
+app.use('/data', dbRoutes);
 
 
 

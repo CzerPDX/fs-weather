@@ -24,7 +24,7 @@
   cd into `fs-weather-app/server` and use:
 
   ```shell
-  npm run user-db
+  npm run fs-database
   ```
 
   then run 

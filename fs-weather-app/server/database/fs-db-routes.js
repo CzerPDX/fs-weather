@@ -23,7 +23,7 @@ const UserSchema = require('./table-schema/user-table-schema')
 // Example url: localhost:5001/dev/post
 router.post('/post', async (req, res) => {
   
-  msg = `POST: id=${req.body.id}, username=${req.body.username}, displayName=${req.body.displayName}`
+  msg = `POST: id=${req.body.id}, email=${req.body.email}, displayName=${req.body.displayName}`
 
   try {
     console.log(msg)
@@ -61,7 +61,7 @@ router.get('/get', async (req, res) => {
 // UPDATE by ID using the patch method
 // Example url: localhost:5001/db/update
 router.patch('/update', async (req, res) => {
-  msg = `UPDATE: id=${req.body.id}, username=${req.body.username}, displayName=${req.body.displayName}`
+  msg = `UPDATE: id=${req.body.id}, email=${req.body.email}, displayName=${req.body.displayName}`
   try {
     console.log(msg)
     res.status(200).send(msg)
@@ -89,5 +89,5 @@ router.delete('/delete', async (req, res) => {
 })
 
 router.all('*', (req, res) => {
-  res.status(400).send(`Error! Invalid databse request at /db${req.path}`)
+  res.status(400).send(`Error! Invalid databse request at /data${req.path}`)
 })
