@@ -1,11 +1,17 @@
+/*
+  fs-server.js 
+  Top-level routing for backend data
+
+  References:
+  https://github.com/typicode/json-server/issues/928
+*/
+
 const express = require("express");
 const axios = require("axios");
 const app = express();
 app.use(express.json());
 require('dotenv').config()
 const port = 5001;
-
-
 
 
 

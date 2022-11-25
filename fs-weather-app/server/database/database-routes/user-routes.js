@@ -12,12 +12,42 @@
 */
 
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 module.exports = router;
-const DB = 'http://localhost:8001/';
 
 // Import our database schema into the routes.js file
 const UserSchema = require('../table-schema/user-table-schema')
+
+// REGISTER using json-server-auth
+router.post('/register', async (req, res) => {
+  // console.log(`BODY: ${JSON.stringify(req.body)}`);
+  if (
+    (req?.body?.id === undefined) 
+    || (req?.body?.email === undefined)
+    || (req?.body?.password === undefined)
+    || (req?.body?.displayName === undefined)) {
+    res.status(400).send(`Error! Requests for user registration must include in the body: id, email, password, and displayName`);
+    } 
+    
+    else {
+      const newUser = {
+        "id": req.body.id,
+        "email": req.body.email,
+        "password": req.body.password,
+        "displayName": req.body.displayName,
+      }
+
+      try {
+        const databaseResponse = await axios.post(`http://localhost:8001/register`, newUser)
+        console.log(`${databaseResponse}`)
+        res.send(databaseResponse);
+      }
+      catch (error) {
+        res.send(error?.response?.data)
+      }
+    }
+})
 
 
 // POST to databse
