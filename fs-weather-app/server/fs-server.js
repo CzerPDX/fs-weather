@@ -1,16 +1,16 @@
-const express = require("express");
-const axios = require("axios");
+const express = require('express');
+const axios = require('axios');
 const FormData = require('form-data');
 const app = express();
 const port = 5001;
-const KEY = "1e859cb9e9c8898c11b003c46405b5d2";
+const KEY = '1e859cb9e9c8898c11b003c46405b5d2';
 const CURRENT_WEATHER =
-  "https://api.openweathermap.org/data/2.5/weather?units=imperial";
+  'https://api.openweathermap.org/data/2.5/weather?units=imperial';
 const HOURLY_FORECAST =
-  "https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=12";
+  'https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=12';
 const DAILY_FORECAST =
-  "https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10";
-const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
+  'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10';
+const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
 
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
@@ -19,7 +19,7 @@ const AIR_QUALITY = "http://api.openweathermap.org/data/2.5/air_pollution?";
 const convertTime = (time, timezone) => {
   let date = new Date((time + timezone) * 1000);
   let hours = date.getUTCHours();
-  let ampm = hours >= 12 ? "pm" : "am";
+  let ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12;
   hours = hours ? hours : 12;
   return { hour: hours, ampm: ampm };
@@ -28,20 +28,20 @@ const convertTime = (time, timezone) => {
 //parses and returns day of the week from the date (dt) value in the openWeather api response
 const getDayOfWeek = (time, timezone) => {
   const dayName = [
-    { name: "Sunday", abbrv: "Sun" },
-    { name: "Monday", abbrv: "Mon" },
-    { name: "Tuesday", abbrv: "Tue" },
-    { name: "Wednesday", abbrv: "Wed" },
-    { name: "Thurday", abbrv: "Thu" },
-    { name: "Friday", abbrv: "Fri" },
-    { name: "Saturday", abbrv: "Sat" },
+    { name: 'Sunday', abbrv: 'Sun' },
+    { name: 'Monday', abbrv: 'Mon' },
+    { name: 'Tuesday', abbrv: 'Tue' },
+    { name: 'Wednesday', abbrv: 'Wed' },
+    { name: 'Thurday', abbrv: 'Thu' },
+    { name: 'Friday', abbrv: 'Fri' },
+    { name: 'Saturday', abbrv: 'Sat' },
   ];
   let date = new Date((time + timezone) * 1000);
   return dayName[date.getDay()];
 };
 
-app.get("/api*", (req, res) => {
-  console.log(`req.url.split("?")[0] = ${req.url.split("?")[0]}`);
+app.get('/api*', (req, res) => {
+  console.log(`req.url.split("?")[0] = ${req.url.split('?')[0]}`);
   let responseObject = null;
   let lat = req.query.lat;
   let lon = req.query.lon;
@@ -50,12 +50,12 @@ app.get("/api*", (req, res) => {
   if (req.query.lat === undefined || req.query.lon === undefined) {
     res
       .status(400)
-      .send({ message: "Error! Paramaters lat and lng are required " });
+      .send({ message: 'Error! Paramaters lat and lng are required ' });
     res.end();
   }
 
   // Handle requests for /api-current-weather
-  else if (req.url.split("?")[0] === "/api-current-weather") {
+  else if (req.url.split('?')[0] === '/api-current-weather') {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -78,15 +78,17 @@ app.get("/api*", (req, res) => {
         console.log({ message: error.message });
       });
     // Handle requests for /api-hourly-weather
-  } else if (req.url.split("?")[0] === "/api-hourly-weather") {
+  } else if (req.url.split('?')[0] === '/api-hourly-weather') {
     axios
       .get(`${HOURLY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
+        const name = response.data.city.name;
 
         responseObject = list.map((item) => {
           const time = convertTime(item.dt, timeZone);
+          const day = getDayOfWeek(item.dt, timeZone);
 
           // {description : item.weather[0].main, descriptionLng : item.weather[0].description}
           // Can be added if we want those values for hourly forcast
@@ -94,10 +96,16 @@ app.get("/api*", (req, res) => {
             time: time,
             temp: Math.round(item.main.temp),
             icon: item.weather[0].icon,
+            day: day,
+            description: item.weather[0].description,
+            wind: Math.round(item.wind.speed),
+            humidity: item.main.humidity,
+            percipitation: item.pop * 100,
+            feelsLike: Math.round(item.main.feels_like),
           };
+          obj = { ...obj, locationName: name };
           return obj;
         });
-
         console.log(responseObject);
         res.status(200).send(responseObject);
       })
@@ -106,7 +114,7 @@ app.get("/api*", (req, res) => {
         console.log(error);
       });
     // Handle requests for /api-daily-weather
-  } else if (req.url.split("?")[0] === "/api-daily-weather") {
+  } else if (req.url.split('?')[0] === '/api-daily-weather') {
     axios
       .get(`${DAILY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -135,13 +143,13 @@ app.get("/api*", (req, res) => {
         console.log(error);
       });
     // Handle requests for /api-air-quality
-  } else if (req.url.split("?")[0] === "/api-air-quality") {
-    console.log("***air quality");
+  } else if (req.url.split('?')[0] === '/api-air-quality') {
+    console.log('***air quality');
     axios
       .get(`${AIR_QUALITY}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
         const list = response.data.list;
-        let aqiValues = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
+        let aqiValues = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
 
         responseObject = {
           aqiIndex: list[0].main.aqi,
@@ -151,15 +159,15 @@ app.get("/api*", (req, res) => {
         res.status(200).send(response.data);
       })
       .catch((error) => {
-        res.status(502).send({ message: "Failed request to openweather API" });
+        res.status(502).send({ message: 'Failed request to openweather API' });
         console.log(error);
       });
   }
 
   // Handle invalid requests
   else {
-    console.error("Error! Response was empty");
-    res.send("[]");
+    console.error('Error! Response was empty');
+    res.send('[]');
   }
 });
 
