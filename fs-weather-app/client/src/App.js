@@ -36,6 +36,7 @@ const App = () => {
         setCoordinates={setCoordinates}
         coordinates={coordinates}
       />
+      {show}
     </div>
   );
 };

@@ -38,7 +38,6 @@ const SearchBarAndResults = ({ coordinates, setCoordinates }) => {
   return (
     <div className="main-page container">
       <MainSearch setCoordinates={setCoordinates} coordinates={coordinates} />
-      {show}
     </div>
   );
 };
