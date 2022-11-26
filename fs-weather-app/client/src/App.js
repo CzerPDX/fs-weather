@@ -8,7 +8,7 @@
 
 import './index.css';
 import MainPage from './routes/MainPage';
-import Login from './routes/Login';
+import LoginRegistrationPage from './routes/LoginRegistrationPage';
 import Header from './components/general/Header';
 import { Routes, Route } from 'react-router-dom';
 
@@ -16,9 +16,6 @@ import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
   
-  
-
-
   return (
     <div>
       
@@ -29,7 +26,7 @@ const App = () => {
       <div className='container'>
         <Routes>
           <Route exact path='/' element={<MainPage />} />
-          <Route path='/login' element={<Login/>} />
+          <Route path='/login' element={<LoginRegistrationPage/>} />
         </Routes>
       </div>
     </div>

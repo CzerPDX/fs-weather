@@ -2,9 +2,8 @@
   References:
   https://bobbyhadz.com/blog/react-onclick-redirect
 */
-// import Button from "./Button"
-
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import Button from "./Button";
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginLogoutBtn = ({ loggedIn }) => {
   const navigate = useNavigate();
@@ -37,10 +36,18 @@ const LoginLogoutBtn = ({ loggedIn }) => {
 
   return (
     <div className={className}>
-      <button type="button" onClick={onClick} className="btn btn-primary">{buttonText}</button>
-      <Routes>
+      
+      {/* <button type="button" onClick={onClick} className="btn btn-primary">{buttonText}</button> */}
+      {/* <Routes>
         <Route exact path={routePath} />
-      </Routes>
+      </Routes> */}
+      <Link to={routePath}>
+        <Button 
+          btnClasses='btn btn-primary'
+          onClick={onClick}
+          text={buttonText}
+        />
+      </Link>
     </div>
   )
 }
@@ -48,8 +55,6 @@ const LoginLogoutBtn = ({ loggedIn }) => {
 
 // General app headers
 const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
-  
-
   return (
     <header className={headerClasses}>
       <div className='container'>
