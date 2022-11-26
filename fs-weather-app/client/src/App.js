@@ -16,7 +16,7 @@ const App = () => {
   } else {
     show = (
       <div>
-        <TestCurrentWeather
+        {/* <TestCurrentWeather
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="main-large"
@@ -25,6 +25,11 @@ const App = () => {
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="hourly-forecast"
+        /> */}
+        <TestCurrentWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="daily-forecast"
         />
       </div>
     );

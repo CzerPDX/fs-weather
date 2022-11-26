@@ -19,25 +19,47 @@ const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
 const convertTime = (time, timezone) => {
   let date = new Date((time + timezone) * 1000);
   let hours = date.getUTCHours();
+  let minutes = date.getMinutes();
   let ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12;
   hours = hours ? hours : 12;
-  return { hour: hours, ampm: ampm };
+  return { hour: hours, ampm: ampm, minutes: minutes };
 };
 
 //parses and returns day of the week from the date (dt) value in the openWeather api response
 const getDayOfWeek = (time, timezone) => {
+  let date = new Date((time + timezone) * 1000);
+  let day = date.getDate();
+
   const dayName = [
-    { name: 'Sunday', abbrv: 'Sun' },
-    { name: 'Monday', abbrv: 'Mon' },
-    { name: 'Tuesday', abbrv: 'Tue' },
-    { name: 'Wednesday', abbrv: 'Wed' },
-    { name: 'Thurday', abbrv: 'Thu' },
-    { name: 'Friday', abbrv: 'Fri' },
-    { name: 'Saturday', abbrv: 'Sat' },
+    { name: 'Sunday', abbrv: 'Sun', dayOfMonth: day },
+    { name: 'Monday', abbrv: 'Mon', dayOfMonth: day },
+    { name: 'Tuesday', abbrv: 'Tue', dayOfMonth: day },
+    { name: 'Wednesday', abbrv: 'Wed', dayOfMonth: day },
+    { name: 'Thurday', abbrv: 'Thu', dayOfMonth: day },
+    { name: 'Friday', abbrv: 'Fri', dayOfMonth: day },
+    { name: 'Saturday', abbrv: 'Sat', dayOfMonth: day },
+  ];
+  return dayName[date.getDay()];
+};
+
+const getDayOfMonth = (time, timezone) => {
+  const monthName = [
+    { name: 'January', abbrv: 'Jan' },
+    { name: 'February', abbrv: 'Feb' },
+    { name: 'March', abbrv: 'Mar' },
+    { name: 'April', abbrv: 'Apr' },
+    { name: 'May', abbrv: 'May' },
+    { name: 'June', abbrv: 'Jun' },
+    { name: 'July', abbrv: 'Jul' },
+    { name: 'August', abbrv: 'Aug' },
+    { name: 'September', abbrv: 'Sep' },
+    { name: 'October', abbrv: 'Oct' },
+    { name: 'November', abbrv: 'Nov' },
+    { name: 'December', abbrv: 'Dec' },
   ];
   let date = new Date((time + timezone) * 1000);
-  return dayName[date.getDay()];
+  return monthName[date.getMonth()];
 };
 
 app.get('/api*', (req, res) => {
@@ -120,18 +142,29 @@ app.get('/api*', (req, res) => {
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
+        const name = response.data.city.name;
 
         responseObject = list.map((item) => {
           const dayOfWeek = getDayOfWeek(item.dt, timeZone);
+          const dayOfMonth = getDayOfMonth(item.dt, timeZone);
+          const sunrise = convertTime(item.sunrise, timeZone);
+          const sunset = convertTime(item.sunset, timeZone);
           let obj = {
             day: dayOfWeek,
-            temp: Math.round(item.temp.day),
+            month: dayOfMonth,
+            temperature: Math.round(item.temp.day),
             tempMax: Math.round(item.temp.max),
             tempMin: Math.round(item.temp.min),
             icon: item.weather[0].icon,
             shortDescription: item.weather[0].main,
             longDescription: item.weather[0].description,
+            wind: Math.round(item.speed),
+            humidity: item.humidity,
+            percipitation: item.pop * 100,
+            sunrise: sunrise,
+            sunset: sunset,
           };
+          obj = { ...obj, locationName: name };
           return obj;
         });
 
