@@ -14,7 +14,7 @@ const SearchBarAndResults = () => {
   // }
 
   return (
-    <div className='main-page container'>
+    <div className='main-page'>
       <MainSearch />
 
       <CurrentWeather 

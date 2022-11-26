@@ -1,7 +1,9 @@
 /* Header */
-.login-logout-btn {
-  float: right;
-  padding-bottom: 0.5em;
+.header .container {
+  display: flex;
+}
+.login-btn, .logout-btn {
+  margin-left: auto;
 }
 
 
@@ -22,6 +24,7 @@
 /* Forecast Card */
 .forecast-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .forecast-card-container{

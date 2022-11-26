@@ -4,8 +4,7 @@
 */
 // import Button from "./Button"
 
-import { Router, Routes, Route, useNavigate } from 'react-router-dom';
-import Login from '../../routes/Login';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 const LoginLogoutBtn = ({ loggedIn }) => {
   const navigate = useNavigate();
@@ -13,28 +12,48 @@ const LoginLogoutBtn = ({ loggedIn }) => {
     navigate('/login');
   };
 
+  const navigateToMainPage = () => {
+    navigate('/');
+  };
+
+
+  let onClick;
+  let className;
+  let buttonText;
+  let routePath;
+
   if (!loggedIn) {
-    return (
-      <div className='login-logout-btn'>
-        <button type="button" onClick={navigateToLogin} className="btn btn-primary">Login</button>
-        <Routes>
-          <Route exact path='/login' element={<Login />} />
-        </Routes>
-      </div>
-      
-    )
+    onClick = navigateToLogin;
+    className = 'login-btn';
+    buttonText = 'Login';
+    routePath = '/login';
   }
+  else {
+    onClick = navigateToMainPage;
+    className = 'logout-btn';
+    buttonText = 'Logout';
+    routePath = '/';
+  }
+
+  return (
+    <div className={className}>
+      <button type="button" onClick={onClick} className="btn btn-primary">{buttonText}</button>
+      <Routes>
+        <Route exact path={routePath} />
+      </Routes>
+    </div>
+  )
 }
 
 
 // General app headers
 const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
-
+  
 
   return (
     <header className={headerClasses}>
       <div className='container'>
-        { headerTitle }
+        <h4>{ headerTitle }</h4>
         <LoginLogoutBtn 
           loggedIn={false}
           navigateToLogin={navigateToLogin}

@@ -10,7 +10,7 @@ import './index.css';
 import MainPage from './routes/MainPage';
 import Login from './routes/Login';
 import Header from './components/general/Header';
-import { Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 
@@ -26,12 +26,12 @@ const App = () => {
         headerTitle='FS Weather'
         headerClasses='p-3 bg-dark text-white header'
       />
-      <Routes>
-        <Route exact path='/' element={<MainPage />} />
-        <Route path='/login' element={<Login/>} />
-      </Routes>
-      
-      
+      <div className='container'>
+        <Routes>
+          <Route exact path='/' element={<MainPage />} />
+          <Route path='/login' element={<Login/>} />
+        </Routes>
+      </div>
     </div>
   );
 }
