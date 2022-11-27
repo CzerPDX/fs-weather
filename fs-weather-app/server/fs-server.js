@@ -1,8 +1,33 @@
+<<<<<<< HEAD
 const express = require('express');
 const axios = require('axios');
 const FormData = require('form-data');
+=======
+/*
+  fs-server.js 
+  Top-level routing for backend data
+
+  References:
+  https://github.com/typicode/json-server/issues/928
+*/
+
+const express = require('express');
+const axios = require('axios');
+>>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 const app = express();
+app.use(express.json());
+require('dotenv').config()
 const port = 5001;
+<<<<<<< HEAD
+=======
+
+
+
+
+// Open Weather API information
+// Set up a route for the API. The frontend will make calls to this route
+// In the frontend we will fetch this user array and display all the users.
+>>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 const KEY = process.env.OPEN_WEATHER_API_KEY;
 const CURRENT_WEATHER =
   'https://api.openweathermap.org/data/2.5/weather?units=imperial';
@@ -12,22 +37,28 @@ const DAILY_FORECAST =
   'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10';
 const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
 
-// Set up a route for the API. The frontend will make calls to this route
-// In the frontend we will fetch this user array and display all the users.
 
 // convert, parse and format time from the date (dt) value in the openWeather api response
 const convertTime = (time, timezone) => {
   let date = new Date((time + timezone) * 1000);
   let hours = date.getUTCHours();
+<<<<<<< HEAD
+=======
+  let minutes = date.getMinutes();
+>>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
   let ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12;
   hours = hours ? hours : 12;
-  return { hour: hours, ampm: ampm };
+  return { hour: hours, ampm: ampm, minutes: minutes };
 };
 
 //parses and returns day of the week from the date (dt) value in the openWeather api response
 const getDayOfWeek = (time, timezone) => {
+  let date = new Date((time + timezone) * 1000);
+  let day = date.getDate();
+
   const dayName = [
+<<<<<<< HEAD
     { name: 'Sunday', abbrv: 'Sun' },
     { name: 'Monday', abbrv: 'Mon' },
     { name: 'Tuesday', abbrv: 'Tue' },
@@ -35,11 +66,41 @@ const getDayOfWeek = (time, timezone) => {
     { name: 'Thurday', abbrv: 'Thu' },
     { name: 'Friday', abbrv: 'Fri' },
     { name: 'Saturday', abbrv: 'Sat' },
+=======
+    { name: 'Sunday', abbrv: 'Sun', dayOfMonth: day },
+    { name: 'Monday', abbrv: 'Mon', dayOfMonth: day },
+    { name: 'Tuesday', abbrv: 'Tue', dayOfMonth: day },
+    { name: 'Wednesday', abbrv: 'Wed', dayOfMonth: day },
+    { name: 'Thurday', abbrv: 'Thu', dayOfMonth: day },
+    { name: 'Friday', abbrv: 'Fri', dayOfMonth: day },
+    { name: 'Saturday', abbrv: 'Sat', dayOfMonth: day },
+>>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
   ];
-  let date = new Date((time + timezone) * 1000);
   return dayName[date.getDay()];
 };
 
+<<<<<<< HEAD
+=======
+const getDayOfMonth = (time, timezone) => {
+  const monthName = [
+    { name: 'January', abbrv: 'Jan' },
+    { name: 'February', abbrv: 'Feb' },
+    { name: 'March', abbrv: 'Mar' },
+    { name: 'April', abbrv: 'Apr' },
+    { name: 'May', abbrv: 'May' },
+    { name: 'June', abbrv: 'Jun' },
+    { name: 'July', abbrv: 'Jul' },
+    { name: 'August', abbrv: 'Aug' },
+    { name: 'September', abbrv: 'Sep' },
+    { name: 'October', abbrv: 'Oct' },
+    { name: 'November', abbrv: 'Nov' },
+    { name: 'December', abbrv: 'Dec' },
+  ];
+  let date = new Date((time + timezone) * 1000);
+  return monthName[date.getMonth()];
+};
+
+>>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 app.get('/api*', (req, res) => {
   console.log(`req.url.split("?")[0] = ${req.url.split('?')[0]}`);
   let responseObject = null;
@@ -84,9 +145,11 @@ app.get('/api*', (req, res) => {
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
+        const name = response.data.city.name;
 
         responseObject = list.map((item) => {
           const time = convertTime(item.dt, timeZone);
+          const day = getDayOfWeek(item.dt, timeZone);
 
           // {description : item.weather[0].main, descriptionLng : item.weather[0].description}
           // Can be added if we want those values for hourly forcast
@@ -94,10 +157,16 @@ app.get('/api*', (req, res) => {
             time: time,
             temp: Math.round(item.main.temp),
             icon: item.weather[0].icon,
+            day: day,
+            description: item.weather[0].description,
+            wind: Math.round(item.wind.speed),
+            humidity: item.main.humidity,
+            percipitation: item.pop * 100,
+            feelsLike: Math.round(item.main.feels_like),
           };
+          obj = { ...obj, locationName: name };
           return obj;
         });
-
         console.log(responseObject);
         res.status(200).send(responseObject);
       })
@@ -112,18 +181,29 @@ app.get('/api*', (req, res) => {
       .then((response) => {
         const list = response.data.list;
         const timeZone = response.data.city.timezone;
+        const name = response.data.city.name;
 
         responseObject = list.map((item) => {
           const dayOfWeek = getDayOfWeek(item.dt, timeZone);
+          const dayOfMonth = getDayOfMonth(item.dt, timeZone);
+          const sunrise = convertTime(item.sunrise, timeZone);
+          const sunset = convertTime(item.sunset, timeZone);
           let obj = {
             day: dayOfWeek,
-            temp: Math.round(item.temp.day),
+            month: dayOfMonth,
+            temperature: Math.round(item.temp.day),
             tempMax: Math.round(item.temp.max),
             tempMin: Math.round(item.temp.min),
             icon: item.weather[0].icon,
             shortDescription: item.weather[0].main,
             longDescription: item.weather[0].description,
+            wind: Math.round(item.speed),
+            humidity: item.humidity,
+            percipitation: item.pop * 100,
+            sunrise: sunrise,
+            sunset: sunset,
           };
+          obj = { ...obj, locationName: name };
           return obj;
         });
 
@@ -163,6 +243,17 @@ app.get('/api*', (req, res) => {
   }
 });
 
+
+// Database routes
+const dbRoutes = require('./database/fs-db-routes');
+app.use('/data', dbRoutes);
+
+
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
+
+
+

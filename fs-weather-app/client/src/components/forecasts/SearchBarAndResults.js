@@ -1,12 +1,50 @@
 // MainSearch manages the search function on the main page
 
-import React from 'react'
-import CurrentWeather from './CurrentWeather'
-import MainSearch from '../general/search-bars/MainSearch'
+import { useState } from 'react';
+import React from 'react';
+import CurrentWeather from './CurrentWeather';
+import TestCurrentWeather from './TestCurrentWeather';
+import MainSearch from '../general/search-bars/MainSearch';
+import HourlyWeather from './HourlyWeather';
+import DailyWeather from './DailyWeather';
+import WeatherNav from '../general/WeatherNav';
 
 const SearchBarAndResults = () => {
-  let lat = '45.5152'
-  let lon = '-122.6784'
+  const [coordinates, setCoordinates] = useState({
+    lat: null,
+    lgn: null,
+  });
+  const [card, setCard] = useState('main-large');
+  const show = () => {
+    console.log('**************', card);
+    let element = null;
+    if (card === 'main-large') {
+      element = (
+        <CurrentWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="main-large"
+        />
+      );
+    } else if (card === 'hourly-forecast') {
+      element = (
+        <HourlyWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="hourly-forecast"
+        />
+      );
+    } else if (card === 'daily-forecast') {
+      element = (
+        <DailyWeather
+          lat={coordinates.lat}
+          lon={coordinates.lon}
+          cardType="daily-forecast"
+        />
+      );
+    }
+    return element;
+  };
 
   // const latAndlon = (latFromSearch, lonFromSearch) => {
   //   lat = latFromSearch
@@ -14,17 +52,12 @@ const SearchBarAndResults = () => {
   // }
 
   return (
-    <div className='main-page container'>
-      <MainSearch />
-
-      <CurrentWeather 
-        lat={lat}
-        lon={lon}
-        cardType='main-large'
-      />
-
+    <div className="main-page container">
+      <WeatherNav setCard={setCard} />
+      <MainSearch setCoordinates={setCoordinates} coordinates={coordinates} />
+      {show()}
     </div>
-  )
-}
+  );
+};
 
-export default SearchBarAndResults
+export default SearchBarAndResults;
