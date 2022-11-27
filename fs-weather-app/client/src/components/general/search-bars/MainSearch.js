@@ -1,17 +1,20 @@
-import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
-import Button from "../Btn";
-import SearchAutoComplete from "./SearchAutoComplete";
+import { FaSearch } from 'react-icons/fa';
+import { useState } from 'react';
+import Button from '../Btn';
+import SearchAutoComplete from './SearchAutoComplete';
 
-const MainSearch = ({ onSearch }) => {
+const MainSearch = ({ setCoordinates, coordinates }) => {
   // AddTask component-level state
   //const [searchTerm, setSearchTerm] = useState("");
 
-  // coordinate State is passed as a prop to child
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lgn: null,
-  });
+  let tempLat = coordinates.lat;
+  let tempLon = coordinates.lon;
+
+  const setTempCoords = (lat, lon) => {
+    tempLat = lat;
+    tempLon = lon;
+  };
+
   const searchIcon = <FaSearch />;
   // const searchIcon = 'hello'
 
@@ -20,7 +23,10 @@ const MainSearch = ({ onSearch }) => {
     error.preventDefault(); // Do not automatically go to a new page once submission happens.
 
     // Validate that coordinate state was updated from child-SearchAutoComplete
-    console.log("from parent", coordinates);
+    console.log('from parent', coordinates);
+    if (tempLat !== coordinates.lat && tempLon !== coordinates.lon) {
+      setCoordinates({ lat: tempLat, lon: tempLon });
+    }
 
     // Coordinates should now have correct values to call OpenWeather api
   };
@@ -33,7 +39,7 @@ const MainSearch = ({ onSearch }) => {
       <form className="form-control" onSubmit={onSubmit}>
         <label>Search City and State to view Weather</label>
         {/** SearchAutoComplete acts as input */}
-        <SearchAutoComplete setCoordinates={setCoordinates} />
+        <SearchAutoComplete setTempCoords={setTempCoords} />
         <Button
           btnClasses="btn btn-primary"
           type="submit"

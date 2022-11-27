@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
-} from "react-places-autocomplete";
+} from 'react-places-autocomplete';
 
-const SearchAutoComplete = ({ setCoordinates }) => {
-  const [city, setCity] = useState("");
+const SearchAutoComplete = ({ setTempCoords }) => {
+  const [city, setCity] = useState('');
   const renderFunc = ({
     getInputProps,
     suggestions,
@@ -15,15 +15,15 @@ const SearchAutoComplete = ({ setCoordinates }) => {
     <div>
       <input
         className="form-control form-control-lg"
-        {...getInputProps({ placeholder: "City" })}
+        {...getInputProps({ placeholder: 'City' })}
       />
 
       <div>
-        {loading ? <div>...</div> : ""}
+        {loading ? <div>...</div> : ''}
         {suggestions.map((suggestion) => {
           const style = {
-            backgroundColor: suggestion.active && "green",
-            color: suggestion.active && "white",
+            backgroundColor: suggestion.active && 'green',
+            color: suggestion.active && 'white',
           };
           console.log(suggestion);
           return (
@@ -41,8 +41,8 @@ const SearchAutoComplete = ({ setCoordinates }) => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const { lat, lng } = await getLatLng(results[0]);
-    setCoordinates({ lat, lng });
-    console.log("from child", lat, lng);
+    setTempCoords(lat, lng);
+    console.log('from child', lat, lng);
     setCity(value);
   };
 
