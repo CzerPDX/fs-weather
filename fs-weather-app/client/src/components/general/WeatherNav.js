@@ -1,7 +1,7 @@
 import 'bootstrap/js/src/collapse.js';
 const WeatherNav = ({ setCard }) => {
   const handleClick = (card) => {
-    console.log('click', card);
+    setCard(card);
   };
   return (
     <div>

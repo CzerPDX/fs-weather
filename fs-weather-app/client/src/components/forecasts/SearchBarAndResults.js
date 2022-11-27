@@ -15,30 +15,37 @@ const SearchBarAndResults = () => {
     lgn: null,
   });
   const [card, setCard] = useState('main-large');
-  let show;
-  if (coordinates.lat === null && coordinates.lgn === null) {
-    show = '';
-  } else {
-    show = (
-      <div>
+  const show = () => {
+    console.log('**************', card);
+    let element = null;
+    if (card === 'main-large') {
+      element = (
         <CurrentWeather
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="main-large"
         />
+      );
+    } else if (card === 'hourly-forecast') {
+      element = (
         <HourlyWeather
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="hourly-forecast"
         />
+      );
+    } else if (card === 'daily-forecast') {
+      element = (
         <DailyWeather
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="daily-forecast"
         />
-      </div>
-    );
-  }
+      );
+    }
+    return element;
+  };
+
   // const latAndlon = (latFromSearch, lonFromSearch) => {
   //   lat = latFromSearch
   //   lon = lonFromSearch
@@ -48,7 +55,7 @@ const SearchBarAndResults = () => {
     <div className="main-page container">
       <WeatherNav setCard={setCard} />
       <MainSearch setCoordinates={setCoordinates} coordinates={coordinates} />
-      {show}
+      {show()}
     </div>
   );
 };

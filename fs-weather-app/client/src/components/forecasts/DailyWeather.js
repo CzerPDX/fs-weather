@@ -25,7 +25,7 @@ const DailyWeather = (props) => {
     fetchData()
       // Error handling
       .catch(console.error);
-  }, [props]);
+  }, [fetchData]);
 
   return (
     <div className="current-weather-detailed">

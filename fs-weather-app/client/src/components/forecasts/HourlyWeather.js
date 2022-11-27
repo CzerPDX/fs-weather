@@ -4,6 +4,7 @@ import ForecastCard from './ForecastCard';
 // import React, { useState } from 'react'
 
 const HourlyWeather = (props) => {
+  console.log('hourly w', props);
   const initialWeatherState = {};
 
   const url = `/api-hourly-weather?lat=${props.lat}&lon=${props.lon}`;
@@ -25,7 +26,7 @@ const HourlyWeather = (props) => {
     fetchData()
       // Error handling
       .catch(console.error);
-  }, [props]);
+  }, [fetchData]);
 
   return (
     <div className="current-weather-detailed">
