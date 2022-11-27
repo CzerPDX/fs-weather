@@ -47,9 +47,8 @@ body {
   flex-wrap: wrap;
 }
 
-.forecast-card-container{
-  padding-right:1em;
-  
+.forecast-card-container {
+  padding-right: 1em;
 }
 
 .forecast-card {
@@ -63,9 +62,8 @@ body {
   border-width: thin;
   padding: 0.65em;
   border-color: #c5c5c5;
-  box-shadow: 0 0 0.5em rgba(0,0,0,0.07);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.07);
 }
-
 
 .temperature-and-graphic-card {
   background-color: #0d6efd;
@@ -86,7 +84,6 @@ body {
   margin: auto;
 }
 
-
 .detailed-weather-info {
   padding: 0.5em;
 }
@@ -94,4 +91,12 @@ body {
 .video {
   max-width: 20em;
   border-radius: 1em;
+}
+.hr-icon {
+  width: 4rem;
+  height: auto;
+}
+.hr-icon-name {
+  font-size: 0.8em;
+  font-weight: bold;
 }

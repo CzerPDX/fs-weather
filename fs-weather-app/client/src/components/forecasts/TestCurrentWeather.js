@@ -18,16 +18,23 @@ import ForecastCard from './ForecastCard';
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
   // when returned or the software will freak out
-
   const initialWeatherState = {
-    locationName: 'Loading...',
-    temperature: 'Loading...',
-    shortDescription: 'Loading...',
-    longDescription: 'Loading...',
-    iconCode: 'Loading...',
+    // Commenting this state out for now.  Hourly and Daily api calls will comeback with a long list
+    // of objects so this state deffinition wont apply to those calls
+    // locationName: 'Loading...',
+    // temperature: 'Loading...',
+    // shortDescription: 'Loading...',
+    // longDescription: 'Loading...',
+    // iconCode: 'Loading...',
   };
 
-  const url = `/api-current-weather?lat=${props.lat}&lon=${props.lon}`;
+  //const url = `/api-current-weather?lat=${props.lat}&lon=${props.lon}`;
+  const urlStubs = {
+    'main-large': '/api-current-weather?',
+    'hourly-forecast': '/api-hourly-weather?',
+    'daily-forecast': '/api-daily-weather?',
+  };
+  const url = urlStubs[props.cardType] + `lat=${props.lat}&lon=${props.lon}`;
   // Get data from backend API
   const [weatherData, setWeatherData] = useState(initialWeatherState);
 
@@ -59,11 +66,22 @@ const CurrentWeather = (props) => {
       <div className="forecast-container">
         <ForecastCard
           cardType={props.cardType}
+          weatherData={weatherData}
+
+          // commenting out for now.  Hourly and daily need to pass the entire weatherData Object
+          // cardType={props.cardType}
+          // iconCode={weatherData.iconCode}
+          // shortDescription={weatherData.shortDescription}
+          // longDescription={weatherData.longDescription}
+          // temperature={weatherData.temperature}
+        />
+        {/* <ForecastCard
+          cardType={props.cardType}
           iconCode={weatherData.iconCode}
           shortDescription={weatherData.shortDescription}
           longDescription={weatherData.longDescription}
           temperature={weatherData.temperature}
-        />
+        /> */}
       </div>
     </div>
   );

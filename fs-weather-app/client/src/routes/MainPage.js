@@ -6,7 +6,7 @@ const MainPage = () => {
     <div className='mainPage'>
       <SearchBarAndResults />   
     </div>
-  )
-}
+  );
+};
 
-export default MainPage
+export default MainPage;
