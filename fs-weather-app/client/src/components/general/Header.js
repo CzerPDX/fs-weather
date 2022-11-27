@@ -24,7 +24,7 @@ const LoginLogoutBtn = ({ loggedIn }) => {
   if (!loggedIn) {
     onClick = navigateToLogin;
     className = 'login-btn';
-    buttonText = 'Login';
+    buttonText = 'Login / Register';
     routePath = '/login';
   }
   else {

@@ -2,7 +2,6 @@ import React from 'react'
 
 const Button = ({ btnClasses, onClick, text, type, icon }) => {
   
-  console.log(icon)
   return (
     <button 
       className={btnClasses}

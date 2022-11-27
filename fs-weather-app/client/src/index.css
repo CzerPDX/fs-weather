@@ -10,12 +10,20 @@ body {
 } */
 
 /* Header */
+.header {
+  margin-bottom: 1.5em;
+}
+
 .header .container {
   display: flex;
 }
 .login-btn, .logout-btn {
   margin-left: auto;
 }
+
+
+/* Registration & Login Page */
+
 
 
 /* Main Page General */
@@ -31,6 +39,7 @@ body {
 .main-search .btn {
   margin-top: 0.5em;
 }
+
 
 /* Forecast Card */
 .forecast-container {
