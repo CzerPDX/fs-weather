@@ -7,12 +7,14 @@ import TestCurrentWeather from './TestCurrentWeather';
 import MainSearch from '../general/search-bars/MainSearch';
 import HourlyWeather from './HourlyWeather';
 import DailyWeather from './DailyWeather';
+import WeatherNav from '../general/WeatherNav';
 
 const SearchBarAndResults = () => {
   const [coordinates, setCoordinates] = useState({
     lat: null,
     lgn: null,
   });
+  const [card, setCard] = useState('main-large');
   let show;
   if (coordinates.lat === null && coordinates.lgn === null) {
     show = '';
@@ -44,6 +46,7 @@ const SearchBarAndResults = () => {
 
   return (
     <div className="main-page container">
+      <WeatherNav setCard={setCard} />
       <MainSearch setCoordinates={setCoordinates} coordinates={coordinates} />
       {show}
     </div>
