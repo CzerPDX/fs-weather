@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import backgroundVideo from './animations/Night_Thunderstorm.mp4';
-import HourlyWeather from './HourlyWeather';
-import DailyWeather from './DailyWeather';
+import HourlyCard from './HourlyCard';
+import DailyCard from './DailyCard';
 
 const WeatherImage = ({ icon, shortDescription }) => {
   return (
@@ -79,9 +79,9 @@ const ForecastCard = (props) => {
         />
       );
     } else if (props.cardType === 'hourly-forecast') {
-      return <HourlyWeather weatherData={props.weatherData} />;
+      return <HourlyCard weatherData={props.weatherData} />;
     } else if (props.cardType === 'daily-forecast') {
-      return <DailyWeather weatherData={props.weatherData} />;
+      return <DailyCard weatherData={props.weatherData} />;
     }
   };
 

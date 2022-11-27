@@ -64,13 +64,6 @@ const CurrentWeather = (props) => {
           longDescription={weatherData.longDescription}
           temperature={weatherData.temperature}
         />
-        <ForecastCard
-          cardType={props.cardType}
-          iconCode={weatherData.iconCode}
-          shortDescription={weatherData.shortDescription}
-          longDescription={weatherData.longDescription}
-          temperature={weatherData.temperature}
-        />
       </div>
     </div>
   );
