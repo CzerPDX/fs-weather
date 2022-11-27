@@ -1,9 +1,25 @@
+/*
+  fs-server.js 
+  Top-level routing for backend data
+
+  References:
+  https://github.com/typicode/json-server/issues/928
+*/
+
 const express = require('express');
 const axios = require('axios');
-const FormData = require('form-data');
 const app = express();
+app.use(express.json());
+require('dotenv').config()
 const port = 5001;
-const KEY = '1e859cb9e9c8898c11b003c46405b5d2';
+
+
+
+
+// Open Weather API information
+// Set up a route for the API. The frontend will make calls to this route
+// In the frontend we will fetch this user array and display all the users.
+const KEY = process.env.OPEN_WEATHER_API_KEY;
 const CURRENT_WEATHER =
   'https://api.openweathermap.org/data/2.5/weather?units=imperial';
 const HOURLY_FORECAST =
@@ -12,8 +28,6 @@ const DAILY_FORECAST =
   'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10';
 const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
 
-// Set up a route for the API. The frontend will make calls to this route
-// In the frontend we will fetch this user array and display all the users.
 
 // convert, parse and format time from the date (dt) value in the openWeather api response
 const convertTime = (time, timezone) => {
@@ -204,6 +218,17 @@ app.get('/api*', (req, res) => {
   }
 });
 
+
+// Database routes
+const dbRoutes = require('./database/fs-db-routes');
+app.use('/data', dbRoutes);
+
+
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
+
+
+

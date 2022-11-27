@@ -1,6 +1,6 @@
 import { FaSearch } from 'react-icons/fa';
-import { useState } from 'react';
-import Button from '../Btn';
+// import { useState } from 'react';
+import Button from '../Button';
 import SearchAutoComplete from './SearchAutoComplete';
 
 const MainSearch = ({ setCoordinates, coordinates }) => {

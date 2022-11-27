@@ -1,15 +1,34 @@
+/*
+
+  References:
+  https://v5.reactrouter.com/web/guides/quick-start
+  https://reactrouter.com/en/main/start/overview
+*/
+
+
 import './index.css';
 import MainPage from './routes/MainPage';
-import { useState } from 'react';
-import TestCurrentWeather from './components/forecasts/TestCurrentWeather';
+import LoginRegistrationPage from './routes/LoginRegistrationPage';
 import Header from './components/general/Header';
-import SearchBarAndResults from './components/forecasts/SearchBarAndResults';
+import { Routes, Route } from 'react-router-dom';
+
+
 
 const App = () => {
+  
   return (
-    <div className="mainPage">
-      <Header headerTitle="FS Weather" headerClasses="p-3 bg-dark text-white" />
-      <MainPage></MainPage>
+    <div>
+      
+      <Header 
+        headerTitle='FS Weather'
+        headerClasses='p-3 bg-dark text-white header'
+      />
+      <div className='container'>
+        <Routes>
+          <Route exact path='/' element={<MainPage />} />
+          <Route path='/login' element={<LoginRegistrationPage/>} />
+        </Routes>
+      </div>
     </div>
   );
 };

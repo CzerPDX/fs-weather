@@ -1,11 +1,10 @@
-import React from 'react';
-import SearchBarAndResults from '../components/forecasts/SearchBarAndResults';
-import Header from '../components/general/Header';
+import React from 'react'
+import SearchBarAndResults from '../components/forecasts/SearchBarAndResults'
 
 const MainPage = () => {
   return (
-    <div className="mainPage">
-      <SearchBarAndResults />
+    <div className='mainPage'>
+      <SearchBarAndResults />   
     </div>
   );
 };
