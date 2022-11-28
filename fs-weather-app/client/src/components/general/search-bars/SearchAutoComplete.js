@@ -25,9 +25,11 @@ const SearchAutoComplete = ({ setTempCoords }) => {
             backgroundColor: suggestion.active && 'green',
             color: suggestion.active && 'white',
           };
-          console.log(suggestion);
           return (
-            <div {...getSuggestionItemProps(suggestion, { style })}>
+            <div
+              key={suggestion.placeId}
+              {...getSuggestionItemProps(suggestion, { style })}
+            >
               {suggestion.description}
             </div>
           );

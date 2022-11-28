@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {
   WiHumidity,
   WiStrongWind,
-  WiRaindrop,
+  // WiRaindrop,
   WiThermometerExterior,
 } from 'react-icons/wi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -45,7 +45,7 @@ const HourlyItemMain = ({ hour, ampm, temp, icon, clickIcon, description }) => {
       <h5 className="display-6">{time}</h5>
       <h5 className="display-6">{temperature}</h5>
       <div className="d-sm-flex align-items-center">
-        <img className="hr-icon" src={image} />
+        <img className="hr-icon" src={image} alt={description} />
         <p className="d-none d-sm-flex">{description}</p>
       </div>
       <h3 className="">{clickIcon}</h3>
@@ -83,11 +83,11 @@ const HourlyCard = (props) => {
   };
   const dataList = Object.entries(props.weatherData).map((item, i) => {
     let it = item[1];
-    let dayChange = null;
     let clickedIcon = clicked === i ? <FaToggleOff /> : <FaToggleOn />;
     let dropContent =
       clicked === i ? (
         <HourlyDropdown
+          key={`hrDrop${i}`}
           feelsLike={it.feelsLike}
           wind={it.wind}
           humidity={it.humidity}
@@ -95,22 +95,19 @@ const HourlyCard = (props) => {
         ></HourlyDropdown>
       ) : null;
     if (it.time.hour === 12 && it.time.ampm === 'am') {
-      dayChange = (
-        <div className="d-flex border-bottom">
+      return (
+        <div className="d-flex border-bottom" key={`hr${i}`}>
           <h2 className=" my-2">{it.day.name}</h2>
         </div>
       );
     }
     return (
-      <>
-        {dayChange}
+      <div key={`hr${i}`}>
         <div
           onClick={() => toggleItem(i)}
           className="d-flex border-bottom justify-content-between align-items-center ps-2"
         >
           <HourlyItemMain
-            id={`hr${i}`}
-            key={i}
             hour={it.time.hour}
             ampm={it.time.ampm}
             temp={it.temp}
@@ -121,7 +118,7 @@ const HourlyCard = (props) => {
           ></HourlyItemMain>
         </div>
         {dropContent}
-      </>
+      </div>
     );
   });
   console.log('hourly', props);

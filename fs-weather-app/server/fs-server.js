@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const axios = require('axios');
-const FormData = require('form-data');
-=======
 /*
   fs-server.js 
   Top-level routing for backend data
@@ -13,39 +8,28 @@ const FormData = require('form-data');
 
 const express = require('express');
 const axios = require('axios');
->>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 const app = express();
 app.use(express.json());
-require('dotenv').config()
+require('dotenv').config();
 const port = 5001;
-<<<<<<< HEAD
-=======
-
-
-
 
 // Open Weather API information
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
->>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 const KEY = process.env.OPEN_WEATHER_API_KEY;
 const CURRENT_WEATHER =
   'https://api.openweathermap.org/data/2.5/weather?units=imperial';
 const HOURLY_FORECAST =
-  'https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=12';
+  'https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=36';
 const DAILY_FORECAST =
-  'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10';
+  'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=14';
 const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
-
 
 // convert, parse and format time from the date (dt) value in the openWeather api response
 const convertTime = (time, timezone) => {
   let date = new Date((time + timezone) * 1000);
   let hours = date.getUTCHours();
-<<<<<<< HEAD
-=======
   let minutes = date.getMinutes();
->>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
   let ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12;
   hours = hours ? hours : 12;
@@ -58,15 +42,6 @@ const getDayOfWeek = (time, timezone) => {
   let day = date.getDate();
 
   const dayName = [
-<<<<<<< HEAD
-    { name: 'Sunday', abbrv: 'Sun' },
-    { name: 'Monday', abbrv: 'Mon' },
-    { name: 'Tuesday', abbrv: 'Tue' },
-    { name: 'Wednesday', abbrv: 'Wed' },
-    { name: 'Thurday', abbrv: 'Thu' },
-    { name: 'Friday', abbrv: 'Fri' },
-    { name: 'Saturday', abbrv: 'Sat' },
-=======
     { name: 'Sunday', abbrv: 'Sun', dayOfMonth: day },
     { name: 'Monday', abbrv: 'Mon', dayOfMonth: day },
     { name: 'Tuesday', abbrv: 'Tue', dayOfMonth: day },
@@ -74,13 +49,10 @@ const getDayOfWeek = (time, timezone) => {
     { name: 'Thurday', abbrv: 'Thu', dayOfMonth: day },
     { name: 'Friday', abbrv: 'Fri', dayOfMonth: day },
     { name: 'Saturday', abbrv: 'Sat', dayOfMonth: day },
->>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
   ];
   return dayName[date.getDay()];
 };
 
-<<<<<<< HEAD
-=======
 const getDayOfMonth = (time, timezone) => {
   const monthName = [
     { name: 'January', abbrv: 'Jan' },
@@ -100,7 +72,6 @@ const getDayOfMonth = (time, timezone) => {
   return monthName[date.getMonth()];
 };
 
->>>>>>> 4fa9e5033c5ed7221911c7f6e8913c096e8295d7
 app.get('/api*', (req, res) => {
   console.log(`req.url.split("?")[0] = ${req.url.split('?')[0]}`);
   let responseObject = null;
@@ -243,17 +214,11 @@ app.get('/api*', (req, res) => {
   }
 });
 
-
 // Database routes
 const dbRoutes = require('./database/fs-db-routes');
 app.use('/data', dbRoutes);
-
-
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
-
-
-

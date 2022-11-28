@@ -3,8 +3,8 @@ import { useState } from 'react';
 import {
   WiHumidity,
   WiStrongWind,
-  WiRaindrop,
-  WiThermometerExterior,
+  // WiRaindrop,
+  // WiThermometerExterior,
 } from 'react-icons/wi';
 import { GiSunset, GiSunrise } from 'react-icons/gi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -77,40 +77,38 @@ const DailyItemMain = ({ day, month, temp, icon, clickIcon, description }) => {
   let date = `${month.abbrv} ${day.dayOfMonth}`;
   let temperature = `${temp}°`;
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="container">
-              <div className="row-col-1 justify-content-center">
-                <div className="col align-items-center">
-                  <div className="m-2">
-                    <h4 className="m-0">{time}</h4>
-                    <p className="m-0">{date} </p>
-                  </div>
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <div className="container">
+            <div className="row-col-1 justify-content-center">
+              <div className="col align-items-center">
+                <div className="m-2">
+                  <h4 className="m-0">{time}</h4>
+                  <p className="m-0">{date} </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col d-flex align-items-center">
-            <h5 className="display-6">{temperature}</h5>
-          </div>
-          <div className="col">
-            <div className="d-sm-flex align-items-center">
-              <img className="hr-icon" src={image} />
-              <p className="d-none d-sm-flex">{description}</p>
-            </div>
-          </div>
-          <div className="col-1 d-flex justify-content-end">
-            <h3 className="">{clickIcon}</h3>
+        </div>
+        <div className="col d-flex align-items-center">
+          <h5 className="display-6">{temperature}</h5>
+        </div>
+        <div className="col">
+          <div className="d-sm-flex align-items-center">
+            <img className="hr-icon" src={image} alt={description} />
+            <p className="d-none d-sm-flex">{description}</p>
           </div>
         </div>
+        <div className="col-1 d-flex justify-content-end">
+          <h3 className="">{clickIcon}</h3>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
-const DailyWeather = (props) => {
+const DailyCard = (props) => {
   const [clicked, setClicked] = useState('');
   const toggleItem = (index) => {
     if (index === clicked) {
@@ -135,14 +133,12 @@ const DailyWeather = (props) => {
         />
       ) : null;
     return (
-      <>
+      <div key={`day${i}`}>
         <div
           onClick={() => toggleItem(i)}
           className="d-flex border-bottom justify-content-between align-items-center ps-2"
         >
           <DailyItemMain
-            id={`day${i}`}
-            key={i}
             month={it.month}
             temp={it.temperature}
             icon={it.icon}
@@ -152,15 +148,15 @@ const DailyWeather = (props) => {
           ></DailyItemMain>
         </div>
         {dropContent}
-      </>
+      </div>
     );
   });
 
   return (
-    <div className="container card mb-5 p-4 shadow">
+    <div className="container d-flex flex-fill card mb-5 p-4 shadow">
       <>{dataList}</>
     </div>
   );
 };
 
-export default DailyWeather;
+export default DailyCard;

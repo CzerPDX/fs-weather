@@ -35,11 +35,17 @@ const HourlyWeather = (props) => {
         <h5>Showing the weather from {hourlyData.locationName}:</h5>
       </div>
 
-      <div className="forecast-container">
+      <div className="">
         <ForecastCard cardType={props.cardType} weatherData={hourlyData} />
       </div>
     </div>
   );
+};
+
+HourlyWeather.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default HourlyWeather;

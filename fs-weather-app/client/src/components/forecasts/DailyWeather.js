@@ -34,11 +34,17 @@ const DailyWeather = (props) => {
         <h5>Showing the weather from {dailyData.locationName}:</h5>
       </div>
 
-      <div className="forecast-container">
+      <div className="">
         <ForecastCard cardType={props.cardType} weatherData={dailyData} />
       </div>
     </div>
   );
+};
+
+DailyWeather.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default DailyWeather;

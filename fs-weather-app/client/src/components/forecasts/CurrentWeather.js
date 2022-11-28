@@ -47,7 +47,7 @@ const CurrentWeather = (props) => {
     fetchData()
       // Error handling
       .catch(console.error);
-  }, [props]);
+  }, [fetchData]);
 
   return (
     <div className="current-weather-detailed">
@@ -70,8 +70,8 @@ const CurrentWeather = (props) => {
 };
 
 CurrentWeather.propTypes = {
-  lat: PropTypes.string.isRequired,
-  lon: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
   cardType: PropTypes.string.isRequired,
 };
 
