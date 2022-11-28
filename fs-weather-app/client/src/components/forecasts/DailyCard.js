@@ -1,11 +1,7 @@
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import { useState } from 'react';
-import {
-  WiHumidity,
-  WiStrongWind,
-  // WiRaindrop,
-  // WiThermometerExterior,
-} from 'react-icons/wi';
+import { WiHumidity, WiStrongWind } from 'react-icons/wi';
+import { BsThermometerHigh, BsThermometerLow } from 'react-icons/bs';
 import { GiSunset, GiSunrise } from 'react-icons/gi';
 import { IoWaterOutline } from 'react-icons/io5';
 const innerIcon = '	#00BFFF';
@@ -21,28 +17,40 @@ const DailyDropdown = ({
 }) => {
   const sunRise = `${sunrise.hour}:${sunrise.minutes} ${sunrise.ampm}`;
   const sunSet = `${sunset.hour}:${sunset.minutes} ${sunset.ampm}`;
+  const dropItem =
+    'd-flex col-6 hr-icon-name justify-content-center flex-fill align-items-center';
   return (
     <>
-      <div className="container p-3 border-2 border-dark border-bottom">
+      <div className="container d-grid gap-sm-4 p-3 border-2 border-dark border-bottom">
         <div className="row">
-          <h6 className="col d-flex align-items-center">
-            <GiSunrise color={innerIcon} size={30}></GiSunrise>Sunrise:{' '}
+          <h6 className={`col-sm-3 col-6 ${dropItem}`}>
+            <BsThermometerHigh color={innerIcon} size={25} />
+            {`High: ${high}°`}
+          </h6>
+          <h6 className={`col-sm-3  ${dropItem}`}>
+            <BsThermometerLow color={innerIcon} size={25} />
+            {`Low: ${low}°`}
+          </h6>
+          <h6 className={`col-sm-3 ${dropItem}`}>
+            <GiSunrise color={innerIcon} size={25}></GiSunrise>Sunrise:{' '}
             {sunRise}
           </h6>
-          <h6 className="col d-flex align-items-center">
-            <GiSunset color={innerIcon} size={30}></GiSunset>Sunset: {sunSet}
+          <h6 className={`col-sm-3 ${dropItem}`}>
+            <GiSunset color={innerIcon} size={25}></GiSunset>Sunset: {sunSet}
           </h6>
-          <h6 className="col d-flex align-items-center">
-            <WiHumidity color={innerIcon} size={30}></WiHumidity>humidity:{' '}
+        </div>
+        <div className="row">
+          <h6 className={`col-sm-4  ${dropItem}`}>
+            <WiStrongWind color={innerIcon} size={35} />
+            wind: {wind} mph
+          </h6>
+          <h6 className={`col-sm-4  ${dropItem}`}>
+            <WiHumidity color={innerIcon} size={25}></WiHumidity>humidity:{' '}
             {humidity}%
           </h6>
-          <h6 className="col d-flex align-items-center">
+          <h6 className={`col-sm-4  ${dropItem}`}>
             <IoWaterOutline color={innerIcon} size={25}></IoWaterOutline>
             precipitation: {percipitation}%
-          </h6>
-          <h6 className="col d-flex align-items-center">
-            <WiStrongWind color={innerIcon} size={40} />
-            wind: {wind} mph
           </h6>
         </div>
       </div>

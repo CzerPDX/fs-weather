@@ -30,9 +30,9 @@ const DailyWeather = (props) => {
   return (
     <div className="current-weather-detailed">
       {/* Forecast Title will stay on this component*/}
-      <div className="title-block">
+      {/* <div className="title-block">
         <h5>Showing the weather from {dailyData.locationName}:</h5>
-      </div>
+      </div> */}
 
       <div className="">
         <ForecastCard cardType={props.cardType} weatherData={dailyData} />

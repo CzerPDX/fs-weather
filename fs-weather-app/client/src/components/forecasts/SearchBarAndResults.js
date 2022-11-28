@@ -16,6 +16,7 @@ const SearchBarAndResults = () => {
   });
   const [card, setCard] = useState('main-large');
   let hasLocation = coordinates.lat && coordinates.lon;
+  let navWeather = hasLocation ? <WeatherNav setCard={setCard} /> : null;
   const show = () => {
     let element = null;
     if (card === 'main-large' && hasLocation) {
@@ -53,8 +54,8 @@ const SearchBarAndResults = () => {
 
   return (
     <div className="main-page container">
-      <WeatherNav setCard={setCard} />
       <MainSearch setCoordinates={setCoordinates} coordinates={coordinates} />
+      {navWeather}
       {show()}
     </div>
   );

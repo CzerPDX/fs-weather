@@ -39,31 +39,34 @@ const HourlyDropdown = ({ percipitation, wind, humidity, feelsLike }) => {
 const HourlyItemMain = ({ hour, ampm, temp, icon, clickIcon, description }) => {
   const image = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   let time = `${hour} ${ampm}`;
-  let temperature = `${temp} F°`;
+  let temperature = `${temp}°`;
   return (
     <>
-      <h5 className="display-6">{time}</h5>
-      <h5 className="display-6">{temperature}</h5>
+      <div className="container">
+        <div className="row">
+          <div className="col d-flex align-items-center">
+            <h3 className="">{time}</h3>
+          </div>
+          <div className="col d-flex align-items-center">
+            <h5 className="display-6">{temperature}</h5>
+          </div>
+          <div className="col">
+            <div className="d-sm-flex align-items-center">
+              <img className="hr-icon" src={image} alt={description} />
+              <p className="d-none d-sm-flex">{description}</p>
+            </div>
+          </div>
+          <div className="col-1 d-flex justify-content-end">
+            <h3 className="">{clickIcon}</h3>
+          </div>
+        </div>
+      </div>
+      {/* 
       <div className="d-sm-flex align-items-center">
         <img className="hr-icon" src={image} alt={description} />
         <p className="d-none d-sm-flex">{description}</p>
       </div>
-      <h3 className="">{clickIcon}</h3>
-      {/* <div className="col d-flex justify-content-around">
-        <h5>{time}</h5>
-        <h5>{temperature}</h5>
-      </div>
-      <div className="col d-flex align-items-center justify-content-end ">
-        <div className="row-col-2">
-          <div className="col">
-            <img src={image} />
-          </div>
-        </div>
-        <p>descripton</p>
-      </div>
-      <div className="col-1 ms-5 d-flex justify-content-end">
-        <h3>{clickIcon}</h3>
-      </div> */}
+      <h3 className="">{clickIcon}</h3> */}
     </>
   );
 };
@@ -96,8 +99,8 @@ const HourlyCard = (props) => {
       ) : null;
     if (it.time.hour === 12 && it.time.ampm === 'am') {
       return (
-        <div className="d-flex border-bottom" key={`hr${i}`}>
-          <h2 className=" my-2">{it.day.name}</h2>
+        <div className="d-flex border-bottom " key={`hr${i}`}>
+          <h2 className=" display-5 my-2">{it.day.name}</h2>
         </div>
       );
     }

@@ -10,27 +10,31 @@ body {
 } */
 
 /* Header */
+body {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  background-repeat: no-repeat;
+}
 .header {
   margin-bottom: 1.5em;
+}
+body {
+  background-color: aqua;
 }
 
 .header .container {
   display: flex;
 }
-.login-btn, .logout-btn {
+.login-btn,
+.logout-btn {
   margin-left: auto;
 }
 
-
 /* Registration & Login Page */
-
-
 
 /* Main Page General */
 .main-page {
   padding-top: 1em;
 }
-
 
 /* Main page search */
 .main-search {
@@ -40,7 +44,6 @@ body {
   margin-top: 0.5em;
 }
 
-
 /* Forecast Card */
 .forecast-container {
   display: flex;
@@ -48,7 +51,7 @@ body {
 }
 
 .forecast-card-container {
-  padding-right: 1em;
+  /* padding-right: 1em; */
 }
 
 .forecast-card {
@@ -92,6 +95,7 @@ body {
   max-width: 20em;
   border-radius: 1em;
 }
+/*DailyCard and HourlyCard Lists*/
 .hr-icon {
   width: 4rem;
   height: auto;
@@ -99,4 +103,12 @@ body {
 .hr-icon-name {
   font-size: 0.8em;
   font-weight: bold;
+}
+.nav-active {
+  border-bottom: #1c1c1c;
+  border-bottom-style: solid;
+  border-width: medium;
+}
+.nav-active button div {
+  font-weight: 800;
 }
