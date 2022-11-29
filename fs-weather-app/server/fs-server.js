@@ -8,11 +8,15 @@
 
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 require('dotenv').config()
 const port = 5001;
-
 
 
 
@@ -82,11 +86,11 @@ app.get('/api*', (req, res) => {
   let lat = req.query.lat;
   let lon = req.query.lon;
 
-  // parameter check. lat and lng paramaters are required
+  // parameter check. lat and lon paramaters are required
   if (req.query.lat === undefined || req.query.lon === undefined) {
     res
       .status(400)
-      .send({ message: 'Error! Paramaters lat and lng are required ' });
+      .send({ message: 'Error! Paramaters lat and lon are required ' });
     res.end();
   }
 

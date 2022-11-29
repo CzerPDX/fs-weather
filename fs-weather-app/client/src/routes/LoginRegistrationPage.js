@@ -8,6 +8,10 @@
 
 import { useState } from 'react';
 import Button from '../components/general/Button';
+import axios from 'axios';
+
+// const BACKEND_URL = 'http://localhost:5001';
+// const axios = require('axios');
 
 const RegistrationForm = () => {
   // States for registration
@@ -60,7 +64,7 @@ const RegistrationForm = () => {
 
   // Handling the form submission
   // Currently only checks to see if the form field is empty. Validation of email format and password complexity isn't done yet!
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let error = false;
 
@@ -101,7 +105,18 @@ const RegistrationForm = () => {
         email: email,
         password: password,
       }
-      console.log(registrationInfo);
+      // console.log(registrationInfo);
+
+      // Send the request to the backend
+      axios.post('http://localhost:5001/data/user/register', registrationInfo)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      // console.log(`response = ${response}`)
     }
   };
 

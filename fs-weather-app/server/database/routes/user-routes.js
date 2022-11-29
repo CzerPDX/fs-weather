@@ -22,7 +22,8 @@ const DB_URL = 'http://localhost:8001';
 
 // REGISTER using json-server-auth
 router.post('/register', async (req, res) => {
-
+  console.log(`REGISTER REACHED ${req.url}`);
+  // console.log(req);
   // Verify the proper information was passed in
   if ((req?.body?.email === undefined) || (req?.body?.password === undefined) || (req?.body?.displayName === undefined)) {
     res.status(400).send(`Error! Requests for user registration must include in the body: email, password, and displayName`);
@@ -36,9 +37,10 @@ router.post('/register', async (req, res) => {
     }
 
     try {
+      console.log(`Sending to: ${DB_URL}/register`)
       const databaseResponse = await axios.post(`${DB_URL}/register`, newUser)
-      console.log(`${databaseResponse}`)
-      res.send(databaseResponse.dat);
+      console.log(`database response: ${databaseResponse}`)
+      res.send(databaseResponse.data);
     }
     catch (error) {
       res.send(error?.response?.data)
