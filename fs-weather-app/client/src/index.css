@@ -11,7 +11,10 @@ body {
 
 /* Header */
 body {
-  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  /* background-image: linear-gradient(to right, #243949 0%, #517fa4 100%); */
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+  min-height: 100vh;
+  padding-bottom: 30px;
 }
 .header {
   margin-bottom: 1.5em;
@@ -79,7 +82,7 @@ body {
 }
 
 .temperature h1 {
-  font-size: xx-large;
+  font-size: 2.5em;
   font-weight: 700;
   color: white;
   margin: auto;
@@ -146,5 +149,13 @@ body {
   }
   .nav-header-text {
     font-size: 0.8em;
+  }
+  .temperature h1 {
+    font-size: 1.5em;
+  }
+}
+@media screen and (min-width: 992px) {
+  .temperature h1 {
+    font-size: 3em;
   }
 }

@@ -59,7 +59,7 @@ const CurrentWeather = (props) => {
   }, [fetchData]);
 
   return (
-    <div className="current-weather-detailed">
+    <div className="current-weather-detailed mb-5">
       {/* Forecast Title will stay on this component*/}
 
       <div className="">
