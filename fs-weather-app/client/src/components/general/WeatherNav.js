@@ -1,4 +1,3 @@
-import 'bootstrap/js/src/collapse.js';
 import { useState } from 'react';
 const WeatherNav = ({ setCard }) => {
   const links = [
@@ -18,12 +17,12 @@ const WeatherNav = ({ setCard }) => {
       outterClass += 'nav-active';
     }
     return (
-      <div id={link.id} className={outterClass}>
+      <div key={`${link.id}-${link.card}`} id={link.id} className={outterClass}>
         <button
           className={button}
           onClick={() => handleClick(link.card, link.id)}
         >
-          <h5>{link.text}</h5>
+          <h5 className="nav-header-text">{link.text}</h5>
         </button>
       </div>
     );

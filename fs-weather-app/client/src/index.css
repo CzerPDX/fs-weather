@@ -68,9 +68,8 @@ body {
 }
 
 .temperature-and-graphic-card {
-  background-color: #0d6efd;
   display: flex;
-  /* min-height: 8em; */
+  min-height: 8em;
   border-radius: 0.65em;
 }
 
@@ -91,7 +90,7 @@ body {
 }
 
 .video {
-  max-width: 20em;
+  max-width: 22em;
   border-radius: 1em;
 }
 /*DailyCard and HourlyCard Lists*/
@@ -117,4 +116,35 @@ body {
 .mn-icon-name {
   font-size: 1em;
   font-weight: bold;
+}
+.current-city::first-letter {
+  text-transform: capitalize;
+}
+@media (max-width: 576px) {
+  .video {
+    max-width: 18em;
+  }
+  .mn-icon-name {
+    font-size: 0.8em;
+  }
+  .hr-icon-name {
+    font-size: 0.7em;
+  }
+  .nav-header-text {
+    font-size: 1em;
+  }
+}
+@media (max-width: 350px) {
+  .video {
+    max-width: 12em;
+  }
+  .mn-icon-name {
+    font-size: 0.8em;
+  }
+  .hr-icon-name {
+    font-size: 0.7em;
+  }
+  .nav-header-text {
+    font-size: 0.8em;
+  }
 }

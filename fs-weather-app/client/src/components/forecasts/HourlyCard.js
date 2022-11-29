@@ -84,8 +84,9 @@ const HourlyCard = (props) => {
       setClicked(index);
     }
   };
-  const dataList = Object.entries(props.weatherData).map((item, i) => {
+  const dataList = Object.entries(props.weatherData.list).map((item, i) => {
     let it = item[1];
+    console.log('it', it.time);
     let clickedIcon = clicked === i ? <FaToggleOff /> : <FaToggleOn />;
     let dropContent =
       clicked === i ? (
@@ -127,6 +128,10 @@ const HourlyCard = (props) => {
   console.log('hourly', props);
   return (
     <div className="container card mb-5 p-4 shadow">
+      <div className="container  pb-5 align-items-baseline ">
+        <h1 className="display-6">Hourly Weather </h1>
+        <h4 className=""> {`- ${props.weatherData.locationName}`}</h4>
+      </div>
       <>{dataList}</>
     </div>
   );

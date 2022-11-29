@@ -4,7 +4,7 @@ import ForecastCard from './ForecastCard';
 // import React, { useState } from 'react'
 
 const DailyWeather = (props) => {
-  const initialWeatherState = {};
+  const initialWeatherState = { list: {}, locationName: '' };
 
   const url = `/api-daily-weather?lat=${props.lat}&lon=${props.lon}`;
   const [dailyData, setDailyData] = useState(initialWeatherState);

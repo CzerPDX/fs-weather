@@ -20,6 +20,7 @@ const SearchBarAndResults = () => {
   const show = () => {
     let element = null;
     if (card === 'main-large' && hasLocation) {
+      console.log('fun', coordinates);
       element = (
         <CurrentWeather
           lat={coordinates.lat}

@@ -21,6 +21,7 @@ const SearchAutoComplete = ({ setTempCoords }) => {
       <div>
         {loading ? <div>...</div> : ''}
         {suggestions.map((suggestion) => {
+          console.log(suggestion);
           const style = {
             backgroundColor: suggestion.active && 'green',
             color: suggestion.active && 'white',
@@ -44,6 +45,7 @@ const SearchAutoComplete = ({ setTempCoords }) => {
     const results = await geocodeByAddress(value);
     const { lat, lng } = await getLatLng(results[0]);
     setTempCoords(lat, lng);
+
     console.log('from child', lat, lng);
     setCity(value);
   };

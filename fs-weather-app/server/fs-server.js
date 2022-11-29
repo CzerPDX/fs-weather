@@ -91,6 +91,7 @@ app.get('/api*', (req, res) => {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
+        const timeZone = response.data.timezone;
         responseObject = {
           locationName: response.data.name,
           temperature: `${Math.round(response.data.main.temp)}`,
@@ -98,16 +99,37 @@ app.get('/api*', (req, res) => {
           longDescription: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
           iconCode: response.data.weather[0].icon,
-          // maxTemp: Math.round(response.data.main.temp_max),
-          // minTemp: Math.round(response.data.main.temp_min),
-          // feelsLike: response.data.main.feels_like,
+          maxTemp: Math.round(response.data.main.temp_max),
+          minTemp: Math.round(response.data.main.temp_min),
+          feelsLike: Math.round(response.data.main.feels_like),
+          sunrise: convertTime(response.data.sys.sunrise, timeZone),
+          sunset: convertTime(response.data.sys.sunset, timeZone),
+          wind: response.data.wind.speed,
+          humidity: response.data.main.humidity,
+          cloudCover: response.data.clouds.all,
         };
         console.log(responseObject);
         res.status(200).send(responseObject);
+        // res.status(200).send({
+        //   locationName: 'portland',
+        //   temperature: 68,
+        //   shortDescription: 'clouds',
+        //   longDescription: '',
+        //   icon: `http://openweathermap.org/img/wn/02d@2x.png`,
+        //   iconCode: '02d',
+        //   maxTemp: 78,
+        //   minTemp: 50,
+        //   feelsLike: 65,
+        //   sunrise: { hour: 7, ampm: 'am', minutes: '00' },
+        //   sunset: { hour: 7, ampm: 'pm', minutes: '04' },
+        //   wind: 2,
+        //   humidity: 30,
+        //   cloudCover: 40,
+        // });
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
-        console.log({ message: error.message });
+        console.log(error);
       });
     // Handle requests for /api-hourly-weather
   } else if (req.url.split('?')[0] === '/api-hourly-weather') {
@@ -135,10 +157,10 @@ app.get('/api*', (req, res) => {
             percipitation: item.pop * 100,
             feelsLike: Math.round(item.main.feels_like),
           };
-          obj = { ...obj, locationName: name };
           return obj;
         });
-        console.log(responseObject);
+        responseObject = { list: responseObject, locationName: name };
+        console.log({ list: responseObject, locationName: name });
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -174,10 +196,9 @@ app.get('/api*', (req, res) => {
             sunrise: sunrise,
             sunset: sunset,
           };
-          obj = { ...obj, locationName: name };
           return obj;
         });
-
+        responseObject = { list: responseObject, locationName: name };
         console.log(responseObject);
         res.status(200).send(responseObject);
       })

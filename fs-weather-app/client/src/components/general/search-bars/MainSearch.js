@@ -35,7 +35,7 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
   // const searchIcon = 'hello'
 
   return (
-    <div className="main-search">
+    <div className="main-search shadow">
       <form className="form-control" onSubmit={onSubmit}>
         <label>Search City and State to view Weather</label>
         {/** SearchAutoComplete acts as input */}

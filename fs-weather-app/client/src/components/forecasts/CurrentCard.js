@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import backgroundVideo from './animations/Night_Thunderstorm.mp4';
 import {
   WiHumidity,
   WiStrongWind,
-  // WiRaindrop,
   WiThermometerExterior,
 } from 'react-icons/wi';
-import { IoWaterOutline } from 'react-icons/io5';
 import { BsThermometerHigh, BsThermometerLow } from 'react-icons/bs';
 import { GiSunset, GiSunrise } from 'react-icons/gi';
+import { IoIosCloudOutline } from 'react-icons/io';
 
 const innerIcon = '	#00BFFF';
 const WeatherImage = ({ icon, shortDescription }) => {
@@ -22,37 +20,39 @@ const WeatherImage = ({ icon, shortDescription }) => {
     // </div>
   );
 };
-const CurrentCard = ({
-  temperature,
-  iconCode,
-  shortDescription,
-  longDescription,
-}) => {
+const CurrentCard = ({ weatherData }) => {
+  console.log(weatherData);
+  const sunrise = `${weatherData.sunrise.hour}:${weatherData.sunrise.minutes} ${weatherData.sunrise.ampm}`;
+  const sunset = `${weatherData.sunset.hour}:${weatherData.sunset.minutes} ${weatherData.sunset.ampm}`;
   return (
-    <div className="container mb-5 d-grid gap-3 card px-md-5 py-3">
+    <div className="container mb-5 d-grid gap-3 card px-md-5 py-3 ">
       <div className="row">
         <div className="col">
           <div>
             <div>
-              <h1 className="display-3 m-0">Portland OR</h1>
+              <h1 className="display-4 m-0 px-2 current-city">
+                {weatherData.locationName}
+              </h1>
             </div>
-            <div>
-              <h3 className="display-6">{shortDescription}</h3>
+            <div className="mb-4 px-3">
+              <h3 className="display-6">{weatherData.shortDescription}</h3>
             </div>
-            <div className="row ">
-              <h6 className="col-6 mt-2 mn-icon-name d-flex align-items-baseline">
+            <div className="row px-1">
+              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-lg-stretch ps-3 ps-sm-5 ps-md-3">
                 <BsThermometerHigh color={innerIcon} size={25} />
-                High: 78°
+                {`High: ${weatherData.maxTemp}°`}
               </h6>
-              <h6 className="col-6 mt-2 mn-icon-name d-flex align-items-baseline">
-                <GiSunrise color={innerIcon} size={25}></GiSunrise>Sunrise: 6 am
+              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-stretch">
+                <GiSunrise color={innerIcon} size={25}></GiSunrise>
+                {`Sunrise: ${sunrise}`}
               </h6>
-              <h6 className="col-6 mt-2 mn-icon-name d-flex align-items-baseline">
+              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-stretch ps-3 ps-md-3 ps-sm-5 ps-md-3">
                 <BsThermometerLow color={innerIcon} size={25} />
-                Low: 68°
+                {`Low: ${weatherData.minTemp}°`}
               </h6>
-              <h6 className="col-6 mt-2 mn-icon-name d-flex align-items-baseline">
-                <GiSunset color={innerIcon} size={25}></GiSunset>Sunset: 7 pm
+              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-stretch">
+                <GiSunset color={innerIcon} size={25}></GiSunset>
+                {`Sunset: ${sunset}`}
               </h6>
             </div>
           </div>
@@ -61,7 +61,7 @@ const CurrentCard = ({
           <div className="temperature-and-graphic-card">
             <div className="temperature row">
               <div className="col">
-                <h1 className="display-6">{temperature}</h1>
+                <h1 className="display-6">{weatherData.temperature}°</h1>
               </div>
             </div>
             {/* This image will also be a component eventually so it doesn't start as a broken link before load */}
@@ -69,8 +69,8 @@ const CurrentCard = ({
             <div className="weather-icon row">
               <div className="col p-0">
                 <WeatherImage
-                  iconCode={iconCode}
-                  shortDescription={shortDescription}
+                  iconCode={weatherData.iconCode}
+                  shortDescription={weatherData.shortDescription}
                 />
               </div>
             </div>
@@ -78,24 +78,24 @@ const CurrentCard = ({
         </div>
       </div>
       <div className="row border-top pt-3">
-        <div className=" col-6 col-sm hr-icon-name d-flex align-items-baseline">
-          <IoWaterOutline color={innerIcon} size={30}></IoWaterOutline>
-          precipitation: 50%
-        </div>
-        <div className="col-6 col-sm hr-icon-name d-flex align-items-baseline ">
-          <WiHumidity color={innerIcon} size={30}></WiHumidity>
-          humidity: 80%
-        </div>
-        <div className=" col-6 col-sm hr-icon-name d-flex align-items-baseline">
+        <div className=" col-6 col-sm hr-icon-name d-flex align-items-stretch">
           <WiStrongWind color={innerIcon} size={30} />
-          wind: 2 mph
+          {`wind: ${weatherData.wind}mph`}
         </div>
-        <div className="col-6 col-sm d-flex hr-icon-name align-items-baseline">
+        <div className="col-6 col-sm hr-icon-name d-flex align-items-stretch ">
+          <WiHumidity color={innerIcon} size={30}></WiHumidity>
+          {`humidity: ${weatherData.humidity}%`}
+        </div>
+        <div className=" col-6 col-sm hr-icon-name d-flex align-items-stretch">
+          <IoIosCloudOutline color={innerIcon} size={30} />
+          {`cloud cover: ${weatherData.cloudCover}%`}
+        </div>
+        <div className="col-6 col-sm d-flex hr-icon-name align-items-strectch">
           <WiThermometerExterior
             color={innerIcon}
             size={30}
           ></WiThermometerExterior>
-          feels like: 65 F°
+          {`feels like: ${weatherData.feelsLike}°`}
         </div>
       </div>
     </div>

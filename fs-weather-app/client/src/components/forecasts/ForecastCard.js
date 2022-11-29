@@ -71,14 +71,7 @@ const ForecastCard = (props) => {
   // Pick layout of forecast card based on the card type
   const renderByType = (props) => {
     if (props.cardType === 'main-large') {
-      return (
-        <CurrentCard
-          temperature={props.temperature}
-          iconCode={props.iconCode}
-          shortDescription={props.shortDescription}
-          longDescription={props.longDescription}
-        />
-      );
+      return <CurrentCard weatherData={props.weatherData} />;
     } else if (props.cardType === 'hourly-forecast') {
       return <HourlyCard weatherData={props.weatherData} />;
     } else if (props.cardType === 'daily-forecast') {
