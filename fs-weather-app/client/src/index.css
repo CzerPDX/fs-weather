@@ -12,7 +12,6 @@ body {
 /* Header */
 body {
   background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
-  background-repeat: no-repeat;
 }
 .header {
   margin-bottom: 1.5em;
@@ -71,7 +70,7 @@ body {
 .temperature-and-graphic-card {
   background-color: #0d6efd;
   display: flex;
-  min-height: 8em;
+  /* min-height: 8em; */
   border-radius: 0.65em;
 }
 
@@ -88,7 +87,7 @@ body {
 }
 
 .detailed-weather-info {
-  padding: 0.5em;
+  /* padding: 0.5em; */
 }
 
 .video {
@@ -111,4 +110,11 @@ body {
 }
 .nav-active button div {
   font-weight: 800;
+}
+.current-container {
+  max-width: 34rem;
+}
+.mn-icon-name {
+  font-size: 1em;
+  font-weight: bold;
 }

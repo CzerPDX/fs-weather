@@ -56,7 +56,7 @@ const CurrentWeather = (props) => {
         <h5>Showing the weather from {weatherData.locationName}:</h5>
       </div>
 
-      <div className="forecast-container">
+      <div className="">
         <ForecastCard
           cardType={props.cardType}
           iconCode={weatherData.iconCode}

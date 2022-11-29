@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import backgroundVideo from './animations/Night_Thunderstorm.mp4';
 import HourlyCard from './HourlyCard';
 import DailyCard from './DailyCard';
+import CurrentCard from './CurrentCard';
 
 const WeatherImage = ({ icon, shortDescription }) => {
   return (
@@ -71,7 +72,7 @@ const ForecastCard = (props) => {
   const renderByType = (props) => {
     if (props.cardType === 'main-large') {
       return (
-        <MainLarge
+        <CurrentCard
           temperature={props.temperature}
           iconCode={props.iconCode}
           shortDescription={props.shortDescription}
