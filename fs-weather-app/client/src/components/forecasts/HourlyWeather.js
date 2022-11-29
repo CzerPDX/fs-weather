@@ -33,7 +33,11 @@ const HourlyWeather = (props) => {
     <div className="current-weather-detailed">
       {/* Forecast Title will stay on this component*/}
       <div className="">
-        <ForecastCard cardType={props.cardType} weatherData={hourlyData} />
+        <ForecastCard
+          cardType={props.cardType}
+          weatherData={hourlyData}
+          location={props.location}
+        />
       </div>
     </div>
   );

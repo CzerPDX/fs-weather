@@ -164,7 +164,7 @@ const DailyCard = (props) => {
     <div className="container d-flex flex-fill card mb-5 py-4 px-sm-4 shadow">
       <div className="container  pb-5 align-items-baseline ">
         <h1 className="display-6">Daily Weather </h1>
-        <h4 className=""> {`- ${props.weatherData.locationName}`}</h4>
+        <h4 className=""> {`- ${props.location}`}</h4>
       </div>
       <>{dataList}</>
     </div>

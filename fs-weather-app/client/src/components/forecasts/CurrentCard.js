@@ -20,8 +20,14 @@ const WeatherImage = ({ icon, shortDescription }) => {
     // </div>
   );
 };
-const CurrentCard = ({ weatherData }) => {
-  console.log(weatherData);
+const CurrentCard = (props) => {
+  const weatherData = props.weatherData;
+  console.log('props', props);
+  console.log('lenght', props.location.length);
+  const titleDisplay =
+    props.location.length < 35
+      ? 'display-5 font-weight-bold'
+      : 'long-title-current';
   const sunrise = `${weatherData.sunrise.hour}:${weatherData.sunrise.minutes} ${weatherData.sunrise.ampm}`;
   const sunset = `${weatherData.sunset.hour}:${weatherData.sunset.minutes} ${weatherData.sunset.ampm}`;
   return (
@@ -30,9 +36,9 @@ const CurrentCard = ({ weatherData }) => {
         <div className="col">
           <div>
             <div>
-              <h1 className="display-4 m-0 px-2 current-city">
-                {weatherData.locationName}
-              </h1>
+              <h3 className={`${titleDisplay} m-0 px-2 current-city`}>
+                {props.location}
+              </h3>
             </div>
             <div className="mb-4 px-3">
               <h3 className="display-6">{weatherData.shortDescription}</h3>
@@ -46,7 +52,7 @@ const CurrentCard = ({ weatherData }) => {
                 <GiSunrise color={innerIcon} size={25}></GiSunrise>
                 {`Sunrise: ${sunrise}`}
               </h6>
-              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-stretch ps-3 ps-md-3 ps-sm-5 ps-md-3">
+              <h6 className="col-6 mt-sm-2 mn-icon-name d-flex align-items-stretch ps-3 ps-md-3 add-formps-sm-5 ps-md-3">
                 <BsThermometerLow color={innerIcon} size={25} />
                 {`Low: ${weatherData.minTemp}°`}
               </h6>

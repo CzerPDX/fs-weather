@@ -35,7 +35,11 @@ const DailyWeather = (props) => {
       </div> */}
 
       <div className="">
-        <ForecastCard cardType={props.cardType} weatherData={dailyData} />
+        <ForecastCard
+          cardType={props.cardType}
+          weatherData={dailyData}
+          location={props.location}
+        />
       </div>
     </div>
   );

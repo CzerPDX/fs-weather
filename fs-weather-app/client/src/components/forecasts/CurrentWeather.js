@@ -57,13 +57,17 @@ const CurrentWeather = (props) => {
       // Error handling
       .catch(console.error);
   }, [fetchData]);
-
+  console.log('props', props.location);
   return (
     <div className="current-weather-detailed mb-5">
       {/* Forecast Title will stay on this component*/}
 
       <div className="">
-        <ForecastCard cardType={props.cardType} weatherData={weatherData} />
+        <ForecastCard
+          cardType={props.cardType}
+          weatherData={weatherData}
+          location={props.location}
+        />
       </div>
     </div>
   );

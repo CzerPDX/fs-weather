@@ -13,11 +13,13 @@ const SearchBarAndResults = () => {
   const [coordinates, setCoordinates] = useState({
     lat: null,
     lgn: null,
+    location: null,
   });
   const [card, setCard] = useState('main-large');
   let hasLocation = coordinates.lat && coordinates.lon;
   let navWeather = hasLocation ? <WeatherNav setCard={setCard} /> : null;
   const show = () => {
+    console.log(coordinates);
     let element = null;
     if (card === 'main-large' && hasLocation) {
       console.log('fun', coordinates);
@@ -26,6 +28,7 @@ const SearchBarAndResults = () => {
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="main-large"
+          location={coordinates.location}
         />
       );
     } else if (card === 'hourly-forecast' && hasLocation) {
@@ -34,6 +37,7 @@ const SearchBarAndResults = () => {
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="hourly-forecast"
+          location={coordinates.location}
         />
       );
     } else if (card === 'daily-forecast' && hasLocation) {
@@ -42,6 +46,7 @@ const SearchBarAndResults = () => {
           lat={coordinates.lat}
           lon={coordinates.lon}
           cardType="daily-forecast"
+          location={coordinates.location}
         />
       );
     }

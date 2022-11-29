@@ -71,11 +71,20 @@ const ForecastCard = (props) => {
   // Pick layout of forecast card based on the card type
   const renderByType = (props) => {
     if (props.cardType === 'main-large') {
-      return <CurrentCard weatherData={props.weatherData} />;
+      return (
+        <CurrentCard
+          weatherData={props.weatherData}
+          location={props.location}
+        />
+      );
     } else if (props.cardType === 'hourly-forecast') {
-      return <HourlyCard weatherData={props.weatherData} />;
+      return (
+        <HourlyCard weatherData={props.weatherData} location={props.location} />
+      );
     } else if (props.cardType === 'daily-forecast') {
-      return <DailyCard weatherData={props.weatherData} />;
+      return (
+        <DailyCard weatherData={props.weatherData} location={props.location} />
+      );
     }
   };
 
