@@ -26,7 +26,8 @@ const App = () => {
       <div className='container'>
         <Routes>
           <Route exact path='/' element={<MainPage />} />
-          <Route path='/login' element={<LoginRegistrationPage/>} />
+          <Route path='/login' element={<LoginRegistrationPage formType='login' />} />
+          <Route path='/register' element={<LoginRegistrationPage formType='register' />} />
         </Routes>
       </div>
     </div>

@@ -1,38 +1,39 @@
+/*
+  References:
+  https://getbootstrap.com/docs/5.0/forms/validation/
+  https://bobbyhadz.com/blog/react-document-queryselector
+  https://www.geeksforgeeks.org/how-to-develop-user-registration-form-in-reactjs/
+  https://stackoverflow.com/questions/39356826/how-to-check-if-it-a-text-input-has-a-valid-email-format-in-reactjs
+*/
 import { useState } from 'react';
 import Button from '../general/Button';
 import axios from 'axios';
+import InputField from './form-parts/InputField';
+
+// States for checking the errors
+const NEUTRAL_CSS = 'form-control';
+const INVALID_CSS = 'is-invalid';
+const VALID_CSS = 'is-valid'
 
 
-const DisplayNameField = ({handleDisplayName, displayNameCSS, displayName, formType}) => {
+const DisplayNameField = ({ formType, handleDisplayName, displayNameCSS, displayName }) => {
 
-  console.log(`HELLO its ${formType}`)
+  // Only display displayName field if registering
   if (formType === 'register') {
-   
     return (
-      <div className='mb-3'>
-        <label 
-          htmlFor='displayNameInput' 
-          className='form-label'
-        >Display Name</label>
-        <input 
-          onChange={handleDisplayName} 
+      <InputField
+          id='displayNameInput'
+          labelText='Display Name'
+          onChange={handleDisplayName}
           className={displayNameCSS}
           value={displayName} 
-          type='text' 
-          id='displayNameInput'
-          required
+          type='text'
+          invalidText='Please enter a display name!'
         />
-        <div className='invalid-feedback'>
-          Please enter a display name!
-        </div>
-      </div>
     )
-  }
-
-  else if (formType === 'login') {
+  } else if (formType === 'login') {
     return ('')
   }
-  
 }
 
 
@@ -42,11 +43,6 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
-  // States for checking the errors
-  const NEUTRAL_CSS = 'form-control';
-  const INVALID_CSS = 'is-invalid';
-  const VALID_CSS = 'is-valid'
 
   // Check for each field
   const [displayNameCSS, setDisplayNameCSS] = useState(NEUTRAL_CSS);
@@ -84,7 +80,8 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
     setPassword(e.target.value);        // Set the password to the current value of the field
   };
 
-  const handleEmptyCSS = (fieldInput, setData) => {
+  // Change CSS class value if field is empty (does no other error checking)
+  const checkForEmptyInput = (fieldInput, setData) => {
     let successValue = false;
     // Check validity of displayName and 
     if (fieldInput === '') {
@@ -108,13 +105,14 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
     // Check to make sure there is some entry for each of the following
     // Only check for displayName entry if this is a register form. Not needed for login
     if (formType === 'register') {
-      if (!handleEmptyCSS(displayName, setDisplayNameCSS)) error = true;
+      if (!checkForEmptyInput(displayName, setDisplayNameCSS)) error = true;
     }
-    if (!handleEmptyCSS(email, setEmailCSS)) error = true;
-    if (!handleEmptyCSS(password, setPasswordCSS)) error = true;
+    if (!checkForEmptyInput(email, setEmailCSS)) error = true;
+    if (!checkForEmptyInput(password, setPasswordCSS)) error = true;
 
 
-    // If we have no errors we can send the registration information to the server
+    // Send request to backend
+    // If we have no errors we can send the login or registration information to the server
     if (!error) {
       let requestInfo = {
         email: email,
@@ -124,7 +122,7 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
         requestInfo.displayName = displayName;
       }
 
-      // Send the login request to the backend
+      // Send the request to the backend
       axios.post(`${BACKEND_URL}/data/user/${formType}`, requestInfo)
       .then(function (response) {
         console.log(response);
@@ -144,51 +142,37 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
         {/* Display Name Input */}
         {/* Only the displayName has its own component bc it is the only field that is conditional */}
         <DisplayNameField
-          handleDisplayName={handleDisplayName} 
-          displayNameCSS={displayNameCSS} 
-          displayName={displayName}
           formType={formType}
+          handleDisplayName={handleDisplayName}
+          displayNameCSS={displayNameCSS}
+          displayName={displayName}
         />
+
         
         {/* Email Input */}
-        <div className='mb-3'>
-          <label 
-            htmlFor='emailInput'
-            className='form-label'
-          >Email</label>
-          <input 
-            onChange={handleEmail} 
-            className={emailCSS}
-            value={email} 
-            type='email'
-            id='emailInput'
-            autoComplete='fs-weather login email'
-            required
-          />
-          <div className='invalid-feedback'>
-            Please enter an email!
-          </div>
-        </div>
+        <InputField
+          id='emailInput'
+          labelText='Email'
+          onChange={handleEmail}
+          className={emailCSS}
+          value={email} 
+          type='email'
+          invalidText='Please enter an email!'
+          autoComplete='fs-weather login email'
+        />
+        
         
         {/* Password Input */}
-        <div className='mb-3'>
-          <label 
-            htmlFor='passwordInput'
-            className='form-label'
-          >Password</label>
-          <input 
-            onChange={handlePassword} 
-            className={passwordCSS}
-            value={password} 
-            type='password' 
-            id='passwordInput'
-            autoComplete='fs-weather login password'
-            required
-          />
-          <div className='invalid-feedback'>
-            Please enter a password!
-          </div>
-        </div>
+        <InputField
+          id='passwordInput'
+          labelText='Password'
+          onChange={handlePassword}
+          className={passwordCSS}
+          value={password} 
+          type='password'
+          invalidText='Please enter a password!'
+          autoComplete='fs-weather login password'
+        />
         
         {/* Submit Button */}
         <Button

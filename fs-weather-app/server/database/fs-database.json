@@ -71,6 +71,18 @@
       "password": "$2a$10$Uo0lXhcB9Ze8M3Iv8oI6WOloIhmproOhdKUGKYyfWOQFIkf9Pgp1q",
       "displayName": "fdsfds",
       "id": 12
+    },
+    {
+      "email": "newemail@example.com",
+      "password": "$2a$10$gR.Gxh1aodyRGb6glE/gxu.uyEL1aDEpeDHkBIkTM5zX7eI9j.M1m",
+      "displayName": "new name",
+      "id": 13
+    },
+    {
+      "email": "emashhfdffdsfsssssil@example.com",
+      "password": "$2a$10$MX05sKg3N13.z2pwI4M7eOyvm5.djR1wcIFr7Kepa380KQvfqSfsi",
+      "displayName": "Brooke",
+      "id": 14
     }
   ]
 }
