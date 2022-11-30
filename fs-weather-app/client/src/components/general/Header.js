@@ -5,14 +5,14 @@
 import Button from './Button';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LoginLogoutBtn = ({ loggedIn }) => {
+const LoginLogoutBtn = ({ loginOrRegister }) => {
   const navigate = useNavigate();
   const navigateToLogin = () => {
     navigate('/login');
   };
 
-  const navigateToMainPage = () => {
-    navigate('/');
+  const navigateToRegister = () => {
+    navigate('/register');
   };
 
   let onClick;
@@ -20,24 +20,21 @@ const LoginLogoutBtn = ({ loggedIn }) => {
   let buttonText;
   let routePath;
 
-  if (!loggedIn) {
+  if (loginOrRegister === 'login') {
     onClick = navigateToLogin;
     className = 'login-btn';
-    buttonText = 'Login / Register';
+    buttonText = 'Login';
     routePath = '/login';
-  } else {
-    onClick = navigateToMainPage;
-    className = 'logout-btn';
-    buttonText = 'Logout';
-    routePath = '/';
+  }
+  else if (loginOrRegister === 'register') {
+    onClick = navigateToRegister;
+    className = 'register-btn';
+    buttonText = 'Register';
+    routePath = '/register';
   }
 
   return (
     <div className={className}>
-      {/* <button type="button" onClick={onClick} className="btn btn-primary">{buttonText}</button> */}
-      {/* <Routes>
-        <Route exact path={routePath} />
-      </Routes> */}
       <Link to={routePath}>
         <Button
           btnClasses="btn btn-primary"
@@ -53,9 +50,12 @@ const LoginLogoutBtn = ({ loggedIn }) => {
 const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
   return (
     <header className={headerClasses}>
-      <div className="container">
-        <h4>{headerTitle}</h4>
-        <LoginLogoutBtn loggedIn={false} navigateToLogin={navigateToLogin} />
+      <div className='container'>
+        <Link to='/' style={{ textDecoration: 'none' }}>
+          <h4>{ headerTitle }</h4>
+        </Link>
+        <LoginLogoutBtn loginOrRegister='register' />
+        <LoginLogoutBtn loginOrRegister='login' />
       </div>
     </header>
   );

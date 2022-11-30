@@ -1,21 +1,12 @@
 /* General */
-/* html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(0deg, rgb(2, 164, 224) 0%, rgb(0, 212, 255) 76%);
-} */
-
-/* Header */
 #root {
-  /* background-image: linear-gradient(to right, #243949 0%, #517fa4 100%); */
   background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
   min-height: 100vh;
   padding-bottom: 30px;
 }
+
+/* Header */
+
 .header {
   margin-bottom: 1.5em;
 }
@@ -23,12 +14,29 @@ body {
 .header .container {
   display: flex;
 }
-.login-btn,
-.logout-btn {
+
+.header a {
+  color: white;
+}
+
+.header a:hover {
+  color: grey;
+}
+
+.register-btn {
   margin-left: auto;
+}
+.login-btn {
+  margin-left: 0.5em;
 }
 
 /* Registration & Login Page */
+.login-registration-page {
+  background-color: white;
+  padding: 2em;
+  border-radius: 0.375em;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
 
 /* Main Page General */
 .main-page {
@@ -47,10 +55,6 @@ body {
 .forecast-container {
   display: flex;
   flex-wrap: wrap;
-}
-
-.forecast-card-container {
-  /* padding-right: 1em; */
 }
 
 .forecast-card {
