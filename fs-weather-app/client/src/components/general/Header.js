@@ -53,7 +53,9 @@ const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
   return (
     <header className={headerClasses}>
       <div className='container'>
-        <h4>{ headerTitle }</h4>
+        <Link to='/' style={{ textDecoration: 'none' }}>
+          <h4>{ headerTitle }</h4>
+        </Link>
         <LoginLogoutBtn loginOrRegister='register' />
         <LoginLogoutBtn loginOrRegister='login' />
       </div>

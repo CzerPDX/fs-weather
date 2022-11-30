@@ -18,6 +18,14 @@ body {
   display: flex;
 }
 
+.header a {
+  color: white;
+}
+
+.header a:hover {
+  color: grey;
+}
+
 .register-btn {
   margin-left: auto;
 }
