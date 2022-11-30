@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import backgroundVideo from './animations/Night_Thunderstorm.mp4';
 import HourlyCard from './HourlyCard';
 import DailyCard from './DailyCard';
+import CurrentCard from './CurrentCard';
 
 const WeatherImage = ({ icon, shortDescription }) => {
   return (
@@ -59,34 +60,29 @@ const MainLarge = ({
   );
 };
 
-const HourlyForecastCard = ({
-  temperature,
-  icon,
-  shortDescription,
-  longDescription,
-}) => {};
-
 const ForecastCard = (props) => {
   // Pick layout of forecast card based on the card type
   const renderByType = (props) => {
     if (props.cardType === 'main-large') {
       return (
-        <MainLarge
-          temperature={props.temperature}
-          iconCode={props.iconCode}
-          shortDescription={props.shortDescription}
-          longDescription={props.longDescription}
+        <CurrentCard
+          weatherData={props.weatherData}
+          location={props.location}
         />
       );
     } else if (props.cardType === 'hourly-forecast') {
-      return <HourlyCard weatherData={props.weatherData} />;
+      return (
+        <HourlyCard weatherData={props.weatherData} location={props.location} />
+      );
     } else if (props.cardType === 'daily-forecast') {
-      return <DailyCard weatherData={props.weatherData} />;
+      return (
+        <DailyCard weatherData={props.weatherData} location={props.location} />
+      );
     }
   };
 
   // If a cardType was provided add it to the className with lowercase and dashes so it can be accessed through CSS
-  let className = 'forecast-card-container';
+  let className = 'forecast-card-container ';
 
   return <div className={className}>{renderByType(props)}</div>;
 };

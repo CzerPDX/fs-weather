@@ -1,11 +1,7 @@
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 import { useState } from 'react';
-import {
-  WiHumidity,
-  WiStrongWind,
-  WiRaindrop,
-  WiThermometerExterior,
-} from 'react-icons/wi';
+import { WiHumidity, WiStrongWind } from 'react-icons/wi';
+import { BsThermometerHigh, BsThermometerLow } from 'react-icons/bs';
 import { GiSunset, GiSunrise } from 'react-icons/gi';
 import { IoWaterOutline } from 'react-icons/io5';
 const innerIcon = '	#00BFFF';
@@ -21,53 +17,43 @@ const DailyDropdown = ({
 }) => {
   const sunRise = `${sunrise.hour}:${sunrise.minutes} ${sunrise.ampm}`;
   const sunSet = `${sunset.hour}:${sunset.minutes} ${sunset.ampm}`;
+  const dropItem =
+    'd-flex col-6 hr-icon-name justify-content-center flex-fill align-items-center';
   return (
     <>
-      <div className="container p-3 border-2 border-dark border-bottom">
+      <div className="container d-grid gap-sm-4 p-3 border-2 border-dark border-bottom">
         <div className="row">
-          <h6 className="col d-flex align-items-center">
-            <GiSunrise color={innerIcon} size={30}></GiSunrise>Sunrise:{' '}
+          <h6 className={`col-sm-3 col-6 ${dropItem}`}>
+            <BsThermometerHigh color={innerIcon} size={25} />
+            {`High: ${high}°`}
+          </h6>
+          <h6 className={`col-sm-3  ${dropItem}`}>
+            <BsThermometerLow color={innerIcon} size={25} />
+            {`Low: ${low}°`}
+          </h6>
+          <h6 className={`col-sm-3 ${dropItem}`}>
+            <GiSunrise color={innerIcon} size={25}></GiSunrise>Sunrise:{' '}
             {sunRise}
           </h6>
-          <h6 className="col d-flex align-items-center">
-            <GiSunset color={innerIcon} size={30}></GiSunset>Sunset: {sunSet}
+          <h6 className={`col-sm-3 ${dropItem}`}>
+            <GiSunset color={innerIcon} size={25}></GiSunset>Sunset: {sunSet}
           </h6>
-          <h6 className="col d-flex align-items-center">
-            <WiHumidity color={innerIcon} size={30}></WiHumidity>humidity:{' '}
+        </div>
+        <div className="row">
+          <h6 className={`col-sm-4  ${dropItem}`}>
+            <WiStrongWind color={innerIcon} size={35} />
+            wind: {wind} mph
+          </h6>
+          <h6 className={`col-sm-4  ${dropItem}`}>
+            <WiHumidity color={innerIcon} size={25}></WiHumidity>humidity:{' '}
             {humidity}%
           </h6>
-          <h6 className="col d-flex align-items-center">
+          <h6 className={`col-sm-4  ${dropItem}`}>
             <IoWaterOutline color={innerIcon} size={25}></IoWaterOutline>
             precipitation: {percipitation}%
           </h6>
-          <h6 className="col d-flex align-items-center">
-            <WiStrongWind color={innerIcon} size={40} />
-            wind: {wind} mph
-          </h6>
         </div>
       </div>
-      {/* <div className="row p-3 border-2 border-dark border-bottom">
-        <div className="col-12 col-sm-6 col-lg d-flex align-items-center justify-content-center hr-icon-name">
-          <WiHumidity color={innerIcon} size={40}></WiHumidity>humidity:{' '}
-          {humidity}%
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center hr-icon-name">
-          <IoWaterOutline color={innerIcon} size={25}></IoWaterOutline>
-          precipitation: {percipitation}%
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <WiStrongWind color={innerIcon} size={40} />
-          wind: {wind} mph
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <GiSunrise color={innerIcon} size={30} /> {sunrise.hour}:
-          {sunrise.minutes} {sunrise.ampm}
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <GiSunset color={innerIcon} size={30} /> {sunset.hour}:
-          {sunset.minutes} {sunset.ampm}
-        </div>
-      </div> */}
     </>
   );
 };
@@ -77,40 +63,38 @@ const DailyItemMain = ({ day, month, temp, icon, clickIcon, description }) => {
   let date = `${month.abbrv} ${day.dayOfMonth}`;
   let temperature = `${temp}°`;
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="container">
-              <div className="row-col-1 justify-content-center">
-                <div className="col align-items-center">
-                  <div className="m-2">
-                    <h4 className="m-0">{time}</h4>
-                    <p className="m-0">{date} </p>
-                  </div>
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <div className="container">
+            <div className="row-col-1 justify-content-center">
+              <div className="col align-items-center">
+                <div className="m-2">
+                  <h4 className="m-0">{time}</h4>
+                  <p className="m-0">{date} </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col d-flex align-items-center">
-            <h5 className="display-6">{temperature}</h5>
-          </div>
-          <div className="col">
-            <div className="d-sm-flex align-items-center">
-              <img className="hr-icon" src={image} />
-              <p className="d-none d-sm-flex">{description}</p>
-            </div>
-          </div>
-          <div className="col-1 d-flex justify-content-end">
-            <h3 className="">{clickIcon}</h3>
+        </div>
+        <div className="col d-flex align-items-center">
+          <h5 className="display-6">{temperature}</h5>
+        </div>
+        <div className="col">
+          <div className="d-sm-flex align-items-center">
+            <img className="hr-icon" src={image} alt={description} />
+            <p className="d-none d-sm-flex">{description}</p>
           </div>
         </div>
+        <div className="col-1 d-flex justify-content-end">
+          <h3 className="">{clickIcon}</h3>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
-const DailyWeather = (props) => {
+const DailyCard = (props) => {
   const [clicked, setClicked] = useState('');
   const toggleItem = (index) => {
     if (index === clicked) {
@@ -119,7 +103,7 @@ const DailyWeather = (props) => {
       setClicked(index);
     }
   };
-  const dataList = Object.entries(props.weatherData).map((item, i) => {
+  const dataList = Object.entries(props.weatherData.list).map((item, i) => {
     let it = item[1];
     let clickedIcon = clicked === i ? <FaToggleOff /> : <FaToggleOn />;
     let dropContent =
@@ -135,14 +119,12 @@ const DailyWeather = (props) => {
         />
       ) : null;
     return (
-      <>
+      <div key={`day${i}`}>
         <div
           onClick={() => toggleItem(i)}
           className="d-flex border-bottom justify-content-between align-items-center ps-2"
         >
           <DailyItemMain
-            id={`day${i}`}
-            key={i}
             month={it.month}
             temp={it.temperature}
             icon={it.icon}
@@ -152,15 +134,19 @@ const DailyWeather = (props) => {
           ></DailyItemMain>
         </div>
         {dropContent}
-      </>
+      </div>
     );
   });
 
   return (
-    <div className="container card mb-5 p-4 shadow">
+    <div className="container d-flex flex-fill card mb-5 py-4 px-sm-4 shadow">
+      <div className="container  pb-5 align-items-baseline ">
+        <h1 className="display-6">Daily Weather </h1>
+        <h4 className=""> {`- ${props.location}`}</h4>
+      </div>
       <>{dataList}</>
     </div>
   );
 };
 
-export default DailyWeather;
+export default DailyCard;

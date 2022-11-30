@@ -4,7 +4,7 @@ import ForecastCard from './ForecastCard';
 // import React, { useState } from 'react'
 
 const DailyWeather = (props) => {
-  const initialWeatherState = {};
+  const initialWeatherState = { list: {}, locationName: '' };
 
   const url = `/api-daily-weather?lat=${props.lat}&lon=${props.lon}`;
   const [dailyData, setDailyData] = useState(initialWeatherState);
@@ -30,15 +30,25 @@ const DailyWeather = (props) => {
   return (
     <div className="current-weather-detailed">
       {/* Forecast Title will stay on this component*/}
-      <div className="title-block">
+      {/* <div className="title-block">
         <h5>Showing the weather from {dailyData.locationName}:</h5>
-      </div>
+      </div> */}
 
-      <div className="forecast-container">
-        <ForecastCard cardType={props.cardType} weatherData={dailyData} />
+      <div className="">
+        <ForecastCard
+          cardType={props.cardType}
+          weatherData={dailyData}
+          location={props.location}
+        />
       </div>
     </div>
   );
+};
+
+DailyWeather.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default DailyWeather;

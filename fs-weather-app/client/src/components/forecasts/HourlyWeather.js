@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
 import ForecastCard from './ForecastCard';
-// import React, { useState } from 'react'
 
 const HourlyWeather = (props) => {
-  console.log('hourly w', props);
-  const initialWeatherState = {};
+  const initialWeatherState = { list: {}, locationName: '' };
 
   const url = `/api-hourly-weather?lat=${props.lat}&lon=${props.lon}`;
   const [hourlyData, setHourlyData] = useState(initialWeatherState);
@@ -27,19 +25,26 @@ const HourlyWeather = (props) => {
       // Error handling
       .catch(console.error);
   }, [fetchData]);
+  console.log(hourlyData);
 
   return (
     <div className="current-weather-detailed">
       {/* Forecast Title will stay on this component*/}
-      <div className="title-block">
-        <h5>Showing the weather from {hourlyData.locationName}:</h5>
-      </div>
-
-      <div className="forecast-container">
-        <ForecastCard cardType={props.cardType} weatherData={hourlyData} />
+      <div className="">
+        <ForecastCard
+          cardType={props.cardType}
+          weatherData={hourlyData}
+          location={props.location}
+        />
       </div>
     </div>
   );
+};
+
+HourlyWeather.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default HourlyWeather;

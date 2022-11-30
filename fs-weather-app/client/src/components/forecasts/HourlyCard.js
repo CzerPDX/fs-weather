@@ -3,7 +3,6 @@ import { useState } from 'react';
 import {
   WiHumidity,
   WiStrongWind,
-  WiRaindrop,
   WiThermometerExterior,
 } from 'react-icons/wi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -39,31 +38,28 @@ const HourlyDropdown = ({ percipitation, wind, humidity, feelsLike }) => {
 const HourlyItemMain = ({ hour, ampm, temp, icon, clickIcon, description }) => {
   const image = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   let time = `${hour} ${ampm}`;
-  let temperature = `${temp} F°`;
+  let temperature = `${temp}°`;
   return (
     <>
-      <h5 className="display-6">{time}</h5>
-      <h5 className="display-6">{temperature}</h5>
-      <div className="d-sm-flex align-items-center">
-        <img className="hr-icon" src={image} />
-        <p className="d-none d-sm-flex">{description}</p>
-      </div>
-      <h3 className="">{clickIcon}</h3>
-      {/* <div className="col d-flex justify-content-around">
-        <h5>{time}</h5>
-        <h5>{temperature}</h5>
-      </div>
-      <div className="col d-flex align-items-center justify-content-end ">
-        <div className="row-col-2">
+      <div className="container">
+        <div className="row">
+          <div className="col d-flex align-items-center">
+            <h3 className="">{time}</h3>
+          </div>
+          <div className="col d-flex align-items-center">
+            <h5 className="display-6">{temperature}</h5>
+          </div>
           <div className="col">
-            <img src={image} />
+            <div className="d-sm-flex align-items-center">
+              <img className="hr-icon" src={image} alt={description} />
+              <p className="d-none d-sm-flex">{description}</p>
+            </div>
+          </div>
+          <div className="col-1 d-flex justify-content-end">
+            <h3 className="">{clickIcon}</h3>
           </div>
         </div>
-        <p>descripton</p>
       </div>
-      <div className="col-1 ms-5 d-flex justify-content-end">
-        <h3>{clickIcon}</h3>
-      </div> */}
     </>
   );
 };
@@ -74,20 +70,18 @@ const HourlyCard = (props) => {
   const toggleItem = (index) => {
     console.log('click', index, clicked);
     if (index === clicked) {
-      console.log('isequal');
       setClicked(null);
     } else {
-      console.log('isequal');
       setClicked(index);
     }
   };
-  const dataList = Object.entries(props.weatherData).map((item, i) => {
+  const dataList = Object.entries(props.weatherData.list).map((item, i) => {
     let it = item[1];
-    let dayChange = null;
     let clickedIcon = clicked === i ? <FaToggleOff /> : <FaToggleOn />;
     let dropContent =
       clicked === i ? (
         <HourlyDropdown
+          key={`hrDrop${i}`}
           feelsLike={it.feelsLike}
           wind={it.wind}
           humidity={it.humidity}
@@ -95,22 +89,19 @@ const HourlyCard = (props) => {
         ></HourlyDropdown>
       ) : null;
     if (it.time.hour === 12 && it.time.ampm === 'am') {
-      dayChange = (
-        <div className="d-flex border-bottom">
-          <h2 className=" my-2">{it.day.name}</h2>
+      return (
+        <div className="d-flex border-bottom " key={`hr${i}`}>
+          <h2 className=" display-5 my-2">{it.day.name}</h2>
         </div>
       );
     }
     return (
-      <>
-        {dayChange}
+      <div key={`hr${i}`}>
         <div
           onClick={() => toggleItem(i)}
           className="d-flex border-bottom justify-content-between align-items-center ps-2"
         >
           <HourlyItemMain
-            id={`hr${i}`}
-            key={i}
             hour={it.time.hour}
             ampm={it.time.ampm}
             temp={it.temp}
@@ -121,12 +112,16 @@ const HourlyCard = (props) => {
           ></HourlyItemMain>
         </div>
         {dropContent}
-      </>
+      </div>
     );
   });
   console.log('hourly', props);
   return (
     <div className="container card mb-5 p-4 shadow">
+      <div className="container  pb-5 align-items-baseline ">
+        <h1 className="display-6">Hourly Weather </h1>
+        <h4 className=""> {`- ${props.location}`}</h4>
+      </div>
       <>{dataList}</>
     </div>
   );

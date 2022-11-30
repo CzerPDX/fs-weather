@@ -9,10 +9,12 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
 
   let tempLat = coordinates.lat;
   let tempLon = coordinates.lon;
+  let tempCity = coordinates.location;
 
-  const setTempCoords = (lat, lon) => {
+  const setTempCoords = (lat, lon, city) => {
     tempLat = lat;
     tempLon = lon;
+    tempCity = city;
   };
 
   const searchIcon = <FaSearch />;
@@ -25,7 +27,7 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
     // Validate that coordinate state was updated from child-SearchAutoComplete
     console.log('from parent', coordinates);
     if (tempLat !== coordinates.lat && tempLon !== coordinates.lon) {
-      setCoordinates({ lat: tempLat, lon: tempLon });
+      setCoordinates({ lat: tempLat, lon: tempLon, location: tempCity });
     }
 
     // Coordinates should now have correct values to call OpenWeather api
@@ -35,7 +37,7 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
   // const searchIcon = 'hello'
 
   return (
-    <div className="main-search">
+    <div className="main-search shadow">
       <form className="form-control" onSubmit={onSubmit}>
         <label>Search City and State to view Weather</label>
         {/** SearchAutoComplete acts as input */}
