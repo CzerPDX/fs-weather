@@ -10,6 +10,7 @@ import './index.css';
 import MainPage from './routes/MainPage';
 import LoginRegistrationPage from './routes/LoginRegistrationPage';
 import Header from './components/general/Header';
+import UserHome from './routes/UserHome';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route exact path='/' element={<MainPage />} />
           <Route path='/login' element={<LoginRegistrationPage formType='login' />} />
           <Route path='/register' element={<LoginRegistrationPage formType='register' />} />
+          <Route path='/user-home' element={<UserHome/>} />
         </Routes>
       </div>
     </div>

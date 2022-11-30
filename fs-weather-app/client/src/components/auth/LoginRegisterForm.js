@@ -9,6 +9,7 @@ import { useState } from 'react';
 import Button from '../general/Button';
 import axios from 'axios';
 import InputField from './form-parts/InputField';
+import { Link, useNavigate } from 'react-router-dom';
 
 // States for checking the errors
 const NEUTRAL_CSS = 'form-control';
@@ -22,14 +23,14 @@ const DisplayNameField = ({ formType, handleDisplayName, displayNameCSS, display
   if (formType === 'register') {
     return (
       <InputField
-          id='displayNameInput'
-          labelText='Display Name'
-          onChange={handleDisplayName}
-          className={displayNameCSS}
-          value={displayName} 
-          type='text'
-          invalidText='Please enter a display name!'
-        />
+        id='displayNameInput'
+        labelText='Display Name'
+        onChange={handleDisplayName}
+        className={displayNameCSS}
+        value={displayName} 
+        type='text'
+        invalidText='Please enter a display name!'
+      />
     )
   } else if (formType === 'login') {
     return ('')
@@ -124,11 +125,17 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
 
       // Send the request to the backend
       axios.post(`${BACKEND_URL}/data/user/${formType}`, requestInfo)
-      .then(function (response) {
-        console.log(response);
+      .then(() => {
+        // Output the results to the console
+        if (formType === 'login') {
+          console.log(`User ${email} successfully logged in!!`);
+        }
+        else if (formType === 'register') {
+          console.log(`User ${email} successfully registered!!`)
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error.response);
       });  
     }
   };
@@ -158,7 +165,7 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
           value={email} 
           type='email'
           invalidText='Please enter an email!'
-          autoComplete='fs-weather login email'
+          autocomplete='fs-weather login email'
         />
         
         
@@ -171,7 +178,7 @@ const AuthForm = ({ BACKEND_URL, formType }) => {
           value={password} 
           type='password'
           invalidText='Please enter a password!'
-          autoComplete='fs-weather login password'
+          autocomplete='fs-weather login password'
         />
         
         {/* Submit Button */}

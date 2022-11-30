@@ -83,6 +83,18 @@
       "password": "$2a$10$MX05sKg3N13.z2pwI4M7eOyvm5.djR1wcIFr7Kepa380KQvfqSfsi",
       "displayName": "Brooke",
       "id": 14
+    },
+    {
+      "email": "email@example.com",
+      "password": "$2a$10$SqrlN0j4Fcstrd7MQgR2I.YbTjtdViJ1OWJiuM49gBheVOC8HFJGe",
+      "displayName": "new name",
+      "id": 15
+    },
+    {
+      "email": "hello2@example.com",
+      "password": "$2a$10$5wQZd6xMG7WeCCiB/gjhRe7OWrEYkLrPdHCBZLwzNETVIfigdqQyu",
+      "displayName": "fdafdsa",
+      "id": 16
     }
   ]
 }

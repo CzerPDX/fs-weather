@@ -29,7 +29,7 @@ const LoginLogoutBtn = ({ loginOrRegister }) => {
   }
   else if (loginOrRegister === 'register') {
     onClick = navigateToRegister;
-    className = 'logout-btn';
+    className = 'register-btn';
     buttonText = 'Register';
     routePath = '/register';
   }

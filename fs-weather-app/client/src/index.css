@@ -17,8 +17,12 @@ body {
 .header .container {
   display: flex;
 }
-.login-btn, .logout-btn {
+
+.register-btn {
   margin-left: auto;
+}
+.login-btn {
+  margin-left: 0.5em;
 }
 
 
