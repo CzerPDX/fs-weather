@@ -95,6 +95,12 @@
       "password": "$2a$10$5wQZd6xMG7WeCCiB/gjhRe7OWrEYkLrPdHCBZLwzNETVIfigdqQyu",
       "displayName": "fdafdsa",
       "id": 16
+    },
+    {
+      "email": "averynewemail@example.com",
+      "password": "$2a$10$8oVsy3abr.Swp58vrfaKv.HyPwtnxeBJdfOWOwtkq/4dkYjUwcJY6",
+      "displayName": "new name",
+      "id": 17
     }
   ]
 }
