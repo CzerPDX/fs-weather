@@ -2,7 +2,7 @@
   References:
   https://bobbyhadz.com/blog/react-onclick-redirect
 */
-import Button from "./Button";
+import Button from './Button';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginLogoutBtn = ({ loginOrRegister }) => {
@@ -14,7 +14,6 @@ const LoginLogoutBtn = ({ loginOrRegister }) => {
   const navigateToRegister = () => {
     navigate('/register');
   };
-
 
   let onClick;
   let className;
@@ -37,16 +36,15 @@ const LoginLogoutBtn = ({ loginOrRegister }) => {
   return (
     <div className={className}>
       <Link to={routePath}>
-        <Button 
-          btnClasses='btn btn-primary'
+        <Button
+          btnClasses="btn btn-primary"
           onClick={onClick}
           text={buttonText}
         />
       </Link>
     </div>
-  )
-}
-
+  );
+};
 
 // General app headers
 const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
@@ -60,13 +58,13 @@ const Header = ({ headerTitle, headerClasses, navigateToLogin }) => {
         <LoginLogoutBtn loginOrRegister='login' />
       </div>
     </header>
-  )
-}
+  );
+};
 
 // We can set default props below the component
 Header.defaultProps = {
   headerTitle: 'FS Weather',
   headerClasses: 'header',
-}
+};
 
-export default Header
+export default Header;

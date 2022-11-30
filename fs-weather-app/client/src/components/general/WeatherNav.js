@@ -1,48 +1,36 @@
-import 'bootstrap/js/src/collapse.js';
+import { useState } from 'react';
 const WeatherNav = ({ setCard }) => {
-  const handleClick = (card) => {
+  const links = [
+    { card: 'main-large', id: 'nav-current', text: 'Current' },
+    { card: 'hourly-forecast', id: 'nav-hourly', text: 'Hourly' },
+    { card: 'daily-forecast', id: 'nav-daily', text: 'Daily' },
+  ];
+  const [active, setActive] = useState('nav-current');
+  const handleClick = (card, id) => {
+    setActive(id);
     setCard(card);
   };
+  const button = 'btn border-0';
+  const navLinks = links.map((link) => {
+    let outterClass = 'd-flex justify-content-center ';
+    if (link.id === active) {
+      outterClass += 'nav-active';
+    }
+    return (
+      <div key={`${link.id}-${link.card}`} id={link.id} className={outterClass}>
+        <button
+          className={button}
+          onClick={() => handleClick(link.card, link.id)}
+        >
+          <h5 className="nav-header-text">{link.text}</h5>
+        </button>
+      </div>
+    );
+  });
+
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <button
-                className="nav-item active border-0"
-                onClick={() => handleClick('main-large')}
-                aria-current="page"
-              >
-                Current
-              </button>
-              <button
-                className="nav-item border-0"
-                onClick={() => handleClick('hourly-forecast')}
-              >
-                Hourly
-              </button>
-              <button
-                className="nav-item border-0"
-                onClick={() => handleClick('daily-forecast')}
-              >
-                Daily
-              </button>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <div className="container card  shadow my-2">
+      <div className="d-flex justify-content-around px-5">{navLinks}</div>
     </div>
   );
 };

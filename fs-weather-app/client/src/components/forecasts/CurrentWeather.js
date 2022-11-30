@@ -13,18 +13,26 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
 import ForecastCard from './ForecastCard';
-// import React, { useState } from 'react'
 
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
   // when returned or the software will freak out
 
   const initialWeatherState = {
-    locationName: 'Loading...',
-    temperature: 'Loading...',
-    shortDescription: 'Loading...',
-    longDescription: 'Loading...',
-    iconCode: 'Loading...',
+    locationName: 'loading...',
+    temperature: 'loading...',
+    shortDescription: 'loading...',
+    longDescription: 'loading...',
+    icon: `http://openweathermap.org/img/wn/02d@2x.png`,
+    iconCode: 'loading...',
+    maxTemp: '...',
+    minTemp: '...',
+    feelsLike: '...',
+    sunrise: { hour: '...', ampm: '...', minutes: '...' },
+    sunset: { hour: '...', ampm: '...', minutes: '...' },
+    wind: '...',
+    humidity: '...',
+    cloudCover: '...',
   };
 
   const url = `/api-current-weather?lat=${props.lat}&lon=${props.lon}`;
@@ -47,22 +55,14 @@ const CurrentWeather = (props) => {
     fetchData()
       // Error handling
       .catch(console.error);
-  }, [props]);
-
+  }, [fetchData]);
   return (
-    <div className="current-weather-detailed">
-      {/* Forecast Title will stay on this component*/}
-      <div className="title-block">
-        <h5>Showing the weather from {weatherData.locationName}:</h5>
-      </div>
-
-      <div className="forecast-container">
+    <div className="current-weather-detailed mb-5">
+      <div className="">
         <ForecastCard
           cardType={props.cardType}
-          iconCode={weatherData.iconCode}
-          shortDescription={weatherData.shortDescription}
-          longDescription={weatherData.longDescription}
-          temperature={weatherData.temperature}
+          weatherData={weatherData}
+          location={props.location}
         />
       </div>
     </div>
@@ -70,8 +70,8 @@ const CurrentWeather = (props) => {
 };
 
 CurrentWeather.propTypes = {
-  lat: PropTypes.string.isRequired,
-  lon: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
   cardType: PropTypes.string.isRequired,
 };
 

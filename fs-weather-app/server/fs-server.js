@@ -18,8 +18,6 @@ app.use(cors({
 require('dotenv').config()
 const port = 5001;
 
-
-
 // Open Weather API information
 // Set up a route for the API. The frontend will make calls to this route
 // In the frontend we will fetch this user array and display all the users.
@@ -27,11 +25,10 @@ const KEY = process.env.OPEN_WEATHER_API_KEY;
 const CURRENT_WEATHER =
   'https://api.openweathermap.org/data/2.5/weather?units=imperial';
 const HOURLY_FORECAST =
-  'https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=12';
+  'https://pro.openweathermap.org/data/2.5/forecast/hourly?units=imperial&cnt=36';
 const DAILY_FORECAST =
-  'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=10';
+  'https://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&cnt=14';
 const AIR_QUALITY = 'http://api.openweathermap.org/data/2.5/air_pollution?';
-
 
 // convert, parse and format time from the date (dt) value in the openWeather api response
 const convertTime = (time, timezone) => {
@@ -39,9 +36,10 @@ const convertTime = (time, timezone) => {
   let hours = date.getUTCHours();
   let minutes = date.getMinutes();
   let ampm = hours >= 12 ? 'pm' : 'am';
+  minutes = minutes < 10 ? `0${String(minutes)}` : String(minutes);
   hours = hours % 12;
   hours = hours ? hours : 12;
-  return { hour: hours, ampm: ampm, minutes: minutes };
+  return { hour: String(hours), ampm: ampm, minutes: minutes };
 };
 
 //parses and returns day of the week from the date (dt) value in the openWeather api response
@@ -99,6 +97,7 @@ app.get('/api*', (req, res) => {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
+        const timeZone = response.data.timezone;
         responseObject = {
           locationName: response.data.name,
           temperature: `${Math.round(response.data.main.temp)}`,
@@ -106,16 +105,36 @@ app.get('/api*', (req, res) => {
           longDescription: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
           iconCode: response.data.weather[0].icon,
-          // maxTemp: Math.round(response.data.main.temp_max),
-          // minTemp: Math.round(response.data.main.temp_min),
-          // feelsLike: response.data.main.feels_like,
+          maxTemp: Math.round(response.data.main.temp_max),
+          minTemp: Math.round(response.data.main.temp_min),
+          feelsLike: Math.round(response.data.main.feels_like),
+          sunrise: convertTime(response.data.sys.sunrise, timeZone),
+          sunset: convertTime(response.data.sys.sunset, timeZone),
+          wind: response.data.wind.speed,
+          humidity: response.data.main.humidity,
+          cloudCover: response.data.clouds.all,
         };
-        console.log(responseObject);
         res.status(200).send(responseObject);
+        // res.status(200).send({
+        //   locationName: 'portland',
+        //   temperature: 68,
+        //   shortDescription: 'clouds',
+        //   longDescription: '',
+        //   icon: `http://openweathermap.org/img/wn/02d@2x.png`,
+        //   iconCode: '02d',
+        //   maxTemp: 78,
+        //   minTemp: 50,
+        //   feelsLike: 65,
+        //   sunrise: { hour: 7, ampm: 'am', minutes: '00' },
+        //   sunset: { hour: 7, ampm: 'pm', minutes: '04' },
+        //   wind: 2,
+        //   humidity: 30,
+        //   cloudCover: 40,
+        // });
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
-        console.log({ message: error.message });
+        console.log(error);
       });
     // Handle requests for /api-hourly-weather
   } else if (req.url.split('?')[0] === '/api-hourly-weather') {
@@ -143,10 +162,9 @@ app.get('/api*', (req, res) => {
             percipitation: item.pop * 100,
             feelsLike: Math.round(item.main.feels_like),
           };
-          obj = { ...obj, locationName: name };
           return obj;
         });
-        console.log(responseObject);
+        responseObject = { list: responseObject, locationName: name };
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -182,11 +200,9 @@ app.get('/api*', (req, res) => {
             sunrise: sunrise,
             sunset: sunset,
           };
-          obj = { ...obj, locationName: name };
           return obj;
         });
-
-        console.log(responseObject);
+        responseObject = { list: responseObject, locationName: name };
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -195,7 +211,6 @@ app.get('/api*', (req, res) => {
       });
     // Handle requests for /api-air-quality
   } else if (req.url.split('?')[0] === '/api-air-quality') {
-    console.log('***air quality');
     axios
       .get(`${AIR_QUALITY}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -206,7 +221,6 @@ app.get('/api*', (req, res) => {
           aqiIndex: list[0].main.aqi,
           aqiDescription: aqiValues[list[0].main.aqi - 1],
         };
-        console.log(responseObject);
         res.status(200).send(response.data);
       })
       .catch((error) => {
@@ -222,17 +236,11 @@ app.get('/api*', (req, res) => {
   }
 });
 
-
 // Database routes
 const dbRoutes = require('./database/fs-db-routes');
 app.use('/data', dbRoutes);
-
-
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 });
-
-
-

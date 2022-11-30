@@ -25,9 +25,11 @@ const SearchAutoComplete = ({ setTempCoords }) => {
             backgroundColor: suggestion.active && 'green',
             color: suggestion.active && 'white',
           };
-          console.log(suggestion);
           return (
-            <div {...getSuggestionItemProps(suggestion, { style })}>
+            <div
+              key={suggestion.placeId}
+              {...getSuggestionItemProps(suggestion, { style })}
+            >
               {suggestion.description}
             </div>
           );
@@ -41,9 +43,8 @@ const SearchAutoComplete = ({ setTempCoords }) => {
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const { lat, lng } = await getLatLng(results[0]);
-    setTempCoords(lat, lng);
-    console.log('from child', lat, lng);
     setCity(value);
+    setTempCoords(lat, lng, value);
   };
 
   return (

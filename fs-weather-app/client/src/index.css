@@ -10,6 +10,12 @@ body {
 } */
 
 /* Header */
+#root {
+  /* background-image: linear-gradient(to right, #243949 0%, #517fa4 100%); */
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
 .header {
   margin-bottom: 1.5em;
 }
@@ -29,20 +35,13 @@ body {
 .register-btn {
   margin-left: auto;
 }
-.login-btn {
-  margin-left: 0.5em;
-}
-
 
 /* Registration & Login Page */
-
-
 
 /* Main Page General */
 .main-page {
   padding-top: 1em;
 }
-
 
 /* Main page search */
 .main-search {
@@ -52,7 +51,6 @@ body {
   margin-top: 0.5em;
 }
 
-
 /* Forecast Card */
 .forecast-container {
   display: flex;
@@ -60,7 +58,7 @@ body {
 }
 
 .forecast-card-container {
-  padding-right: 1em;
+  /* padding-right: 1em; */
 }
 
 .forecast-card {
@@ -78,7 +76,6 @@ body {
 }
 
 .temperature-and-graphic-card {
-  background-color: #0d6efd;
   display: flex;
   min-height: 8em;
   border-radius: 0.65em;
@@ -90,20 +87,20 @@ body {
 }
 
 .temperature h1 {
-  font-size: xx-large;
+  font-size: 2.5em;
   font-weight: 700;
-  color: white;
   margin: auto;
 }
 
 .detailed-weather-info {
-  padding: 0.5em;
+  /* padding: 0.5em; */
 }
 
 .video {
-  max-width: 20em;
+  max-width: 26em;
   border-radius: 1em;
 }
+/*DailyCard and HourlyCard Lists*/
 .hr-icon {
   width: 4rem;
   height: auto;
@@ -111,4 +108,74 @@ body {
 .hr-icon-name {
   font-size: 0.8em;
   font-weight: bold;
+}
+.nav-active {
+  border-bottom: #1c1c1c;
+  border-bottom-style: solid;
+  border-width: medium;
+}
+.nav-active button div {
+  font-weight: 800;
+}
+.current-container {
+  max-width: 34rem;
+}
+.mn-icon-name {
+  font-size: 1em;
+  font-weight: bold;
+}
+.current-city::first-letter {
+  text-transform: capitalize;
+}
+.long-title-current {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .video {
+    max-width: 16em;
+  }
+  .temperature h1 {
+    font-size: 2.2em;
+  }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+  .video {
+    max-width: 16rem;
+  }
+  .mn-icon-name {
+    font-size: 0.8em;
+  }
+  .hr-icon-name {
+    font-size: 0.7em;
+  }
+  .nav-header-text {
+    font-size: 1em;
+  }
+  .temperature h1 {
+    font-size: 2em;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .video {
+    max-width: 16rem;
+  }
+  .mn-icon-name {
+    font-size: 0.8em;
+  }
+  .hr-icon-name {
+    font-size: 0.7em;
+  }
+  .nav-header-text {
+    font-size: 0.8em;
+  }
+  .temperature h1 {
+    font-size: 1.8em;
+  }
+}
+@media (max-width: 350px) {
+  .video {
+    max-width: 10em;
+  }
 }
