@@ -8,8 +8,10 @@
   ```shell
   npm install
   ```
-- #### **Set up environment variable file**
-  Copy the provided `.env` file that contains the API key into `fs-weather-app/server`
+- #### **Set up environment variable files**
+  **There are two .env files required. **
+  Place the provided `.env` file that contains the Open Weather API key into `fs-weather-app/server`
+  Place the provided `.env` file that contains the Google Autocomplete API key into `fs-weather-app/client`
 
 - #### **Install client node modules**
   cd into `fs-weather-app/client` and use:

@@ -9,7 +9,6 @@ import { useState } from 'react';
 import Button from '../general/Button';
 import axios from 'axios';
 import InputField from './form-parts/InputField';
-import { Link, useNavigate } from 'react-router-dom';
 
 // States for checking the errors
 const NEUTRAL_CSS = 'form-control';
