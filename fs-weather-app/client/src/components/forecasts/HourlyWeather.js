@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
 import ForecastCard from './ForecastCard';
-// import React, { useState } from 'react'
 
 const HourlyWeather = (props) => {
-  console.log('hourly w', props);
   const initialWeatherState = { list: {}, locationName: '' };
 
   const url = `/api-hourly-weather?lat=${props.lat}&lon=${props.lon}`;

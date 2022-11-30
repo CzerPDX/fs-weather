@@ -3,7 +3,6 @@ import { useState } from 'react';
 import {
   WiHumidity,
   WiStrongWind,
-  // WiRaindrop,
   WiThermometerExterior,
 } from 'react-icons/wi';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -61,12 +60,6 @@ const HourlyItemMain = ({ hour, ampm, temp, icon, clickIcon, description }) => {
           </div>
         </div>
       </div>
-      {/* 
-      <div className="d-sm-flex align-items-center">
-        <img className="hr-icon" src={image} alt={description} />
-        <p className="d-none d-sm-flex">{description}</p>
-      </div>
-      <h3 className="">{clickIcon}</h3> */}
     </>
   );
 };
@@ -77,16 +70,13 @@ const HourlyCard = (props) => {
   const toggleItem = (index) => {
     console.log('click', index, clicked);
     if (index === clicked) {
-      console.log('isequal');
       setClicked(null);
     } else {
-      console.log('isequal');
       setClicked(index);
     }
   };
   const dataList = Object.entries(props.weatherData.list).map((item, i) => {
     let it = item[1];
-    console.log('it', it.time);
     let clickedIcon = clicked === i ? <FaToggleOff /> : <FaToggleOn />;
     let dropContent =
       clicked === i ? (

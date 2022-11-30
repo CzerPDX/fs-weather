@@ -10,7 +10,7 @@ body {
 } */
 
 /* Header */
-body {
+#root {
   /* background-image: linear-gradient(to right, #243949 0%, #517fa4 100%); */
   background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
   min-height: 100vh;
@@ -18,9 +18,6 @@ body {
 }
 .header {
   margin-bottom: 1.5em;
-}
-body {
-  background-color: aqua;
 }
 
 .header .container {
@@ -84,7 +81,6 @@ body {
 .temperature h1 {
   font-size: 2.5em;
   font-weight: 700;
-  color: white;
   margin: auto;
 }
 
@@ -93,7 +89,7 @@ body {
 }
 
 .video {
-  max-width: 22em;
+  max-width: 26em;
   border-radius: 1em;
 }
 /*DailyCard and HourlyCard Lists*/
@@ -126,9 +122,18 @@ body {
 .long-title-current {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-@media (max-width: 576px) {
+@media all and (min-width: 768px) and (max-width: 1024px) {
   .video {
-    max-width: 18em;
+    max-width: 16em;
+  }
+  .temperature h1 {
+    font-size: 2.2em;
+  }
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+  .video {
+    max-width: 16rem;
   }
   .mn-icon-name {
     font-size: 0.8em;
@@ -139,10 +144,14 @@ body {
   .nav-header-text {
     font-size: 1em;
   }
+  .temperature h1 {
+    font-size: 2em;
+  }
 }
-@media (max-width: 350px) {
+
+@media all and (max-width: 480px) {
   .video {
-    max-width: 12em;
+    max-width: 16rem;
   }
   .mn-icon-name {
     font-size: 0.8em;
@@ -154,11 +163,11 @@ body {
     font-size: 0.8em;
   }
   .temperature h1 {
-    font-size: 1.5em;
+    font-size: 1.8em;
   }
 }
-@media screen and (min-width: 992px) {
-  .temperature h1 {
-    font-size: 3em;
+@media (max-width: 350px) {
+  .video {
+    max-width: 10em;
   }
 }

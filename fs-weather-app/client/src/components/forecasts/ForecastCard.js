@@ -60,13 +60,6 @@ const MainLarge = ({
   );
 };
 
-const HourlyForecastCard = ({
-  temperature,
-  icon,
-  shortDescription,
-  longDescription,
-}) => {};
-
 const ForecastCard = (props) => {
   // Pick layout of forecast card based on the card type
   const renderByType = (props) => {
@@ -89,7 +82,7 @@ const ForecastCard = (props) => {
   };
 
   // If a cardType was provided add it to the className with lowercase and dashes so it can be accessed through CSS
-  let className = 'forecast-card-container';
+  let className = 'forecast-card-container ';
 
   return <div className={className}>{renderByType(props)}</div>;
 };

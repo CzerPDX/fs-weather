@@ -31,9 +31,10 @@ const convertTime = (time, timezone) => {
   let hours = date.getUTCHours();
   let minutes = date.getMinutes();
   let ampm = hours >= 12 ? 'pm' : 'am';
+  minutes = minutes < 10 ? `0${String(minutes)}` : String(minutes);
   hours = hours % 12;
   hours = hours ? hours : 12;
-  return { hour: hours, ampm: ampm, minutes: minutes };
+  return { hour: String(hours), ampm: ampm, minutes: minutes };
 };
 
 //parses and returns day of the week from the date (dt) value in the openWeather api response
@@ -108,7 +109,6 @@ app.get('/api*', (req, res) => {
           humidity: response.data.main.humidity,
           cloudCover: response.data.clouds.all,
         };
-        console.log(responseObject);
         res.status(200).send(responseObject);
         // res.status(200).send({
         //   locationName: 'portland',
@@ -160,7 +160,6 @@ app.get('/api*', (req, res) => {
           return obj;
         });
         responseObject = { list: responseObject, locationName: name };
-        console.log({ list: responseObject, locationName: name });
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -199,7 +198,6 @@ app.get('/api*', (req, res) => {
           return obj;
         });
         responseObject = { list: responseObject, locationName: name };
-        console.log(responseObject);
         res.status(200).send(responseObject);
       })
       .catch((error) => {
@@ -208,7 +206,6 @@ app.get('/api*', (req, res) => {
       });
     // Handle requests for /api-air-quality
   } else if (req.url.split('?')[0] === '/api-air-quality') {
-    console.log('***air quality');
     axios
       .get(`${AIR_QUALITY}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -219,7 +216,6 @@ app.get('/api*', (req, res) => {
           aqiIndex: list[0].main.aqi,
           aqiDescription: aqiValues[list[0].main.aqi - 1],
         };
-        console.log(responseObject);
         res.status(200).send(response.data);
       })
       .catch((error) => {

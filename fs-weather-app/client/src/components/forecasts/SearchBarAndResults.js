@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import React from 'react';
 import CurrentWeather from './CurrentWeather';
-import TestCurrentWeather from './TestCurrentWeather';
 import MainSearch from '../general/search-bars/MainSearch';
 import HourlyWeather from './HourlyWeather';
 import DailyWeather from './DailyWeather';
@@ -52,11 +51,6 @@ const SearchBarAndResults = () => {
     }
     return element;
   };
-
-  // const latAndlon = (latFromSearch, lonFromSearch) => {
-  //   lat = latFromSearch
-  //   lon = lonFromSearch
-  // }
 
   return (
     <div className="main-page container">

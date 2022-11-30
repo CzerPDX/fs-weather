@@ -13,7 +13,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
 import ForecastCard from './ForecastCard';
-// import React, { useState } from 'react'
 
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
@@ -31,7 +30,7 @@ const CurrentWeather = (props) => {
     feelsLike: '...',
     sunrise: { hour: '...', ampm: '...', minutes: '...' },
     sunset: { hour: '...', ampm: '...', minutes: '...' },
-    wind: '..',
+    wind: '...',
     humidity: '...',
     cloudCover: '...',
   };
@@ -57,11 +56,8 @@ const CurrentWeather = (props) => {
       // Error handling
       .catch(console.error);
   }, [fetchData]);
-  console.log('props', props.location);
   return (
     <div className="current-weather-detailed mb-5">
-      {/* Forecast Title will stay on this component*/}
-
       <div className="">
         <ForecastCard
           cardType={props.cardType}

@@ -54,28 +54,6 @@ const DailyDropdown = ({
           </h6>
         </div>
       </div>
-      {/* <div className="row p-3 border-2 border-dark border-bottom">
-        <div className="col-12 col-sm-6 col-lg d-flex align-items-center justify-content-center hr-icon-name">
-          <WiHumidity color={innerIcon} size={40}></WiHumidity>humidity:{' '}
-          {humidity}%
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center hr-icon-name">
-          <IoWaterOutline color={innerIcon} size={25}></IoWaterOutline>
-          precipitation: {percipitation}%
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <WiStrongWind color={innerIcon} size={40} />
-          wind: {wind} mph
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <GiSunrise color={innerIcon} size={30} /> {sunrise.hour}:
-          {sunrise.minutes} {sunrise.ampm}
-        </div>
-        <div className="col-12 col-sm-6 col-lg  d-flex align-items-center justify-content-center  hr-icon-name">
-          <GiSunset color={innerIcon} size={30} /> {sunset.hour}:
-          {sunset.minutes} {sunset.ampm}
-        </div>
-      </div> */}
     </>
   );
 };
