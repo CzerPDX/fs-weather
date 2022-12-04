@@ -6,7 +6,7 @@ import ForecastCard from './ForecastCard';
 const DailyWeather = (props) => {
   const initialWeatherState = { list: {}, locationName: '' };
 
-  const url = `/api-daily-weather?lat=${props.lat}&lon=${props.lon}`;
+  const url = `/api/daily-weather?lat=${props.lat}&lon=${props.lon}`;
   const [dailyData, setDailyData] = useState(initialWeatherState);
 
   // Declare the async data fetching function
@@ -28,11 +28,6 @@ const DailyWeather = (props) => {
 
   return (
     <div className="current-weather-detailed">
-      {/* Forecast Title will stay on this component*/}
-      {/* <div className="title-block">
-        <h5>Showing the weather from {dailyData.locationName}:</h5>
-      </div> */}
-
       <div className="">
         <ForecastCard
           cardType={props.cardType}

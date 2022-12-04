@@ -8,15 +8,12 @@
 
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');
-const app = express();
-app.use(express.json());
-// app.use(cors());
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+const router = express.Router();
+module.exports = router;
+router.use(express.json());
+
 require('dotenv').config()
-const port = 5001;
+
 
 // Open Weather API information
 // Set up a route for the API. The frontend will make calls to this route
@@ -78,7 +75,7 @@ const getDayOfMonth = (time, timezone) => {
   return monthName[date.getMonth()];
 };
 
-app.get('/api*', (req, res) => {
+router.get('/*', (req, res) => {
   let responseObject = null;
   let lat = req.query.lat;
   let lon = req.query.lon;
@@ -91,8 +88,8 @@ app.get('/api*', (req, res) => {
     res.end();
   }
 
-  // Handle requests for /api-current-weather
-  else if (req.url.split('?')[0] === '/api-current-weather') {
+  // Handle requests for /current-weather
+  else if (req.url.split('?')[0] === '/current-weather') {
     axios
       .get(`${CURRENT_WEATHER}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -114,28 +111,12 @@ app.get('/api*', (req, res) => {
           cloudCover: response.data.clouds.all,
         };
         res.status(200).send(responseObject);
-        // res.status(200).send({
-        //   locationName: 'portland',
-        //   temperature: 68,
-        //   shortDescription: 'clouds',
-        //   longDescription: '',
-        //   icon: `http://openweathermap.org/img/wn/02d@2x.png`,
-        //   iconCode: '02d',
-        //   maxTemp: 78,
-        //   minTemp: 50,
-        //   feelsLike: 65,
-        //   sunrise: { hour: 7, ampm: 'am', minutes: '00' },
-        //   sunset: { hour: 7, ampm: 'pm', minutes: '04' },
-        //   wind: 2,
-        //   humidity: 30,
-        //   cloudCover: 40,
-        // });
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
       });
-    // Handle requests for /api-hourly-weather
-  } else if (req.url.split('?')[0] === '/api-hourly-weather') {
+    // Handle requests for /hourly-weather
+  } else if (req.url.split('?')[0] === '/hourly-weather') {
     axios
       .get(`${HOURLY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -168,8 +149,8 @@ app.get('/api*', (req, res) => {
       .catch((error) => {
         res.status(502).send({ message: error.message });
       });
-    // Handle requests for /api-daily-weather
-  } else if (req.url.split('?')[0] === '/api-daily-weather') {
+    // Handle requests for /daily-weather
+  } else if (req.url.split('?')[0] === '/daily-weather') {
     axios
       .get(`${DAILY_FORECAST}&lat=${lat}&lon=${lon}&appid=${KEY}`)
       .then((response) => {
@@ -231,11 +212,3 @@ app.get('/api*', (req, res) => {
   }
 });
 
-// Database routes
-const dbRoutes = require('./database/fs-db-routes');
-app.use('/data', dbRoutes);
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server started on port ${port}...`);
-});

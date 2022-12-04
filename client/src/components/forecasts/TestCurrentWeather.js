@@ -18,21 +18,13 @@ import ForecastCard from './ForecastCard';
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
   // when returned or the software will freak out
-  const initialWeatherState = {
-    // Commenting this state out for now.  Hourly and Daily api calls will comeback with a long list
-    // of objects so this state deffinition wont apply to those calls
-    // locationName: 'Loading...',
-    // temperature: 'Loading...',
-    // shortDescription: 'Loading...',
-    // longDescription: 'Loading...',
-    // iconCode: 'Loading...',
-  };
+  const initialWeatherState = { };
 
-  //const url = `/api-current-weather?lat=${props.lat}&lon=${props.lon}`;
+  //const url = `/current-weather?lat=${props.lat}&lon=${props.lon}`;
   const urlStubs = {
-    'main-large': '/api-current-weather?',
-    'hourly-forecast': '/api-hourly-weather?',
-    'daily-forecast': '/api-daily-weather?',
+    'main-large': '/current-weather?',
+    'hourly-forecast': '/hourly-weather?',
+    'daily-forecast': '/daily-weather?',
   };
   const url = urlStubs[props.cardType] + `lat=${props.lat}&lon=${props.lon}`;
   // Get data from backend API

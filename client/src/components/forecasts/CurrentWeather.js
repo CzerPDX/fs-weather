@@ -35,7 +35,7 @@ const CurrentWeather = (props) => {
     cloudCover: '...',
   };
 
-  const url = `/api-current-weather?lat=${props.lat}&lon=${props.lon}`;
+  const url = `/api/current-weather?lat=${props.lat}&lon=${props.lon}`;
   // Get data from backend API
   const [weatherData, setWeatherData] = useState(initialWeatherState);
 

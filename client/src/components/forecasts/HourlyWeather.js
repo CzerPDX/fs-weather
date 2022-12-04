@@ -5,7 +5,7 @@ import ForecastCard from './ForecastCard';
 const HourlyWeather = (props) => {
   const initialWeatherState = { list: {}, locationName: '' };
 
-  const url = `/api-hourly-weather?lat=${props.lat}&lon=${props.lon}`;
+  const url = `/api/hourly-weather?lat=${props.lat}&lon=${props.lon}`;
   const [hourlyData, setHourlyData] = useState(initialWeatherState);
 
   // Declare the async data fetching function
