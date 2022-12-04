@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import React from 'react';
-import CurrentWeather from './CurrentWeather';
+import CurrentWeather from './forecast-display-cards/forecast-api-components/CurrentWeather';
 import MainSearch from '../general/search-bars/MainSearch';
-import HourlyWeather from './HourlyWeather';
-import DailyWeather from './DailyWeather';
+import HourlyWeather from './forecast-display-cards/forecast-api-components/HourlyWeather';
+import DailyWeather from './forecast-display-cards/forecast-api-components/DailyWeather';
 import WeatherNav from '../general/WeatherNav';
 
 const SearchBarAndResults = () => {

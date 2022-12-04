@@ -4,7 +4,7 @@
     - Pull data from the API
     - Call top-level forecast components and send them data as needed
 
-    The ForecastCard will be responsible for formatting the data based on cardType
+    The ForecastCardBase will be responsible for formatting the data based on cardType
 
     References:
     https://bobbyhadz.com/blog/react-hook-useeffect-has-missing-dependency
@@ -12,7 +12,7 @@
 
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
-import ForecastCard from './ForecastCard';
+import ForecastCardBase from '../../ForecastCardBase';
 
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
@@ -58,7 +58,7 @@ const CurrentWeather = (props) => {
   return (
     <div className="current-weather-detailed mb-5">
       <div className="">
-        <ForecastCard
+        <ForecastCardBase
           cardType={props.cardType}
           weatherData={weatherData}
           location={props.location}

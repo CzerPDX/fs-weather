@@ -1,24 +1,15 @@
 import PropTypes from 'prop-types';
 import backgroundVideo from './animations/Night_Thunderstorm.mp4';
-import HourlyCard from './HourlyCard';
-import DailyCard from './DailyCard';
-import CurrentCard from './CurrentCard';
+import HourlyCard from './forecast-display-cards/HourlyCard';
+import DailyCard from './forecast-display-cards/DailyCard';
+import CurrentCard from './forecast-display-cards/CurrentCard';
 
 const WeatherImage = ({ icon, shortDescription }) => {
   return (
     <video autoPlay loop muted className="video">
       <source src={backgroundVideo} type="video/mp4" />
     </video>
-    // <div className='weather-image'>
-    //   <source src="/animations/Night_Thunderstorm.mp4" type="video/mp4"/>
-    // </div>
   );
-
-  // return (
-  //   <div className='weather-image'>
-  //     <img src={icon} alt={shortDescription} />
-  //   </div>
-  // )
 };
 
 // Different cardTypes of ForecastCards can have different layouts
@@ -60,7 +51,7 @@ const MainLarge = ({
   );
 };
 
-const ForecastCard = (props) => {
+const ForecastCardBase = (props) => {
   // Pick layout of forecast card based on the card type
   const renderByType = (props) => {
     if (props.cardType === 'main-large') {
@@ -87,7 +78,7 @@ const ForecastCard = (props) => {
   return <div className={className}>{renderByType(props)}</div>;
 };
 
-ForecastCard.propTypes = {
+ForecastCardBase.propTypes = {
   cardType: PropTypes.string.isRequired,
 };
 
@@ -98,4 +89,4 @@ MainLarge.propTypes = {
   temperature: PropTypes.string.isRequired,
 };
 
-export default ForecastCard;
+export default ForecastCardBase;

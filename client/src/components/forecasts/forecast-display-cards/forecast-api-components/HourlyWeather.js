@@ -1,20 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useCallback } from 'react';
-import ForecastCard from './ForecastCard';
-// import React, { useState } from 'react'
+import ForecastCardBase from '../../ForecastCardBase';
 
-const DailyWeather = (props) => {
+const HourlyWeather = (props) => {
   const initialWeatherState = { list: {}, locationName: '' };
 
-  const url = `/api/daily-weather?lat=${props.lat}&lon=${props.lon}`;
-  const [dailyData, setDailyData] = useState(initialWeatherState);
+  const url = `/api/hourly-weather?lat=${props.lat}&lon=${props.lon}`;
+  const [hourlyData, setHourlyData] = useState(initialWeatherState);
 
   // Declare the async data fetching function
   const fetchData = useCallback(async () => {
     const response = await fetch(url);
     // Convert the data to json
     const json = await response.json();
-    setDailyData(json);
+    setHourlyData(json);
   }, [url]);
 
   // the useEffect is only there to call `fetchData` at the right time
@@ -28,10 +27,11 @@ const DailyWeather = (props) => {
 
   return (
     <div className="current-weather-detailed">
+      {/* Forecast Title will stay on this component*/}
       <div className="">
-        <ForecastCard
+        <ForecastCardBase
           cardType={props.cardType}
-          weatherData={dailyData}
+          weatherData={hourlyData}
           location={props.location}
         />
       </div>
@@ -39,10 +39,10 @@ const DailyWeather = (props) => {
   );
 };
 
-DailyWeather.propTypes = {
+HourlyWeather.propTypes = {
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
   cardType: PropTypes.string.isRequired,
 };
 
-export default DailyWeather;
+export default HourlyWeather;
