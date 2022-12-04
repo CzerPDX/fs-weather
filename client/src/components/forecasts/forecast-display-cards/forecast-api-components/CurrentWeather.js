@@ -11,20 +11,23 @@
 */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import ForecastCardBase from '../../ForecastCardBase';
+
+
 
 const CurrentWeather = (props) => {
   // Have to set the data up with defaults in the same structure they will be in
   // when returned or the software will freak out
 
+
   const initialWeatherState = {
     locationName: 'loading...',
-    temperature: 'loading...',
+    temperature: '',
     shortDescription: 'loading...',
     longDescription: 'loading...',
     icon: `http://openweathermap.org/img/wn/02d@2x.png`,
-    iconCode: 'loading...',
+    iconCode: undefined,
     maxTemp: '...',
     minTemp: '...',
     feelsLike: '...',
