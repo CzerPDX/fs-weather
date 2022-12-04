@@ -79,7 +79,6 @@ const getDayOfMonth = (time, timezone) => {
 };
 
 app.get('/api*', (req, res) => {
-  console.log(`req.url.split("?")[0] = ${req.url.split('?')[0]}`);
   let responseObject = null;
   let lat = req.query.lat;
   let lon = req.query.lon;
@@ -134,7 +133,6 @@ app.get('/api*', (req, res) => {
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
-        console.log(error);
       });
     // Handle requests for /api-hourly-weather
   } else if (req.url.split('?')[0] === '/api-hourly-weather') {
@@ -169,7 +167,6 @@ app.get('/api*', (req, res) => {
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
-        console.log(error);
       });
     // Handle requests for /api-daily-weather
   } else if (req.url.split('?')[0] === '/api-daily-weather') {
@@ -207,7 +204,6 @@ app.get('/api*', (req, res) => {
       })
       .catch((error) => {
         res.status(502).send({ message: error.message });
-        console.log(error);
       });
     // Handle requests for /api-air-quality
   } else if (req.url.split('?')[0] === '/api-air-quality') {
@@ -225,7 +221,6 @@ app.get('/api*', (req, res) => {
       })
       .catch((error) => {
         res.status(502).send({ message: 'Failed request to openweather API' });
-        console.log(error);
       });
   }
 

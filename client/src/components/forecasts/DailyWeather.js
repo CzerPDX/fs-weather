@@ -14,7 +14,6 @@ const DailyWeather = (props) => {
     const response = await fetch(url);
     // Convert the data to json
     const json = await response.json();
-    console.log(`SETTING WEATHER DATA: ${JSON.stringify(json)}`);
     setDailyData(json);
   }, [url]);
 

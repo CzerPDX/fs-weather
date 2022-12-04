@@ -13,7 +13,6 @@ const HourlyWeather = (props) => {
     const response = await fetch(url);
     // Convert the data to json
     const json = await response.json();
-    console.log(`SETTING WEATHER DATA: ${JSON.stringify(json)}`);
     setHourlyData(json);
   }, [url]);
 
@@ -25,7 +24,6 @@ const HourlyWeather = (props) => {
       // Error handling
       .catch(console.error);
   }, [fetchData]);
-  console.log(hourlyData);
 
   return (
     <div className="current-weather-detailed">

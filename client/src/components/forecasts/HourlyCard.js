@@ -65,10 +65,8 @@ const HourlyItemMain = ({ hour, ampm, temp, icon, clickIcon, description }) => {
 };
 
 const HourlyCard = (props) => {
-  console.log(props.weatherData);
   const [clicked, setClicked] = useState('');
   const toggleItem = (index) => {
-    console.log('click', index, clicked);
     if (index === clicked) {
       setClicked(null);
     } else {
@@ -115,7 +113,6 @@ const HourlyCard = (props) => {
       </div>
     );
   });
-  console.log('hourly', props);
   return (
     <div className="container card mb-5 p-4 shadow">
       <div className="container  pb-5 align-items-baseline ">

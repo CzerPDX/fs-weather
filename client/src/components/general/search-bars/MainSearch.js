@@ -28,7 +28,6 @@ const MainSearch = ({ setCoordinates, coordinates }) => {
     error.preventDefault(); // Do not automatically go to a new page once submission happens.
 
     // Validate that coordinate state was updated from child-SearchAutoComplete
-    console.log('from parent', coordinates);
     if (tempLat !== coordinates.lat && tempLon !== coordinates.lon) {
       setCoordinates({ lat: tempLat, lon: tempLon, location: tempCity });
     }

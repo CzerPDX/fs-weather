@@ -25,7 +25,6 @@ const CurrentCard = (props) => {
       ? 'display-5 font-weight-bold'
       : 'long-title-current';
   const tod = props.weatherData.iconCode;
-  console.log(tod);
   const tempColor = tod.includes('n') ? 'text-white' : 'text-dark opacity-75';
   const sunrise = `${weatherData.sunrise.hour}:${weatherData.sunrise.minutes} ${weatherData.sunrise.ampm}`;
   const sunset = `${weatherData.sunset.hour}:${weatherData.sunset.minutes} ${weatherData.sunset.ampm}`;

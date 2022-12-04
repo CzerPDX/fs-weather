@@ -18,10 +18,8 @@ const SearchBarAndResults = () => {
   let hasLocation = coordinates.lat && coordinates.lon;
   let navWeather = hasLocation ? <WeatherNav setCard={setCard} /> : null;
   const show = () => {
-    console.log(coordinates);
     let element = null;
     if (card === 'main-large' && hasLocation) {
-      console.log('fun', coordinates);
       element = (
         <CurrentWeather
           lat={coordinates.lat}
