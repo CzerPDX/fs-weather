@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import backgroundVideo from './animations/Night_Thunderstorm.mp4';
 import HourlyCard from './forecast-display-cards/HourlyCard';
 import DailyCard from './forecast-display-cards/DailyCard';
 import CurrentCard from './forecast-display-cards/CurrentCard';
@@ -33,6 +32,8 @@ const ForecastCardBase = (props) => {
 
 ForecastCardBase.propTypes = {
   cardType: PropTypes.string.isRequired,
+  weatherData: PropTypes.object.isRequired,
+  location: PropTypes.string.isRequired,
 };
 
 export default ForecastCardBase;
