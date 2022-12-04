@@ -101,6 +101,12 @@
       "password": "$2a$10$8oVsy3abr.Swp58vrfaKv.HyPwtnxeBJdfOWOwtkq/4dkYjUwcJY6",
       "displayName": "new name",
       "id": 17
+    },
+    {
+      "email": "demoemail@example.com",
+      "password": "$2a$10$2VGCmIm/8g62T7p2.a9E.udoM0Cn3jzugXpzS0Fq8BlkkeFadZz06",
+      "displayName": "hello",
+      "id": 18
     }
   ]
 }
